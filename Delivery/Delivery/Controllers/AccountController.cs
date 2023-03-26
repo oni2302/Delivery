@@ -14,25 +14,47 @@ namespace Delivery.Controllers
 {
     public class AccountController : Controller
     {
-        string connString = @"Data Source=.;Initial Catalog=""Giao Hàng"";Integrated Security=True";
-        SqlConnection conn = null;
-        public ActionResult Login(int id = -1)
+        DeliveryEntities db = new DeliveryEntities();
+
+        //Đăng nhập
+        public ActionResult Login()
         {
-            if(id==0)
-            {
-                ViewBag.message = "Tài khoản hoặc mật khẩu không đúng";
-            }            
             return View();
         }
 
-        public ActionResult LoginValidation()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(TaiKhoan taiKhoan)
         {
-            //POST: LOGIN
-            string username = Request.Form["username"];
-            string password = Request.Form["password"];
+            string username = taiKhoan.TenTaiKhoan;
+            string password = taiKhoan.MatKhau;
             //LOGIN: PROCESSING...
-
-            //
+            var check = db.TaiKhoans.SingleOrDefault(c => c.TenTaiKhoan.Equals(username) && c.MatKhau.Equals(password));
+            if (ModelState.IsValid && username != null && password != null)
+            {
+                if (check != null)
+                {
+                    var layChucNang = db.LayChucNang(check.MaNhanVien);
+                    List<LayChucNang_Result> layChucNang_List = new List<LayChucNang_Result>();
+                    foreach (LayChucNang_Result item in layChucNang)
+                    {
+                        layChucNang_List.Add(item);
+                    }
+                    Session.Add(CommonConstants.NGUOI_DUNG, check);
+                    Session.Add(CommonConstants.CHUC_NANG, layChucNang_List);
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Tài khoản hoặc mật khẩu không đúng !");
+                    return View("Login");
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("", "Chưa nhập tài khoản hoặc mật khẩu !");
+                return View("Login");
+            }
             return null;
         }
         

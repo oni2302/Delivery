@@ -7,6 +7,9 @@
     <Property Name="MaChucNang" Type="Int32" Nullable="false" />
     <Property Name="TenChucNang" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
     <Property Name="BieuTuong" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="Controller" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Action" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Direction" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="ChucVu">
     <Key>
@@ -14,6 +17,7 @@
     </Key>
     <Property Name="MaChucVu" Type="Int32" Nullable="false" />
     <Property Name="TenChucVu" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="NhanViens" Relationship="DeliveryModel.FK__NhanVien__MaChuc__6EF57B66" FromRole="ChucVu" ToRole="NhanVien" />
   </EntityType>
   <EntityType Name="DH">
     <Key>
@@ -52,6 +56,11 @@
     <Property Name="TenNhanVien" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="MaChucVu" Type="Int32" />
     <NavigationProperty Name="TaiKhoan" Relationship="Self.FK__TaiKhoan__MaNhan__68487DD7" FromRole="NhanVien" ToRole="TaiKhoan" />
+    <NavigationProperty Name="ChucVu" Relationship="DeliveryModel.FK__NhanVien__MaChuc__6EF57B66" FromRole="NhanVien" ToRole="ChucVu" />
+    <Property Name="NgaySinh" Type="DateTime" Precision="0" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SoDienThoai" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="AnhDaiDien" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="PhanChucNang">
     <Key>
@@ -111,5 +120,49 @@
       <End Role="NhanVien" EntitySet="NhanViens" />
       <End Role="TaiKhoan" EntitySet="TaiKhoans" />
     </AssociationSet>
+    <AssociationSet Name="FK__NhanVien__MaChuc__6EF57B66" Association="DeliveryModel.FK__NhanVien__MaChuc__6EF57B66">
+      <End Role="ChucVu" EntitySet="ChucVus" />
+      <End Role="NhanVien" EntitySet="NhanViens" />
+    </AssociationSet>
+    <EntitySet Name="database_firewall_rules" EntityType="DeliveryModel.database_firewall_rules" />
+    <FunctionImport Name="LayChucNang" ReturnType="Collection(DeliveryModel.LayChucNang_Result)">
+      <Parameter Name="MaNhanVien" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
+  <Association Name="FK__NhanVien__MaChuc__6EF57B66">
+    <End Type="DeliveryModel.ChucVu" Role="ChucVu" Multiplicity="0..1" />
+    <End Type="DeliveryModel.NhanVien" Role="NhanVien" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChucVu">
+        <PropertyRef Name="MaChucVu" />
+      </Principal>
+      <Dependent Role="NhanVien">
+        <PropertyRef Name="MaChucVu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="database_firewall_rules">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="name" />
+      <PropertyRef Name="start_ip_address" />
+      <PropertyRef Name="end_ip_address" />
+      <PropertyRef Name="create_date" />
+      <PropertyRef Name="modify_date" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="start_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="end_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <ComplexType Name="LayChucNang_Result">
+    <Property Type="Int32" Name="MaChucNang" Nullable="false" />
+    <Property Type="String" Name="TenChucNang" Nullable="true" MaxLength="1000" />
+    <Property Type="String" Name="BieuTuong" Nullable="true" MaxLength="4000" />
+    <Property Type="String" Name="Controller" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Action" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Direction" Nullable="true" MaxLength="200" />
+  </ComplexType>
 </Schema>

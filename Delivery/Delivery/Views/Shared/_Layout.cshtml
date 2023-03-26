@@ -1,7 +1,8 @@
 ﻿@using Delivery.Common;
-@using Delivery.Entities;
+@using Delivery.Models;
 @{
-  var session = (List<ChucNang>)Session[CommonConstants.CHUC_NANG];
+    var session = (List<LayChucNang_Result>)Session[CommonConstants.CHUC_NANG];
+    string controller = ViewContext.RouteData.Values["controller"].ToString();
 }
 <!DOCTYPE html>
 <html>
@@ -21,7 +22,9 @@
         <div class="wrap-navbar">
             <nav class="navigation-bar">
                 <div class="space"></div>
-                <div class="nav-content d-flex align-items-center"></div>
+                <div class="nav-content d-flex align-items-center">
+
+                </div>
             </nav>
         </div>
     </header>
@@ -47,18 +50,22 @@
                     </div>
                 </div>
                 <ul class="main-menu">
-                    @foreach (var chucNang in session)
-                    {
-                       <li class="main-menu-item-wrap ">
-                           <a class="main-menu-item" href="#">
-                               <svg width="22" height="22" viewBox="0 0 33 31" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                   @Html.Raw(chucNang.BieuTuong);                                   
-                               </svg>
-                               <span>@chucNang.TenChucNang</span>
-                           </a>
-                       </li> 
+                    @if(session!=null){
+                        foreach (var chucNang in session)
+                        {
+                            <li class="main-menu-item-wrap @if (chucNang.Controller == controller) { Write("active"); } ">
+                                <a class="main-menu-item  " href="">
+                                    <svg width="22" height="22" viewBox="0 0 33 31" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        @Html.Raw(chucNang.BieuTuong);
+                                    </svg>
+                                    <span>@chucNang.TenChucNang</span>
+                                </a>
+                            </li>
+
+                        }
                     }
+
                     <li class="main-menu-item-wrap">
                         <a class="main-menu-item" href="#">
                             <svg width="22" height="22" viewBox="0 0 29 29" fill="none"
