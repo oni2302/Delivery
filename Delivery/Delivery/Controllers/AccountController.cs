@@ -14,8 +14,8 @@ namespace Delivery.Controllers
 {
     public class AccountController : Controller
     {
-        string connString = @"Data Source=.;Initial Catalog=""Giao Hàng"";Integrated Security=True";
-        SqlConnection conn = null;
+        //string connString = @"Data Source=.;Initial Catalog=""Giao Hàng"";Integrated Security=True";
+        //SqlConnection conn = null;
         public ActionResult Login(int id = -1)
         {
             if(id==0)
