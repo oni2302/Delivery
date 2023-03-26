@@ -1,5 +1,5 @@
 ﻿@using Delivery.Common;
-@using Delivery.Entities;
+@using Delivery.Models;
 @{
   var session = (List<ChucNang>)Session[CommonConstants.CHUC_NANG];
 }
@@ -47,7 +47,7 @@
                     </div>
                 </div>
                 <ul class="main-menu">
-                    @foreach (var chucNang in session)
+                    @*@foreach (var chucNang in session)
                     {
                        <li class="main-menu-item-wrap ">
                            <a class="main-menu-item" href="#">
@@ -58,7 +58,7 @@
                                <span>@chucNang.TenChucNang</span>
                            </a>
                        </li> 
-                    }
+                    }*@
                     <li class="main-menu-item-wrap">
                         <a class="main-menu-item" href="#">
                             <svg width="22" height="22" viewBox="0 0 29 29" fill="none"

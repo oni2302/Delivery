@@ -1,0 +1,199 @@
+﻿@model IEnumerable<Delivery.Models.NhanVien>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container" style="background-color: #F2F2F2; padding: 50px;">
+    <div class="form-horizontal" style="background-color: white; padding: 30px; border-radius: 1rem">
+        <h4>Nhân viên</h4>
+        <hr />
+        <div class="row g-3">
+            <div class="col">
+                @Html.DisplayName("Mã nhân viên")
+                <div class="col">
+                    <input type="text" class="form-control" id="">
+                </div>
+            </div>
+            <div class="col">
+                @Html.DisplayName("Họ tên")
+                <div class="col">
+                    <input type="text" class="form-control" id="">
+                </div>
+            </div>
+            <div class="col">
+                @Html.DisplayName("Ngày sinh")
+                <div class="col">
+                    <input type="text" class="form-control" id="">
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-3">
+            <div class="col-4">
+                @Html.DisplayName("Email")
+                <div class="col">
+                    <input type="email" class="form-control" id="">
+                </div>
+            </div>
+            <div class="col-4">
+                @Html.DisplayName("Số điện thoại")
+                <div class="col">
+                    <input type="number" class="form-control" id="">
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="d-flex justify-content-between">
+            @Html.ActionLink("+ Thêm nhân viên", "Create", "NhanVien", new { @class = "btn btn-success", @style="border-radius: 1.5rem" })
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <input type="submit" value="Reset" class="btn btn-outline-success"  style="border-radius: 1.5rem; width: 100px;"/>
+                <input type="submit" value="Search" class="btn btn-success"  style="border-radius: 1.5rem; width: 100px; "/>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-horizontal" style="background-color: white; padding: 30px; border-radius: 1rem; margin-top: 20px;">
+        <table class="table table-hover">
+            <tr>
+                <th>
+                    @Html.DisplayName("Mã nhân viên")
+                </th>
+                <th>
+                    @Html.DisplayName("Họ tên")
+                </th>
+                <th>
+                    @Html.DisplayName("Ngày sinh")
+                </th>
+                <th>
+                    @Html.DisplayName("Email")
+                </th>
+                <th>
+                    @Html.DisplayName("Số điện thoại")
+                </th>
+                <th>
+                    @Html.DisplayName("Actions")
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+             {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MaNhanVien)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TenNhanVien)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NgaySinh)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SoDienThoai)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Xóa", "Delete", new { id = item.MaNhanVien }, new { @class = "btn btn-outline-success" })
+                    </td>
+                </tr>
+             }
+
+        </table>
+    </div>
+ </div>
+
+    @*<div class="container" style="background-color: #F2F2F2; padding: 50px; margin: auto">
+        <div style=" border-radius: 30px;" class="card border-0 shadow">
+            <h4 style="font-weight: 600;" class="ms-5 mt-4">Nhân viên</h4>
+            <form class="ms-3 me-3 ">
+                <hr style="width: 95%;" class=" mx-auto ">
+                <div class="d-flex justify-content-around">
+                    <div style="width: 20%;" class="mb-3">
+                        <label for="" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="">
+                    </div>
+                    <div style="width: 20%;" class="mb-3">
+                        <label for="" class="form-label">User role</label>
+                        <select class="form-select" name="" id="">
+                            <option value="">--Select--</option>
+                        </select>
+                    </div>
+                    <div style="width: 20%;" class="mb-3">
+                        <label for="" class="form-label">Họ tên</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1">
+                    </div>
+                </div>
+                <hr style="width: 95%;" class=" mx-auto">
+                <div class="d-flex justify-content-between">
+                    <button style="width: 20%; border:none; border-radius: 30px; color: whitesmoke; background: linear-gradient(90deg, #54BF5A 0%, #228542 100%);"
+                            class="ms-5 p-2 mb-4" type="submit">
+                        + Thêm tài khoản
+                    </button>
+                    @Html.ActionLink("+ Thêm nhân viên", "Create", "NhanVien", new { @class = "btn btn-success" })
+
+                    <div class="d-flex justify-content-around me-5 w-25">
+                        <button style="width: 40%; background: #FFFFFF; color: #2D9147; border: 2px solid #2D9147; border-radius: 30px;"
+                                class=" p-2 mb-4" type="submit">
+                            Reset
+                        </button>
+                        <button style="width: 40%; border:none; border-radius: 30px; color: whitesmoke; background: linear-gradient(90deg, #54BF5A 0%, #228542 100%);"
+                                class=" p-2 mb-4" type="submit">
+                            Search
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <table class="table table-hover" style="background-color: white; padding: 30px; border-radius: 1rem">
+            <tr>
+                <th>
+                    @Html.DisplayName("Mã nhân viên")
+                </th>
+                <th>
+                    @Html.DisplayName("Họ tên")
+                </th>
+                <th>
+                    @Html.DisplayName("Ngày sinh")
+                </th>
+                <th>
+                    @Html.DisplayName("Email")
+                </th>
+                <th>
+                    @Html.DisplayName("Số điện thoại")
+                </th>
+                <th>
+                    @Html.DisplayName("Actions")
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MaNhanVien)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TenNhanVien)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NgaySinh)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SoDienThoai)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Xóa", "Delete", new { id = item.MaNhanVien }, new { @class = "btn btn-outline-success" })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>*@
