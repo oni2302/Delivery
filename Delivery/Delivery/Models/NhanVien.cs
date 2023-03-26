@@ -13,11 +13,9 @@ namespace Delivery.Models
 {
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-
-    public partial class NhanVien
+    using System.Collections.Generic;
+    
+public partial class NhanVien
 {
 
     public int MaNhanVien { get; set; }
@@ -26,7 +24,6 @@ using System.ComponentModel.DataAnnotations;
 
     public Nullable<int> MaChucVu { get; set; }
 
-    //[DisplayFormat(DataFormatString = "{dd/MM/yyyy}", ApplyFormatInEditMode = true)]
     public Nullable<System.DateTime> NgaySinh { get; set; }
 
     public string Email { get; set; }

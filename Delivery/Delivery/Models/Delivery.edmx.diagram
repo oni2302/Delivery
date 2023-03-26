@@ -9,7 +9,7 @@
         <EntityTypeShape EntityType="DeliveryModel.ChucVu" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DeliveryModel.DH" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DeliveryModel.DH_DaNhan" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DeliveryModel.NhanVien" Width="1.5" PointX="0.625" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DeliveryModel.NhanVien" Width="1.5" PointX="0.75" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DeliveryModel.PhanChucNang" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DeliveryModel.PhanQuyen" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DeliveryModel.Quyen" Width="1.5" PointX="2.75" PointY="7.75" IsExpanded="true" />

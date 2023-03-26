@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -15,9 +16,49 @@ namespace Delivery.Controllers
         private DeliveryEntities db = new DeliveryEntities();
 
         // GET: NhanViens
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString, int categoryID = 0)
         {
+            // 1. Thêm biến NameSortParm để biết trạng thái sắp xếp tăng, giảm ở View
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            //2.Tạo câu truy vấn kết 3 bảng Book, Author, Category
             var nhanViens = db.NhanViens.Include(n => n.TaiKhoan).Include(n => n.ChucVu);
+            //3. Sắp xếp theo sortOrder
+            switch (sortOrder)
+            {
+                // 3.1 Nếu biến sortOrder sắp giảm thì sắp giảm theo Họ tên NV
+                case "name_desc":
+                    nhanViens = nhanViens.OrderByDescending(b => b.TenNhanVien);
+                    break;
+                // 3.2 Mặc định thì sẽ sắp tăng
+                default:
+                    nhanViens = nhanViens.OrderBy(b => b.TenNhanVien);
+                    break;
+            }
+
+            // 1.1. Lưu tư khóa tìm kiếm
+            ViewBag.Keyword = searchString;
+            //1.2 Lưu chủ đề tìm kiếm
+           // ViewBag.Subject = categoryID;
+            //ViewBag.Id = categoryID;
+            //1.2.Tạo câu truy vấn kết 3 bảng Book, Author, Category
+
+            //1.3. Tìm kiếm theo searchString
+            if (!String.IsNullOrEmpty(searchString))
+                nhanViens = nhanViens.Where(b => b.TenNhanVien.Contains(searchString));
+
+            //1.4. Tìm kiếm theo CategoryID
+           // if (!String.IsNullOrEmpty(searchString))
+                //nhanViens = nhanViens.Where(b => b.TenNhanVien.Contains(searchString));
+           
+            //1.5. Tìm kiếm theo CategoryID
+           // if (categoryID != 0)
+             // nhanViens = nhanViens.Where(c => c.MaNhanVien == categoryID);
+
+            //1.6. Tìm kiếm theo Danh sách chủ đề
+            //ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName"); // danh sách Category               
+
+
+            //Trả kết quả về Views
             return View(nhanViens.ToList());
         }
 
@@ -49,7 +90,7 @@ namespace Delivery.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaNhanVien,TenNhanVien,MaChucVu,NgaySinh,Email,SoDienThoai,AnhDaiDien")] NhanVien nhanVien)
+        public ActionResult Create([Bind(Include = "MaNhanVien,TenNhanVien,NgaySinh,Email,SoDienThoai")] NhanVien nhanVien)
         {
             if (ModelState.IsValid)
             {
