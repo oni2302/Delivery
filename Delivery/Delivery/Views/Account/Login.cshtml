@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+}
+
+<div>
+    @if (ViewBag.message!="")
+    {
+        <h3>@ViewBag.message</h3>
+    }
+    <form action="~/Account/LoginValidation" method="post" class="d-flex flex-column w-25 m-auto align-items-center">
+        <input type="text" name="username"/>
+        <input type="password" name="password"/>
+        <button type="submit" style="width:fit-content;">Đăng nhập</button>
+    </form>
+</div>
+

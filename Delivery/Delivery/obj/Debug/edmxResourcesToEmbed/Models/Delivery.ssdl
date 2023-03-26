@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DeliveryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ChucNang">
+    <Key>
+      <PropertyRef Name="MaChucNang" />
+    </Key>
+    <Property Name="MaChucNang" Type="int" Nullable="false" />
+    <Property Name="TenChucNang" Type="nvarchar" MaxLength="1000" />
+    <Property Name="BieuTuong" Type="nvarchar" MaxLength="4000" />
+  </EntityType>
+  <EntityType Name="ChucVu">
+    <Key>
+      <PropertyRef Name="MaChucVu" />
+    </Key>
+    <Property Name="MaChucVu" Type="int" Nullable="false" />
+    <Property Name="TenChucVu" Type="nvarchar" MaxLength="1000" />
+  </EntityType>
+  <EntityType Name="DH">
+    <Key>
+      <PropertyRef Name="MaDH" />
+    </Key>
+    <Property Name="MaDH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MaVanDon" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="HoTenNG" Type="nvarchar" MaxLength="30" />
+    <Property Name="DiaChiNG" Type="nvarchar" MaxLength="50" />
+    <Property Name="SdtNG" Type="nvarchar" MaxLength="30" />
+    <Property Name="HotenNN" Type="nvarchar" MaxLength="30" />
+    <Property Name="DiaChiNN" Type="nvarchar" MaxLength="30" />
+    <Property Name="SdtNN" Type="nvarchar" MaxLength="30" />
+    <Property Name="TrangThai" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="DH_DaNhan">
+    <Key>
+      <PropertyRef Name="MaDH_DaNhan" />
+    </Key>
+    <Property Name="MaDH_DaNhan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MaDH" Type="int" />
+    <Property Name="MaVanDon" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="HoTenNG" Type="nvarchar" MaxLength="30" />
+    <Property Name="DiaChiNG" Type="nvarchar" MaxLength="50" />
+    <Property Name="SdtNG" Type="nvarchar" MaxLength="30" />
+    <Property Name="HotenNN" Type="nvarchar" MaxLength="30" />
+    <Property Name="DiaChiNN" Type="nvarchar" MaxLength="30" />
+    <Property Name="SdtNN" Type="nvarchar" MaxLength="30" />
+    <Property Name="TrangThai" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="NhanVien">
+    <Key>
+      <PropertyRef Name="MaNhanVien" />
+    </Key>
+    <Property Name="MaNhanVien" Type="int" Nullable="false" />
+    <Property Name="TenNhanVien" Type="nvarchar" MaxLength="100" />
+    <Property Name="MaChucVu" Type="int" />
+  </EntityType>
+  <EntityType Name="PhanChucNang">
+    <Key>
+      <PropertyRef Name="MaQuyen" />
+      <PropertyRef Name="MaChucNang" />
+    </Key>
+    <Property Name="MaQuyen" Type="int" Nullable="false" />
+    <Property Name="MaChucNang" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PhanQuyen">
+    <Key>
+      <PropertyRef Name="MaPhanQuyen" />
+    </Key>
+    <Property Name="MaPhanQuyen" Type="int" Nullable="false" />
+    <Property Name="MaQuyen" Type="int" />
+    <Property Name="MaChucVu" Type="int" />
+  </EntityType>
+  <EntityType Name="Quyen">
+    <Key>
+      <PropertyRef Name="MaQuyen" />
+    </Key>
+    <Property Name="MaQuyen" Type="int" Nullable="false" />
+    <Property Name="TenQuyen" Type="nvarchar" MaxLength="1000" />
+  </EntityType>
+  <EntityType Name="TaiKhoan">
+    <Key>
+      <PropertyRef Name="MaNhanVien" />
+    </Key>
+    <Property Name="MaNhanVien" Type="int" Nullable="false" />
+    <Property Name="TenTaiKhoan" Type="varchar" MaxLength="100" />
+    <Property Name="MatKhau" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <Association Name="FK__TaiKhoan__MaNhan__68487DD7">
+    <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="1" />
+    <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="NhanVien">
+        <PropertyRef Name="MaNhanVien" />
+      </Principal>
+      <Dependent Role="TaiKhoan">
+        <PropertyRef Name="MaNhanVien" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DeliveryModelStoreContainer">
+    <EntitySet Name="ChucNang" EntityType="Self.ChucNang" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ChucVu" EntityType="Self.ChucVu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DH" EntityType="Self.DH" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DH_DaNhan" EntityType="Self.DH_DaNhan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NhanVien" EntityType="Self.NhanVien" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PhanChucNang" EntityType="Self.PhanChucNang" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PhanQuyen" EntityType="Self.PhanQuyen" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Quyen" EntityType="Self.Quyen" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TaiKhoan" EntityType="Self.TaiKhoan" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__TaiKhoan__MaNhan__68487DD7" Association="Self.FK__TaiKhoan__MaNhan__68487DD7">
+      <End Role="NhanVien" EntitySet="NhanVien" />
+      <End Role="TaiKhoan" EntitySet="TaiKhoan" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
