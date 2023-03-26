@@ -12,17 +12,13 @@ namespace Delivery.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class NhanVien
+    public partial class database_firewall_rules
     {
-        public int MaNhanVien { get; set; }
-        public string TenNhanVien { get; set; }
-        public Nullable<int> MaChucVu { get; set; }
-        public Nullable<System.DateTime> NgaySinh { get; set; }
-        public string Email { get; set; }
-        public string SoDienThoai { get; set; }
-        public string AnhDaiDien { get; set; }
-    
-        public virtual TaiKhoan TaiKhoan { get; set; }
-        public virtual ChucVu ChucVu { get; set; }
+        public int id { get; set; }
+        public string name { get; set; }
+        public string start_ip_address { get; set; }
+        public string end_ip_address { get; set; }
+        public System.DateTime create_date { get; set; }
+        public System.DateTime modify_date { get; set; }
     }
 }

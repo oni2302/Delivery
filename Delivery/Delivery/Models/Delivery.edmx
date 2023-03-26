@@ -12,6 +12,9 @@
           <Property Name="MaChucNang" Type="int" Nullable="false" />
           <Property Name="TenChucNang" Type="nvarchar" MaxLength="1000" />
           <Property Name="BieuTuong" Type="nvarchar" MaxLength="4000" />
+          <Property Name="Controller" Type="nvarchar" MaxLength="100" />
+          <Property Name="Action" Type="nvarchar" MaxLength="100" />
+          <Property Name="Direction" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="ChucVu">
           <Key>
@@ -56,6 +59,10 @@
           <Property Name="MaNhanVien" Type="int" Nullable="false" />
           <Property Name="TenNhanVien" Type="nvarchar" MaxLength="100" />
           <Property Name="MaChucVu" Type="int" />
+          <Property Name="NgaySinh" Type="date" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="SoDienThoai" Type="char" MaxLength="10" />
+          <Property Name="AnhDaiDien" Type="nvarchar" MaxLength="1000" />
         </EntityType>
         <EntityType Name="PhanChucNang">
           <Key>
@@ -93,6 +100,24 @@ warning 6013: The table/view 'Delivery.dbo.test' does not have a primary key def
         <EntityType Name="test">
           <Property Name="test" Type="int" />
         </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Delivery.sys.database_firewall_rules' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="database_firewall_rules">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="start_ip_address" />
+            <PropertyRef Name="end_ip_address" />
+            <PropertyRef Name="create_date" />
+            <PropertyRef Name="modify_date" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="start_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="end_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="create_date" Type="datetime" Nullable="false" />
+          <Property Name="modify_date" Type="datetime" Nullable="false" />
+        </EntityType>
         <Association Name="FK__NhanVien__MaChuc__6EF57B66">
           <End Role="ChucVu" Type="Self.ChucVu" Multiplicity="0..1" />
           <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="*" />
@@ -117,6 +142,9 @@ warning 6013: The table/view 'Delivery.dbo.test' does not have a primary key def
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="LayChucNang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MaNhanVien" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="DeliveryModelStoreContainer">
           <EntitySet Name="ChucNang" EntityType="Self.ChucNang" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ChucVu" EntityType="Self.ChucVu" Schema="dbo" store:Type="Tables" />
@@ -127,6 +155,16 @@ warning 6013: The table/view 'Delivery.dbo.test' does not have a primary key def
           <EntitySet Name="PhanQuyen" EntityType="Self.PhanQuyen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Quyen" EntityType="Self.Quyen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TaiKhoan" EntityType="Self.TaiKhoan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" store:Type="Views" store:Schema="sys">
+            <DefiningQuery>SELECT 
+    [database_firewall_rules].[id] AS [id], 
+    [database_firewall_rules].[name] AS [name], 
+    [database_firewall_rules].[start_ip_address] AS [start_ip_address], 
+    [database_firewall_rules].[end_ip_address] AS [end_ip_address], 
+    [database_firewall_rules].[create_date] AS [create_date], 
+    [database_firewall_rules].[modify_date] AS [modify_date]
+    FROM [sys].[database_firewall_rules] AS [database_firewall_rules]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK__NhanVien__MaChuc__6EF57B66" Association="Self.FK__NhanVien__MaChuc__6EF57B66">
             <End Role="ChucVu" EntitySet="ChucVu" />
             <End Role="NhanVien" EntitySet="NhanVien" />
@@ -147,6 +185,9 @@ warning 6013: The table/view 'Delivery.dbo.test' does not have a primary key def
           <Property Name="MaChucNang" Type="Int32" Nullable="false" />
           <Property Name="TenChucNang" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="BieuTuong" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Controller" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Action" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Direction" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ChucVu">
           <Key>
@@ -194,6 +235,10 @@ warning 6013: The table/view 'Delivery.dbo.test' does not have a primary key def
           <Property Name="MaChucVu" Type="Int32" />
           <NavigationProperty Name="TaiKhoan" Relationship="Self.FK__TaiKhoan__MaNhan__68487DD7" FromRole="NhanVien" ToRole="TaiKhoan" />
           <NavigationProperty Name="ChucVu" Relationship="DeliveryModel.FK__NhanVien__MaChuc__6EF57B66" FromRole="NhanVien" ToRole="ChucVu" />
+          <Property Name="NgaySinh" Type="DateTime" Precision="0" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SoDienThoai" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="AnhDaiDien" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PhanChucNang">
           <Key>
@@ -257,6 +302,10 @@ warning 6013: The table/view 'Delivery.dbo.test' does not have a primary key def
             <End Role="ChucVu" EntitySet="ChucVus" />
             <End Role="NhanVien" EntitySet="NhanViens" />
           </AssociationSet>
+          <EntitySet Name="database_firewall_rules" EntityType="DeliveryModel.database_firewall_rules" />
+          <FunctionImport Name="LayChucNang" ReturnType="Collection(DeliveryModel.LayChucNang_Result)">
+            <Parameter Name="MaNhanVien" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <Association Name="FK__NhanVien__MaChuc__6EF57B66">
           <End Type="DeliveryModel.ChucVu" Role="ChucVu" Multiplicity="0..1" />
@@ -270,6 +319,30 @@ warning 6013: The table/view 'Delivery.dbo.test' does not have a primary key def
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="database_firewall_rules">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="start_ip_address" />
+            <PropertyRef Name="end_ip_address" />
+            <PropertyRef Name="create_date" />
+            <PropertyRef Name="modify_date" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="start_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="end_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <ComplexType Name="LayChucNang_Result">
+          <Property Type="Int32" Name="MaChucNang" Nullable="false" />
+          <Property Type="String" Name="TenChucNang" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="BieuTuong" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="Controller" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Action" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Direction" Nullable="true" MaxLength="200" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -279,6 +352,9 @@ warning 6013: The table/view 'Delivery.dbo.test' does not have a primary key def
           <EntitySetMapping Name="ChucNangs">
             <EntityTypeMapping TypeName="DeliveryModel.ChucNang">
               <MappingFragment StoreEntitySet="ChucNang">
+                <ScalarProperty Name="Direction" ColumnName="Direction" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="Controller" ColumnName="Controller" />
                 <ScalarProperty Name="MaChucNang" ColumnName="MaChucNang" />
                 <ScalarProperty Name="TenChucNang" ColumnName="TenChucNang" />
                 <ScalarProperty Name="BieuTuong" ColumnName="BieuTuong" />
@@ -327,6 +403,10 @@ warning 6013: The table/view 'Delivery.dbo.test' does not have a primary key def
           <EntitySetMapping Name="NhanViens">
             <EntityTypeMapping TypeName="DeliveryModel.NhanVien">
               <MappingFragment StoreEntitySet="NhanVien">
+                <ScalarProperty Name="AnhDaiDien" ColumnName="AnhDaiDien" />
+                <ScalarProperty Name="SoDienThoai" ColumnName="SoDienThoai" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
                 <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
                 <ScalarProperty Name="TenNhanVien" ColumnName="TenNhanVien" />
                 <ScalarProperty Name="MaChucVu" ColumnName="MaChucVu" />
@@ -367,6 +447,30 @@ warning 6013: The table/view 'Delivery.dbo.test' does not have a primary key def
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="database_firewall_rules">
+            <EntityTypeMapping TypeName="DeliveryModel.database_firewall_rules">
+              <MappingFragment StoreEntitySet="database_firewall_rules">
+                <ScalarProperty Name="modify_date" ColumnName="modify_date" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
+                <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="LayChucNang" FunctionName="DeliveryModel.Store.LayChucNang">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DeliveryModel.LayChucNang_Result">
+                <ScalarProperty Name="MaChucNang" ColumnName="MaChucNang" />
+                <ScalarProperty Name="TenChucNang" ColumnName="TenChucNang" />
+                <ScalarProperty Name="BieuTuong" ColumnName="BieuTuong" />
+                <ScalarProperty Name="Controller" ColumnName="Controller" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="Direction" ColumnName="Direction" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

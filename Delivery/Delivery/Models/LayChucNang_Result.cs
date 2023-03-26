@@ -10,9 +10,8 @@
 namespace Delivery.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class ChucNang
+    public partial class LayChucNang_Result
     {
         public int MaChucNang { get; set; }
         public string TenChucNang { get; set; }
