@@ -11,7 +11,9 @@ namespace Delivery.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.Web.UI.WebControls;
+
     public partial class TaiKhoan
     {
         public int MaNhanVien { get; set; }
@@ -19,5 +21,22 @@ namespace Delivery.Models
         public string MatKhau { get; set; }
     
         public virtual NhanVien NhanVien { get; set; }
+    }
+
+    public class ChangePasswordViewModel
+    {
+        [Required(ErrorMessage = "ban chua dang nhap")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Mât kháu hien tai")]
+        public string oldPassword { get; set; }
+        [Required(ErrorMessage = "Ban chua nhap mât khau moi")]
+        [StringLength(100, ErrorMessage = "Mât khau mói toi da {0} ky tu và toi thiéu {2} ky ty.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Mat khau moi")]
+        public string NewPassword { get; set; }
+        [DataType(DataType.Password)]
+        [Display(Name = "Xác thuc mât khau moi")]
+        [Compare("NewPassword", ErrorMessage = "Mât khau mói và xác thuc mât khau mói không khóp.")]
+        public string ConfirmPassword { get; set; }
     }
 }

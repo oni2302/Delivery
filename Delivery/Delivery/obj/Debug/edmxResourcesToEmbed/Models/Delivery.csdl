@@ -14,6 +14,7 @@
     </Key>
     <Property Name="MaChucVu" Type="Int32" Nullable="false" />
     <Property Name="TenChucVu" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="NhanViens" Relationship="DeliveryModel.FK__NhanVien__MaChuc__6EF57B66" FromRole="ChucVu" ToRole="NhanVien" />
   </EntityType>
   <EntityType Name="DH">
     <Key>
@@ -52,6 +53,11 @@
     <Property Name="TenNhanVien" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="MaChucVu" Type="Int32" />
     <NavigationProperty Name="TaiKhoan" Relationship="Self.FK__TaiKhoan__MaNhan__68487DD7" FromRole="NhanVien" ToRole="TaiKhoan" />
+    <NavigationProperty Name="ChucVu" Relationship="DeliveryModel.FK__NhanVien__MaChuc__6EF57B66" FromRole="NhanVien" ToRole="ChucVu" />
+    <Property Name="NgaySinh" Type="DateTime" Precision="0" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SoDienThoai" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="AnhDaiDien" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="PhanChucNang">
     <Key>
@@ -111,5 +117,21 @@
       <End Role="NhanVien" EntitySet="NhanViens" />
       <End Role="TaiKhoan" EntitySet="TaiKhoans" />
     </AssociationSet>
+    <AssociationSet Name="FK__NhanVien__MaChuc__6EF57B66" Association="DeliveryModel.FK__NhanVien__MaChuc__6EF57B66">
+      <End Role="ChucVu" EntitySet="ChucVus" />
+      <End Role="NhanVien" EntitySet="NhanViens" />
+    </AssociationSet>
   </EntityContainer>
+  <Association Name="FK__NhanVien__MaChuc__6EF57B66">
+    <End Type="DeliveryModel.ChucVu" Role="ChucVu" Multiplicity="0..1" />
+    <End Type="DeliveryModel.NhanVien" Role="NhanVien" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChucVu">
+        <PropertyRef Name="MaChucVu" />
+      </Principal>
+      <Dependent Role="NhanVien">
+        <PropertyRef Name="MaChucVu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

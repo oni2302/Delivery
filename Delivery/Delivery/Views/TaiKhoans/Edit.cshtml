@@ -1,0 +1,67 @@
+﻿@model Delivery.Models.TaiKhoan
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="row form-horizontal container  card-body border-0 shadow  mx-auto w-75">
+        <h4>Đổi Mật Khẩu</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.MaNhanVien)
+        <div class="col-2"></div>
+        <div class="col-8 row" style="border-radius: 30px;">
+            <div class="col-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TenTaiKhoan, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input class="form-control" type="text" value="@Html.DisplayFor(model => Model.TenTaiKhoan)" aria-label="Disabled input example" disabled readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MatKhau, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input id="Password" name="Password" type="password" class="form-control" value="@Html.DisplayFor(model => model.MatKhau)" />
+                        <input type="checkbox" class="me-2" onclick="myFunction()">Show Password
+                        @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10 text-end mt-3">
+                        <button type="submit" value="Save" class="btn text-white " style="background: linear-gradient(90deg, #54BF5A 0.7%, #2D9147 71.82%); border-radius: 55px;">Save</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        
+
+}
+
+<Script >
+    function myFunction() {
+        var x = document.getElementById("Password");
+    if (x.type == "password") {
+    x.type = "text";
+    } 
+    else {
+    x.type = "password";
+    }
+    }
+</Script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+}
