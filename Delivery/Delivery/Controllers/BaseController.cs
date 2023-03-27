@@ -14,7 +14,7 @@ namespace Delivery.Controllers
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             //Kiểm tra phiên đăng nhập trách trường hợp người dùng tự ghi đường dẫn mà chưa đăng nhập
-            var session = Session[CommonConstants.NGUOI_DUNG];
+            var session = Session[CommonConstants.PHIEN_DANG_NHAP];
             if (session == null) {
                 filterContext.Result = new RedirectToRouteResult(
                     new RouteValueDictionary(
