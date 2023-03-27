@@ -71,20 +71,6 @@
                     </div>
                 </div>
                 <ul class="main-menu">
-<<<<<<< HEAD
-                    @*@foreach (var chucNang in session)
-                    {
-                       <li class="main-menu-item-wrap ">
-                           <a class="main-menu-item" href="#">
-                               <svg width="22" height="22" viewBox="0 0 33 31" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                   @Html.Raw(chucNang.BieuTuong);                                   
-                               </svg>
-                               <span>@chucNang.TenChucNang</span>
-                           </a>
-                       </li> 
-                    }*@
-=======
                     @if(session!=null){
                         foreach (var chucNang in session)
                         {
@@ -100,8 +86,6 @@
 
                         }
                     }
-
->>>>>>> main
                     <li class="main-menu-item-wrap">
                         <a class="main-menu-item" href="#">
                             <svg width="22" height="22" viewBox="0 0 29 29" fill="none"

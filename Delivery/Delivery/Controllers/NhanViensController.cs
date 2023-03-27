@@ -11,12 +11,12 @@ using Delivery.Models;
 
 namespace Delivery.Controllers
 {
-    public class NhanViensController : Controller
+    public class NhanViensController : BaseController
     {
         private DeliveryEntities db = new DeliveryEntities();
 
         // GET: NhanViens
-        public ActionResult Index(string sortOrder, string searchString, int categoryID = 0)
+        public ActionResult Index(string sortOrder, string searchString, int categoryIDNV = 0, int categoryIDCV = 0)
         {
             // 1. Thêm biến NameSortParm để biết trạng thái sắp xếp tăng, giảm ở View
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
@@ -37,27 +37,19 @@ namespace Delivery.Controllers
 
             // 1.1. Lưu tư khóa tìm kiếm
             ViewBag.Keyword = searchString;
-            //1.2 Lưu chủ đề tìm kiếm
-           // ViewBag.Subject = categoryID;
-            //ViewBag.Id = categoryID;
-            //1.2.Tạo câu truy vấn kết 3 bảng Book, Author, Category
+            ViewBag.IdCV = categoryIDCV;
+            ViewBag.IdNV = categoryIDNV;
 
             //1.3. Tìm kiếm theo searchString
             if (!String.IsNullOrEmpty(searchString))
                 nhanViens = nhanViens.Where(b => b.TenNhanVien.Contains(searchString));
 
-            //1.4. Tìm kiếm theo CategoryID
-           // if (!String.IsNullOrEmpty(searchString))
-                //nhanViens = nhanViens.Where(b => b.TenNhanVien.Contains(searchString));
-           
-            //1.5. Tìm kiếm theo CategoryID
-           // if (categoryID != 0)
-             // nhanViens = nhanViens.Where(c => c.MaNhanVien == categoryID);
-
-            //1.6. Tìm kiếm theo Danh sách chủ đề
-            //ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName"); // danh sách Category               
-
-
+            //1.4. Tìm kiếm theo CategoryIDCV
+            if (categoryIDCV != 0)
+                nhanViens = nhanViens.Where(c => c.MaChucVu == categoryIDCV);
+            //1.5. Tìm kiếm theo CategoryIDNV
+            if (categoryIDNV != 0)
+           nhanViens = nhanViens.Where(d => d.MaNhanVien == categoryIDNV);
             //Trả kết quả về Views
             return View(nhanViens.ToList());
         }

@@ -15,7 +15,15 @@
                 <div class="col">
                     @Html.DisplayName("Mã nhân viên")
                     <div class="col">
-                        <input type="text" class="form-control" id="">
+                        <input type="text" class="form-control" value="@ViewBag.IdNV" name="categoryIDNV" />
+                        @*<input type="text" class="form-control" id="">*@
+                    </div>
+                </div>
+                <div class="col">
+                    @Html.DisplayName("Mã chức vụ")
+                    <div class="col">
+                        <input type="Text" class="form-control" value="@ViewBag.IdCV" name="categoryIDCV" placeholder="">
+                        @*<input type="text" class="form-control" id="">*@
                     </div>
                 </div>
                 <div class="col">
@@ -23,27 +31,6 @@
                     <div class="col">
                         <input type="Text" class="form-control" value="@ViewBag.Keyword" name="searchString" placeholder="">
                         @*<input type="text" class="form-control" id="">*@
-                    </div>
-                </div>
-                <div class="col">
-                    @Html.DisplayName("Ngày sinh")
-                    <div class="col">
-                        <input type="text" class="form-control" id="">
-                    </div>
-                </div>
-            </div>
-
-            <div class="row g-3">
-                <div class="col-4">
-                    @Html.DisplayName("Email")
-                    <div class="col">
-                        <input type="email" class="form-control" id="">
-                    </div>
-                </div>
-                <div class="col-4">
-                    @Html.DisplayName("Số điện thoại")
-                    <div class="col">
-                        <input type="number" class="form-control" id="">
                     </div>
                 </div>
             </div>
@@ -62,10 +49,12 @@
             <table class="table table-hover">
                 <tr>
                     <th>
-                        @Html.DisplayName("Mã nhân viên")
+                        @Html.ActionLink("Mã nhân viên", "Index", new { sortOrder = ViewBag.NameSortParm, searchString = ViewBag.Keyword, categoryIDNV = ViewBag.IdNV, categoryIDCV = ViewBag.IdCV }, new { @class = "text-dark text-decoration-none" })
+
+                        @*@Html.DisplayName("Mã nhân viên")*@
                     </th>
                     <th>
-                        @Html.ActionLink("Họ Tên", "Index", new { sortOrder = ViewBag.NameSortParm, searchString = ViewBag.Keyword }, new { @class = "text-dark text-decoration-none" })
+                        @Html.ActionLink("Họ Tên", "Index", new { sortOrder = ViewBag.NameSortParm, searchString = ViewBag.Keyword, categoryIDNV = ViewBag.IdNV, categoryIDCV = ViewBag.IdCV }, new { @class = "text-dark text-decoration-none" })
                         @*@Html.DisplayName("Họ tên")*@
                     </th>
                     <th>
@@ -78,7 +67,7 @@
                         @Html.DisplayName("Số điện thoại")
                     </th>
                     <th>
-                        @Html.DisplayName("Mã chức vụ")
+                        @Html.ActionLink("Mã chức vụ", "Index", new { sortOrder = ViewBag.NameSortParm, searchString = ViewBag.Keyword, categoryIDNV = ViewBag.IdNV, categoryIDCV = ViewBag.IdCV }, new { @class = "text-dark text-decoration-none" })
                     </th>
                     <th>
                         @Html.DisplayName("Actions")

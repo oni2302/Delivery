@@ -18,11 +18,11 @@ using System;
 public partial class TaiKhoan
 {
 
+    public int MaNhanVien { get; set; }
+
     public string TenTaiKhoan { get; set; }
 
     public string MatKhau { get; set; }
-
-    public int MaNhanVien { get; set; }
 
 
 

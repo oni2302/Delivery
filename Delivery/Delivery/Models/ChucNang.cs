@@ -15,7 +15,6 @@ namespace Delivery.Models
 using System;
     using System.Collections.Generic;
     
-<<<<<<< HEAD
 public partial class ChucNang
 {
 
@@ -33,15 +32,4 @@ public partial class ChucNang
 
 }
 
-=======
-    public partial class ChucNang
-    {
-        public int MaChucNang { get; set; }
-        public string TenChucNang { get; set; }
-        public string BieuTuong { get; set; }
-        public string Controller { get; set; }
-        public string Action { get; set; }
-        public string Direction { get; set; }
-    }
->>>>>>> main
 }
