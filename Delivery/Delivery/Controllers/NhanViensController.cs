@@ -90,7 +90,7 @@ namespace Delivery.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaNhanVien,TenNhanVien,NgaySinh,Email,SoDienThoai")] NhanVien nhanVien)
+        public ActionResult Create([Bind(Include = "MaNhanVien,TenNhanVien,NgaySinh,Email,SoDienThoai,MaChucVu")] NhanVien nhanVien)
         {
             if (ModelState.IsValid)
             {

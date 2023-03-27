@@ -143,6 +143,9 @@
     <Compile Include="Models\ChucVu.cs">
       <DependentUpon>Delivery.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\database_firewall_rules.cs">
+      <DependentUpon>Delivery.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Delivery.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -162,6 +165,9 @@
       <DependentUpon>Delivery.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DH_DaNhan.cs">
+      <DependentUpon>Delivery.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LayChucNang_Result.cs">
       <DependentUpon>Delivery.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\NhanVien.cs">

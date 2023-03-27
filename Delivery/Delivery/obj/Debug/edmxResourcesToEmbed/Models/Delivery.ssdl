@@ -7,13 +7,16 @@
     <Property Name="MaChucNang" Type="int" Nullable="false" />
     <Property Name="TenChucNang" Type="nvarchar" MaxLength="1000" />
     <Property Name="BieuTuong" Type="nvarchar" MaxLength="4000" />
+    <Property Name="Controller" Type="nvarchar" MaxLength="100" />
+    <Property Name="Action" Type="nvarchar" MaxLength="100" />
+    <Property Name="Direction" Type="nvarchar" MaxLength="200" />
   </EntityType>
   <EntityType Name="ChucVu">
     <Key>
       <PropertyRef Name="MaChucVu" />
     </Key>
-    <Property Name="MaChucVu" Type="int" Nullable="false" />
-    <Property Name="TenChucVu" Type="nvarchar" MaxLength="1000" />
+    <Property Name="MaChucVu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenChucVu" Type="nchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="DH">
     <Key>
@@ -48,12 +51,12 @@
     <Key>
       <PropertyRef Name="MaNhanVien" />
     </Key>
-    <Property Name="MaNhanVien" Type="int" Nullable="false" />
-    <Property Name="TenNhanVien" Type="nvarchar" MaxLength="100" />
-    <Property Name="MaChucVu" Type="int" />
+    <Property Name="MaNhanVien" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenNhanVien" Type="nchar" MaxLength="100" />
     <Property Name="NgaySinh" Type="date" />
-    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nchar" MaxLength="100" />
     <Property Name="SoDienThoai" Type="char" MaxLength="10" />
+    <Property Name="MaChucVu" Type="int" />
     <Property Name="AnhDaiDien" Type="nvarchar" MaxLength="1000" />
   </EntityType>
   <EntityType Name="PhanChucNang">
@@ -83,16 +86,34 @@
     <Key>
       <PropertyRef Name="MaNhanVien" />
     </Key>
-    <Property Name="MaNhanVien" Type="int" Nullable="false" />
-    <Property Name="TenTaiKhoan" Type="varchar" MaxLength="100" />
-    <Property Name="MatKhau" Type="varchar" MaxLength="100" />
+    <Property Name="TenTaiKhoan" Type="nvarchar" MaxLength="50" />
+    <Property Name="MatKhau" Type="varchar" MaxLength="30" />
+    <Property Name="MaNhanVien" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6013: The table/view 'Delivery.dbo.test' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="test">
           <Property Name="test" Type="int" />
         </EntityType>-->
-  <Association Name="FK__NhanVien__MaChuc__6EF57B66">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Delivery.sys.database_firewall_rules' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="database_firewall_rules">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="name" />
+      <PropertyRef Name="start_ip_address" />
+      <PropertyRef Name="end_ip_address" />
+      <PropertyRef Name="create_date" />
+      <PropertyRef Name="modify_date" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="start_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="end_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="create_date" Type="datetime" Nullable="false" />
+    <Property Name="modify_date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__NhanVien__MaChuc__0D7A0286">
     <End Role="ChucVu" Type="Self.ChucVu" Multiplicity="0..1" />
     <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="*" />
     <ReferentialConstraint>
@@ -104,7 +125,7 @@ warning 6013: The table/view 'Delivery.dbo.test' does not have a primary key def
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__TaiKhoan__MaNhan__68487DD7">
+  <Association Name="FK__TaiKhoan__MaNhan__0C85DE4D">
     <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="1" />
     <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -116,6 +137,9 @@ warning 6013: The table/view 'Delivery.dbo.test' does not have a primary key def
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="LayChucNang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MaNhanVien" Type="int" Mode="In" />
+  </Function>
   <EntityContainer Name="DeliveryModelStoreContainer">
     <EntitySet Name="ChucNang" EntityType="Self.ChucNang" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ChucVu" EntityType="Self.ChucVu" Schema="dbo" store:Type="Tables" />
@@ -126,11 +150,21 @@ warning 6013: The table/view 'Delivery.dbo.test' does not have a primary key def
     <EntitySet Name="PhanQuyen" EntityType="Self.PhanQuyen" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Quyen" EntityType="Self.Quyen" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TaiKhoan" EntityType="Self.TaiKhoan" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__NhanVien__MaChuc__6EF57B66" Association="Self.FK__NhanVien__MaChuc__6EF57B66">
+    <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" store:Type="Views" store:Schema="sys">
+      <DefiningQuery>SELECT 
+    [database_firewall_rules].[id] AS [id], 
+    [database_firewall_rules].[name] AS [name], 
+    [database_firewall_rules].[start_ip_address] AS [start_ip_address], 
+    [database_firewall_rules].[end_ip_address] AS [end_ip_address], 
+    [database_firewall_rules].[create_date] AS [create_date], 
+    [database_firewall_rules].[modify_date] AS [modify_date]
+    FROM [sys].[database_firewall_rules] AS [database_firewall_rules]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__NhanVien__MaChuc__0D7A0286" Association="Self.FK__NhanVien__MaChuc__0D7A0286">
       <End Role="ChucVu" EntitySet="ChucVu" />
       <End Role="NhanVien" EntitySet="NhanVien" />
     </AssociationSet>
-    <AssociationSet Name="FK__TaiKhoan__MaNhan__68487DD7" Association="Self.FK__TaiKhoan__MaNhan__68487DD7">
+    <AssociationSet Name="FK__TaiKhoan__MaNhan__0C85DE4D" Association="Self.FK__TaiKhoan__MaNhan__0C85DE4D">
       <End Role="NhanVien" EntitySet="NhanVien" />
       <End Role="TaiKhoan" EntitySet="TaiKhoan" />
     </AssociationSet>

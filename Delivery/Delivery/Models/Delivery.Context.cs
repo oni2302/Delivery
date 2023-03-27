@@ -17,6 +17,9 @@ using System;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 
+using System.Data.Entity.Core.Objects;
+using System.Linq;
+
 
 public partial class DeliveryEntities : DbContext
 {
@@ -32,13 +35,15 @@ public partial class DeliveryEntities : DbContext
     }
 
 
+    public virtual DbSet<DH_DaNhan> DH_DaNhan { get; set; }
+
+    public virtual DbSet<TaiKhoan> TaiKhoans { get; set; }
+
     public virtual DbSet<ChucNang> ChucNangs { get; set; }
 
     public virtual DbSet<ChucVu> ChucVus { get; set; }
 
     public virtual DbSet<DH> DHs { get; set; }
-
-    public virtual DbSet<DH_DaNhan> DH_DaNhan { get; set; }
 
     public virtual DbSet<NhanVien> NhanViens { get; set; }
 
@@ -48,7 +53,19 @@ public partial class DeliveryEntities : DbContext
 
     public virtual DbSet<Quyen> Quyens { get; set; }
 
-    public virtual DbSet<TaiKhoan> TaiKhoans { get; set; }
+    public virtual DbSet<database_firewall_rules> database_firewall_rules { get; set; }
+
+
+    public virtual ObjectResult<LayChucNang_Result> LayChucNang(Nullable<int> maNhanVien)
+    {
+
+        var maNhanVienParameter = maNhanVien.HasValue ?
+            new ObjectParameter("MaNhanVien", maNhanVien) :
+            new ObjectParameter("MaNhanVien", typeof(int));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<LayChucNang_Result>("LayChucNang", maNhanVienParameter);
+    }
 
 }
 

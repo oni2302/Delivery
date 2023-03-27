@@ -13,30 +13,21 @@ namespace Delivery.Models
 {
 
 using System;
-    using System.Collections.Generic;
     
-public partial class NhanVien
+public partial class LayChucNang_Result
 {
 
-    public int MaNhanVien { get; set; }
+    public int MaChucNang { get; set; }
 
-    public string TenNhanVien { get; set; }
+    public string TenChucNang { get; set; }
 
-    public Nullable<System.DateTime> NgaySinh { get; set; }
+    public string BieuTuong { get; set; }
 
-    public string Email { get; set; }
+    public string Controller { get; set; }
 
-    public string SoDienThoai { get; set; }
+    public string Action { get; set; }
 
-    public Nullable<int> MaChucVu { get; set; }
-
-    public string AnhDaiDien { get; set; }
-
-
-
-    public virtual TaiKhoan TaiKhoan { get; set; }
-
-    public virtual ChucVu ChucVu { get; set; }
+    public string Direction { get; set; }
 
 }
 

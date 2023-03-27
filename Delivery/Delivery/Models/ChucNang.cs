@@ -24,6 +24,12 @@ public partial class ChucNang
 
     public string BieuTuong { get; set; }
 
+    public string Controller { get; set; }
+
+    public string Action { get; set; }
+
+    public string Direction { get; set; }
+
 }
 
 }
