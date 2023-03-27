@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="DeliveryModelStoreContainer" CdmEntityContainer="DeliveryEntities">
+<<<<<<< HEAD
+=======
     <EntitySetMapping Name="ChucNangs">
       <EntityTypeMapping TypeName="DeliveryModel.ChucNang">
         <MappingFragment StoreEntitySet="ChucNang">
@@ -36,6 +38,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+>>>>>>> main
     <EntitySetMapping Name="DH_DaNhan">
       <EntityTypeMapping TypeName="DeliveryModel.DH_DaNhan">
         <MappingFragment StoreEntitySet="DH_DaNhan">
@@ -52,50 +55,117 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="TaiKhoans">
+      <EntityTypeMapping TypeName="DeliveryModel.TaiKhoan">
+        <MappingFragment StoreEntitySet="TaiKhoan">
+          <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
+          <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+          <ScalarProperty Name="TenTaiKhoan" ColumnName="TenTaiKhoan" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="LayChucNang" FunctionName="DeliveryModel.Store.LayChucNang">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DeliveryModel.LayChucNang_Result">
+          <ScalarProperty Name="MaChucNang" ColumnName="MaChucNang" />
+          <ScalarProperty Name="TenChucNang" ColumnName="TenChucNang" />
+          <ScalarProperty Name="BieuTuong" ColumnName="BieuTuong" />
+          <ScalarProperty Name="Controller" ColumnName="Controller" />
+          <ScalarProperty Name="Action" ColumnName="Action" />
+          <ScalarProperty Name="Direction" ColumnName="Direction" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="ChucNangs">
+      <EntityTypeMapping TypeName="DeliveryModel.ChucNang">
+        <MappingFragment StoreEntitySet="ChucNang">
+          <ScalarProperty Name="Direction" ColumnName="Direction" />
+          <ScalarProperty Name="Action" ColumnName="Action" />
+          <ScalarProperty Name="Controller" ColumnName="Controller" />
+          <ScalarProperty Name="BieuTuong" ColumnName="BieuTuong" />
+          <ScalarProperty Name="TenChucNang" ColumnName="TenChucNang" />
+          <ScalarProperty Name="MaChucNang" ColumnName="MaChucNang" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ChucVus">
+      <EntityTypeMapping TypeName="DeliveryModel.ChucVu">
+        <MappingFragment StoreEntitySet="ChucVu">
+          <ScalarProperty Name="TenChucVu" ColumnName="TenChucVu" />
+          <ScalarProperty Name="MaChucVu" ColumnName="MaChucVu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DHs">
+      <EntityTypeMapping TypeName="DeliveryModel.DH">
+        <MappingFragment StoreEntitySet="DH">
+          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+          <ScalarProperty Name="SdtNN" ColumnName="SdtNN" />
+          <ScalarProperty Name="DiaChiNN" ColumnName="DiaChiNN" />
+          <ScalarProperty Name="HotenNN" ColumnName="HotenNN" />
+          <ScalarProperty Name="SdtNG" ColumnName="SdtNG" />
+          <ScalarProperty Name="DiaChiNG" ColumnName="DiaChiNG" />
+          <ScalarProperty Name="HoTenNG" ColumnName="HoTenNG" />
+          <ScalarProperty Name="MaVanDon" ColumnName="MaVanDon" />
+          <ScalarProperty Name="MaDH" ColumnName="MaDH" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="NhanViens">
       <EntityTypeMapping TypeName="DeliveryModel.NhanVien">
         <MappingFragment StoreEntitySet="NhanVien">
           <ScalarProperty Name="AnhDaiDien" ColumnName="AnhDaiDien" />
+<<<<<<< HEAD
+=======
           <ScalarProperty Name="SoDienThoai" ColumnName="SoDienThoai" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
           <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
           <ScalarProperty Name="TenNhanVien" ColumnName="TenNhanVien" />
+>>>>>>> main
           <ScalarProperty Name="MaChucVu" ColumnName="MaChucVu" />
+          <ScalarProperty Name="SoDienThoai" ColumnName="SoDienThoai" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+          <ScalarProperty Name="TenNhanVien" ColumnName="TenNhanVien" />
+          <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PhanChucNangs">
       <EntityTypeMapping TypeName="DeliveryModel.PhanChucNang">
         <MappingFragment StoreEntitySet="PhanChucNang">
-          <ScalarProperty Name="MaQuyen" ColumnName="MaQuyen" />
           <ScalarProperty Name="MaChucNang" ColumnName="MaChucNang" />
+          <ScalarProperty Name="MaQuyen" ColumnName="MaQuyen" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PhanQuyens">
       <EntityTypeMapping TypeName="DeliveryModel.PhanQuyen">
         <MappingFragment StoreEntitySet="PhanQuyen">
-          <ScalarProperty Name="MaPhanQuyen" ColumnName="MaPhanQuyen" />
-          <ScalarProperty Name="MaQuyen" ColumnName="MaQuyen" />
           <ScalarProperty Name="MaChucVu" ColumnName="MaChucVu" />
+          <ScalarProperty Name="MaQuyen" ColumnName="MaQuyen" />
+          <ScalarProperty Name="MaPhanQuyen" ColumnName="MaPhanQuyen" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Quyens">
       <EntityTypeMapping TypeName="DeliveryModel.Quyen">
         <MappingFragment StoreEntitySet="Quyen">
-          <ScalarProperty Name="MaQuyen" ColumnName="MaQuyen" />
           <ScalarProperty Name="TenQuyen" ColumnName="TenQuyen" />
+          <ScalarProperty Name="MaQuyen" ColumnName="MaQuyen" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TaiKhoans">
-      <EntityTypeMapping TypeName="DeliveryModel.TaiKhoan">
-        <MappingFragment StoreEntitySet="TaiKhoan">
-          <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
-          <ScalarProperty Name="TenTaiKhoan" ColumnName="TenTaiKhoan" />
-          <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+    <EntitySetMapping Name="database_firewall_rules">
+      <EntityTypeMapping TypeName="DeliveryModel.database_firewall_rules">
+        <MappingFragment StoreEntitySet="database_firewall_rules">
+          <ScalarProperty Name="modify_date" ColumnName="modify_date" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
+          <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
