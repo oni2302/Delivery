@@ -1,9 +1,7 @@
 ﻿@using Delivery.Common;
 @using Delivery.Models;
 @{
-    var session = (List<LayChucNang_Result>)Session[CommonConstants.CHUC_NANG];
-    var session_user = Session[CommonConstants.TEN_NGUOI_DUNG];
-    string controller = ViewContext.RouteData.Values["controller"].ToString();
+  var session = (List<ChucNang>)Session[CommonConstants.CHUC_NANG];
 }
 <!DOCTYPE html>
 <html>
@@ -23,29 +21,7 @@
         <div class="wrap-navbar">
             <nav class="navigation-bar">
                 <div class="space"></div>
-                <div class="nav-content d-flex justify-content-end align-items-center">
-                    <div class="user-option-wrap">
-                        <div class="user-option-name">
-                            <span>@if (session_user != null) { Write(session_user); } else { Write("Chưa có tên"); }</span>
-                        </div>
-                        <div class="user-option-img">
-                            <img src="~/Images/logo.png" alt="Alternate Text" />
-                        </div>
-                        <div class="user-option-dropdown-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 19 11" fill="none">
-                                <path d="M0.324495 2.04013L8.08015 10.4396C8.20516 10.5749 8.36024 10.6835 8.53474 10.758C8.70923 10.8325 8.89902 10.871 9.09108 10.871C9.28315 10.871 9.47294 10.8325 9.64743 10.758C9.82193 10.6835 9.977 10.5749 10.102 10.4396L17.8577 2.04013C18.5978 1.23839 17.9842 -1.73979e-06 16.8467 -1.69007e-06L1.33321 -1.01195e-06C0.19577 -9.62232e-07 -0.417891 1.23839 0.324495 2.04013Z" fill="white" />
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="user-option-dropdown-menu-wrap shadow-sm active">
-                        <ul class="user-option-dropdown-menu">
-                            <li><a href="">@CommonConstants.OPTION_1</a></li>
-                            <li><a href="">@CommonConstants.OPTION_2</a></li>
-                            <li><a href="">@CommonConstants.OPTION_3</a></li>
-                            <li class="cross-line"><a href="">@CommonConstants.OPTION_LOGOUT</a></li>
-                        </ul>
-                    </div>
-                </div>
+                <div class="nav-content d-flex align-items-center"></div>
             </nav>
         </div>
     </header>
@@ -71,10 +47,6 @@
                     </div>
                 </div>
                 <ul class="main-menu">
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 4425621bd2cd90cdf24694b3521dd8b1d467d198
                     @*@foreach (var chucNang in session)
                     {
                        <li class="main-menu-item-wrap ">
@@ -87,27 +59,6 @@
                            </a>
                        </li> 
                     }*@
-<<<<<<< HEAD
-=======
-=======
-                    @if(session!=null){
-                        foreach (var chucNang in session)
-                        {
-                            <li class="main-menu-item-wrap @if (chucNang.Controller == controller) { Write("active"); } ">
-                                <a class="main-menu-item  " href="">
-                                    <svg width="22" height="22" viewBox="0 0 33 31" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        @Html.Raw(chucNang.BieuTuong);
-                                    </svg>
-                                    <span>@chucNang.TenChucNang</span>
-                                </a>
-                            </li>
-
-                        }
-                    }
-
->>>>>>> main
->>>>>>> 4425621bd2cd90cdf24694b3521dd8b1d467d198
                     <li class="main-menu-item-wrap">
                         <a class="main-menu-item" href="#">
                             <svg width="22" height="22" viewBox="0 0 29 29" fill="none"
