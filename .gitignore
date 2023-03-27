@@ -2,3 +2,5 @@ Delivery\Delivery\.vs\
 .vs\
 Delivery/Delivery/.vs/
 .vs/
+*.vsidx
+Delivery/Delivery/.vs/Delivery/v17/.suo

@@ -40,6 +40,8 @@ namespace Delivery.Controllers
                     {
                         layChucNang_List.Add(item);
                     }
+                    Session.Add(CommonConstants.TEN_NGUOI_DUNG,db.NhanViens.Find(check.MaNhanVien).TenNhanVien);
+
                     Session.Add(CommonConstants.NGUOI_DUNG, check);
                     Session.Add(CommonConstants.CHUC_NANG, layChucNang_List);
                     return RedirectToAction("Index", "Home");
@@ -55,7 +57,6 @@ namespace Delivery.Controllers
                 ModelState.AddModelError("", "Chưa nhập tài khoản hoặc mật khẩu !");
                 return View("Login");
             }
-            return null;
         }
         
     }
