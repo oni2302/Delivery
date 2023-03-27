@@ -1,0 +1,56 @@
+﻿@model Delivery.Models.NhanVien
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container" style="background-color: #F2F2F2; padding: 50px; margin: auto">
+    <div class="form-horizontal" style="background-color: white; padding: 30px; border-radius: 1rem; width: 50%;">
+        <h4 style="text-align:center;">Xác nhận xóa nhân viên?</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayName("Họ tên")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TenNhanVien)
+            </dd>
+
+            <dt>
+                @Html.DisplayName("Ngày sinh")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NgaySinh)
+            </dd>
+
+            <dt>
+                @Html.DisplayName("Email")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+            <dt>
+                @Html.DisplayName("Số điện thoại")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SoDienThoai)
+            </dd>
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color" style="display:flex; justify-content: center;">
+                <input type="submit" value="Delete" class="btn btn-success" style="border-radius: 1.5rem;  width: 100px; margin-right:10px;" />
+                @Html.ActionLink("Hủy", "Index", "NhanVien", new { @class = "btn btn-outline-success", @style = "border-radius: 1.5rem;  width: 100px;" })
+            </div>
+        }
+    </div>
+</div>
