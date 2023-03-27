@@ -1,0 +1,85 @@
+﻿@model IEnumerable<Delivery.Models.TaiKhoan>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<div class="container" style="background-color: #F2F2F2; padding: 50px;">
+    <div class="form-horizontal" style="background-color: white; padding: 30px; border-radius: 1rem">
+        <h4>Người dùng hệ thống</h4>
+        <hr />
+            <div class="d-flex justify-content-around">
+                <div class="col">
+                    <label for="" class="form-label">Tên tài khoản </label>
+                    <input type="text" class="form-control" id="" value="@ViewBag.KeywordTK" name="searchString" >
+                </div>
+                <div class="col">
+                    <label for="" class="form-label">Họ tên</label>
+                    <input type="text" class="form-control" value="@ViewBag.KeywordTenNV" name="TenNVString"/>
+                </div>
+                <div class="col">
+                    <label for="" class="form-label">Chức vụ</label>
+                    <input type="text" class="form-control" value="@ViewBag.KeywordCV" name="CVString" />
+                </div>
+            </div>
+            <hr />
+            <div class="d-flex justify-content-between">
+                @Html.ActionLink("+ Thêm tài khoản", "Create", "TaiKhoan", new { @class = "btn btn-success", @style = "border-radius: 1.5rem" })
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    @Html.ActionLink("Reset", "Index", "TaiKhoan", new { @class = "btn btn-outline-success", @style = "border-radius: 1.5rem;  width: 100px;" })
+                    <input type="submit" value="Search" class="btn btn-success" style="border-radius: 1.5rem; width: 100px; " />
+                </div>
+            </div>
+    </div>
+
+    <div class="form-horizontal" style="background-color: white; padding: 30px; border-radius: 1rem; margin-top: 20px;">
+        <table class="table table-hover">
+            <tr>
+                <th>
+                    @Html.ActionLink("Tên Tài Khoản", "Index", new { sortOrder = ViewBag.NameSortParm, searchString = ViewBag.KeywordTK, TenNVString = ViewBag.KeywordTenNV, CVString = ViewBag.KeywordCV}, new { @class = "text-dark text-decoration-none" })
+                </th>
+                <th>
+                    @Html.DisplayName("Mật khẩu")
+                </th>
+                <th>
+                    @Html.ActionLink("Họ tên", "Index", new { sortOrder = ViewBag.NameSortParm, searchString = ViewBag.KeywordTK, TenNVString = ViewBag.KeywordTenNV, CVString = ViewBag.KeywordCV }, new { @class = "text-dark text-decoration-none" })
+                </th>
+                <th>
+                    @Html.ActionLink("Chức vụ", "Index", new { sortOrder = ViewBag.NameSortParm, searchString = ViewBag.KeywordTK, TenNVString = ViewBag.KeywordTenNV, CVString = ViewBag.KeywordCV }, new { @class = "text-dark text-decoration-none" })
+                </th>
+                <th>
+                    @Html.DisplayName("Actions")
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+             {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TenTaiKhoan)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MatKhau)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NhanVien.TenNhanVien)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NhanVien.ChucVu.TenChucVu)
+                    </td>
+                    <td>
+                        <a style="text-decoration: none; color:black; margin-right:10px;" href="@Url.Action("Reset", "TaiKhoan",new { id = item.MaNhanVien })">
+                            <i class="fas fa-sync-alt"></i>
+                        </a>
+                        <a style="text-decoration: none; color: black;" href="@Url.Action("Delete", "TaiKhoan",new { id = item.MaNhanVien })">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </a>
+                    </td>
+                </tr>
+             }
+
+        </table>
+    </div>
+</div>
