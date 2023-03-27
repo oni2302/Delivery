@@ -7,13 +7,16 @@
     <Property Name="MaChucNang" Type="Int32" Nullable="false" />
     <Property Name="TenChucNang" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
     <Property Name="BieuTuong" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="Controller" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Action" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Direction" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="ChucVu">
     <Key>
       <PropertyRef Name="MaChucVu" />
     </Key>
     <Property Name="MaChucVu" Type="Int32" Nullable="false" />
-    <Property Name="TenChucVu" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="TenChucVu" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
     <NavigationProperty Name="NhanViens" Relationship="DeliveryModel.FK__NhanVien__MaChuc__6EF57B66" FromRole="ChucVu" ToRole="NhanVien" />
   </EntityType>
   <EntityType Name="DH">
@@ -50,12 +53,12 @@
       <PropertyRef Name="MaNhanVien" />
     </Key>
     <Property Name="MaNhanVien" Type="Int32" Nullable="false" />
-    <Property Name="TenNhanVien" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="TenNhanVien" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
     <Property Name="MaChucVu" Type="Int32" />
     <NavigationProperty Name="TaiKhoan" Relationship="Self.FK__TaiKhoan__MaNhan__68487DD7" FromRole="NhanVien" ToRole="TaiKhoan" />
     <NavigationProperty Name="ChucVu" Relationship="DeliveryModel.FK__NhanVien__MaChuc__6EF57B66" FromRole="NhanVien" ToRole="ChucVu" />
     <Property Name="NgaySinh" Type="DateTime" Precision="0" />
-    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
     <Property Name="SoDienThoai" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
     <Property Name="AnhDaiDien" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
   </EntityType>
@@ -87,8 +90,8 @@
       <PropertyRef Name="MaNhanVien" />
     </Key>
     <Property Name="MaNhanVien" Type="Int32" Nullable="false" />
-    <Property Name="TenTaiKhoan" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="MatKhau" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="TenTaiKhoan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MatKhau" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="NhanVien" Relationship="Self.FK__TaiKhoan__MaNhan__68487DD7" FromRole="TaiKhoan" ToRole="NhanVien" />
   </EntityType>
   <Association Name="FK__TaiKhoan__MaNhan__68487DD7">

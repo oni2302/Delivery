@@ -321,3 +321,4 @@ D:\2022-2023\CNPM_NC\Doan\Delivery_CNPM_NC\Delivery\Delivery\Delivery\obj\Debug\
 D:\2022-2023\CNPM_NC\Doan\Delivery_CNPM_NC\Delivery\Delivery\Delivery\obj\Debug\Delivery.csproj.CopyComplete
 D:\2022-2023\CNPM_NC\Doan\Delivery_CNPM_NC\Delivery\Delivery\Delivery\obj\Debug\Delivery.dll
 D:\2022-2023\CNPM_NC\Doan\Delivery_CNPM_NC\Delivery\Delivery\Delivery\obj\Debug\Delivery.pdb
+D:\2022-2023\CNPM_NC\Doan\Delivery_CNPM_NC\Delivery\Delivery\Delivery\obj\Debug\Delivery.csproj.AssemblyReference.cache

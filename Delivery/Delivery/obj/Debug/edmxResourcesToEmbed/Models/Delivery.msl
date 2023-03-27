@@ -4,6 +4,9 @@
     <EntitySetMapping Name="ChucNangs">
       <EntityTypeMapping TypeName="DeliveryModel.ChucNang">
         <MappingFragment StoreEntitySet="ChucNang">
+          <ScalarProperty Name="Direction" ColumnName="Direction" />
+          <ScalarProperty Name="Action" ColumnName="Action" />
+          <ScalarProperty Name="Controller" ColumnName="Controller" />
           <ScalarProperty Name="MaChucNang" ColumnName="MaChucNang" />
           <ScalarProperty Name="TenChucNang" ColumnName="TenChucNang" />
           <ScalarProperty Name="BieuTuong" ColumnName="BieuTuong" />

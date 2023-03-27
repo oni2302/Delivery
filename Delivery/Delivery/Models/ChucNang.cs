@@ -17,5 +17,8 @@ namespace Delivery.Models
         public int MaChucNang { get; set; }
         public string TenChucNang { get; set; }
         public string BieuTuong { get; set; }
+        public string Controller { get; set; }
+        public string Action { get; set; }
+        public string Direction { get; set; }
     }
 }
