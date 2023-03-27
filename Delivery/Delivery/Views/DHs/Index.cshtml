@@ -4,49 +4,56 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="my-3 d-flex justify-content-between" >
-    <h3 class="fw-bold">Đơn hàng chưa nhận</h3>
-    <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-    </form>
+<div class="container-fluid" style="background-color: #f2f2f2">
+    <div class="container">
+        <div class="my-3 d-flex justify-content-between">
+            <h3 class="fw-bold">Đơn hàng chưa nhận</h3>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+        @*<p>
+            @Html.ActionLink("Create New", "Create")
+        </p>*@
+        <div class="bg-white rounded p-5 m-3">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayName("Mã đơn hàng")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Mã vận đơn")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Trạng thái")
+                    </th>
+                    <th class="text-center">
+                        @Html.DisplayName("Actions")
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MaDH)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MaVanDon)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TrangThai)
+                        </td>
+                        <td class="text-center">
+                            @Html.ActionLink("Xem chi tiết", "Details", new { id = item.MaDH }, new { @class = "btn btn-outline-success mx-2" })
+                            @Html.ActionLink("Nhận đơn", "NhanDon", new { id = item.MaDH }, new { @class = "btn btn-success" })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
     </div>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-<table class="table table-hover" style="background-color:#fff; border-radius:20px">
-    <tr>
-        <th>
-            @Html.DisplayName("Mã đơn hàng")
-        </th>
-        <th>
-            @Html.DisplayName("Mã vận đơn")
-        </th>
-        <th>
-            @Html.DisplayName("Trạng thái")
-        </th>
-        <th class="text-center">
-            @Html.DisplayName("Actions")
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.MaDH)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.MaVanDon)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.TrangThai)
-    </td>
-    <td class="text-center">
-        @Html.ActionLink("Xem chi tiết", "Details", new { id = item.MaDH },new { @class = "btn btn-outline-success mx-2"})
-        @Html.ActionLink("Nhận đơn", "NhanDon", new { id = item.MaDH }, new { @class = "btn btn-success" })
-    </td>
-</tr>
-}
-
-</table>
+</div>

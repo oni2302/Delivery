@@ -95,11 +95,6 @@
           <Property Name="MatKhau" Type="varchar" MaxLength="30" />
           <Property Name="MaNhanVien" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'Delivery.dbo.test' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="test">
-          <Property Name="test" Type="int" />
-        </EntityType>-->
         <Association Name="FK__NhanVien__MaChuc__0D7A0286">
           <End Role="ChucVu" Type="Self.ChucVu" Multiplicity="0..1" />
           <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="*" />

@@ -5,97 +5,104 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Nhận đơn</h2>
+<div class="container-fluid" style="background-color: #f2f2f2">
+    <div class="container">
+        <h2 class="mt-3">Nhận đơn</h2>
+    </div>
+    <div class="bg-white rounded p-5 m-3 row">
+        <div class="col-md-10 mx-auto">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group my-3">
+                            @Html.Label("Mã đơn hàng", htmlAttributes: new { @class = "control-label" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.MaDH, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.MaDH, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group my-3">
+                            @Html.Label("Mã vận đơn", htmlAttributes: new { @class = "control-label" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.MaVanDon, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.MaVanDon, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
+                        <div class="form-group my-3">
+                            @Html.Label("Họ tên người gửi", htmlAttributes: new { @class = "control-label" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.HoTenNG, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.HoTenNG, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group my-3">
+                            @Html.Label("Địa chỉ người gửi", htmlAttributes: new { @class = "control-label" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.DiaChiNG, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DiaChiNG, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group my-3">
+                            @Html.Label("Số điện thoại người gửi", htmlAttributes: new { @class = "control-label" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.SdtNG, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.SdtNG, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-<div class="form-horizontal">
-    <div class="form-group">
-        @Html.Label("Mã đơn hàng", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.MaDH, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.MaDH, "", new { @class = "text-danger" })
+                        <div class="form-group my-3">
+                            @Html.Label("Họ tên người nhận", htmlAttributes: new { @class = "control-label" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.HotenNN, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.HotenNN, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group my-3">
+                            @Html.Label("Địa chỉ người nhận", htmlAttributes: new { @class = "control-label " })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.DiaChiNN, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DiaChiNN, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group my-3">
+                            @Html.Label("Số điện thoại người nhận", htmlAttributes: new { @class = "control-label" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.SdtNN, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.SdtNN, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group my-3">
+                            @Html.Label("Trạng thái", htmlAttributes: new { @class = "control-label " })
+                            <div class="col-md-10">
+                                <input class="form-control" type="text" name="TrangThai" value="Đã nhận" />
+                                @* @Html.EditorFor(model=>model.TrangThai,new { htmlAttributes = new { @class = "form-control"} })*@
+                                @Html.ValidationMessageFor(model => model.TrangThai, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mt-3">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Nhận đơn" class="btn btn-success" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="col-md-2 text-end">
+            @Html.ActionLink("< Trở về", "Index","DHs",new { @class = "text-decoration-none text-dark"})
         </div>
     </div>
-    <div class="form-group">
-        @Html.Label("Mã vận đơn", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.MaVanDon, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.MaVanDon, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.Label("Họ tên người gửi", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.HoTenNG, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.HoTenNG, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.Label("Địa chỉ người gửi", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.DiaChiNG, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.DiaChiNG, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.Label("Số điện thoại người gửi", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.SdtNG, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.SdtNG, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.Label("Họ tên người nhận", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.HotenNN, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.HotenNN, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.Label("Địa chỉ người nhận", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.DiaChiNN, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.DiaChiNN, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.Label("Số điện thoại người nhận", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.SdtNN, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.SdtNN, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.Label("Trạng thái", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10"> 
-            <input class="form-control" type="text" name="TrangThai" value="Đã nhận" />
-           @* @Html.EditorFor(model=>model.TrangThai,new { htmlAttributes = new { @class = "form-control"} })*@
-            @Html.ValidationMessageFor(model => model.TrangThai,"", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group mt-3">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Nhận đơn" class="btn btn-success" />
-        </div>
-    </div>
-</div>
-}
-
-<div>
-    @Html.ActionLink("Trở về", "Index")
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/jqueryval")
 }
