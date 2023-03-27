@@ -133,7 +133,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\NhanViensController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -283,11 +282,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_AccountLayout.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\NhanViens\Create.cshtml" />
-    <Content Include="Views\NhanViens\Delete.cshtml" />
-    <Content Include="Views\NhanViens\Details.cshtml" />
-    <Content Include="Views\NhanViens\Edit.cshtml" />
-    <Content Include="Views\NhanViens\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
