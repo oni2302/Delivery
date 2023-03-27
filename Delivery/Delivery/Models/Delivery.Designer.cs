@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\HK2 (2022 - 2023)\Delivery\Delivery\Delivery\Models\Delivery.edmx'. 
+﻿// T4 code generation is enabled for model 'D:\2022-2023\CNPM_NC\Doan\Delivery_CNPM_NC\Delivery\Delivery\Delivery\Models\Delivery.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
