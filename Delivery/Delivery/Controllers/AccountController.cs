@@ -58,6 +58,10 @@ namespace Delivery.Controllers
                 return View("Login");
             }
         }
-        
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return RedirectToAction("Login");
+        }
     }
 }
