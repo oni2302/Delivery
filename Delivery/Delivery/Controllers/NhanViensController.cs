@@ -123,7 +123,7 @@ namespace Delivery.Controllers
             {
                 db.Entry(nhanVien).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Edit");
             }
             ViewBag.MaNhanVien = new SelectList(db.TaiKhoans, "MaNhanVien", "TenTaiKhoan", nhanVien.MaNhanVien);
             ViewBag.MaChucVu = new SelectList(db.ChucVus, "MaChucVu", "TenChucVu", nhanVien.MaChucVu);

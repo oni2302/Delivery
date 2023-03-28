@@ -108,7 +108,7 @@ namespace Delivery.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.MaNhanVien = new SelectList(db.NhanViens, "MaNhanVien", "TenNhanVien", taiKhoan.MaNhanVien);
-            return View(taiKhoan);
+            return RedirectToAction("index","Home");
         }
 
         // GET: TaiKhoan/Delete/5
