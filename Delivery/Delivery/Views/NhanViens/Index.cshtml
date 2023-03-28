@@ -12,25 +12,22 @@
             <h4>Nhân viên</h4>
             <hr />
             <div class="row g-3">
-                <div class="col">
-                    @Html.DisplayName("Mã nhân viên")
-                    <div class="col">
+                <div class="col mb-3">
+                    @Html.DisplayName("Mã nhân viên") 
+                    <div class="col mt-2">
                         <input type="text" class="form-control" value="@ViewBag.IdNV" name="categoryIDNV" />
-                        @*<input type="text" class="form-control" id="">*@
                     </div>
                 </div>
-                <div class="col">
+                <div class="col mb-3">
                     @Html.DisplayName("Mã chức vụ")
-                    <div class="col">
+                    <div class="col mt-2">
                         <input type="Text" class="form-control" value="@ViewBag.IdCV" name="categoryIDCV" placeholder="">
-                        @*<input type="text" class="form-control" id="">*@
                     </div>
                 </div>
-                <div class="col">
+                <div class="col mb-3">
                     @Html.DisplayName("Họ tên")
-                    <div class="col">
+                    <div class="col mt-2">
                         <input type="Text" class="form-control" value="@ViewBag.Keyword" name="searchString" placeholder="">
-                        @*<input type="text" class="form-control" id="">*@
                     </div>
                 </div>
             </div>
@@ -50,12 +47,9 @@
                 <tr>
                     <th>
                         @Html.ActionLink("Mã nhân viên", "Index", new { sortOrder = ViewBag.NameSortParm, searchString = ViewBag.Keyword, categoryIDNV = ViewBag.IdNV, categoryIDCV = ViewBag.IdCV }, new { @class = "text-dark text-decoration-none" })
-
-                        @*@Html.DisplayName("Mã nhân viên")*@
                     </th>
                     <th>
                         @Html.ActionLink("Họ Tên", "Index", new { sortOrder = ViewBag.NameSortParm, searchString = ViewBag.Keyword, categoryIDNV = ViewBag.IdNV, categoryIDCV = ViewBag.IdCV }, new { @class = "text-dark text-decoration-none" })
-                        @*@Html.DisplayName("Họ tên")*@
                     </th>
                     <th>
                         @Html.DisplayName("Ngày sinh")

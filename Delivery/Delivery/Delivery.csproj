@@ -132,8 +132,11 @@
     <Compile Include="Common\CommonConstants.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\DHsController.cs" />
+    <Compile Include="Controllers\DH_DaNhanController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NhanViensController.cs" />
+    <Compile Include="Controllers\TaiKhoanController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -210,6 +213,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\logo.png" />
+    <Content Include="Images\logo_delivery.png" />
     <Content Include="Models\Delivery.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Delivery.edmx</DependentUpon>
@@ -284,6 +288,21 @@
     <Content Include="Views\Shared\_AccountLayout.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\NhanViens\Index.cshtml" />
+    <Content Include="Views\DH_DaNhan\Create.cshtml" />
+    <Content Include="Views\DH_DaNhan\Delete.cshtml" />
+    <Content Include="Views\DH_DaNhan\Details.cshtml" />
+    <Content Include="Views\DH_DaNhan\Edit.cshtml" />
+    <Content Include="Views\DH_DaNhan\Index.cshtml" />
+    <Content Include="Views\DHs\Create.cshtml" />
+    <Content Include="Views\DHs\Delete.cshtml" />
+    <Content Include="Views\DHs\Details.cshtml" />
+    <Content Include="Views\DHs\Edit.cshtml" />
+    <Content Include="Views\DHs\Index.cshtml" />
+    <Content Include="Views\DHs\NhanDon.cshtml" />
+    <Content Include="Views\TaiKhoan\Create.cshtml" />
+    <Content Include="Views\TaiKhoan\Delete.cshtml" />
+    <Content Include="Views\TaiKhoan\Index.cshtml" />
+    <Content Include="Views\TaiKhoan\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

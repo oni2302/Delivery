@@ -35,19 +35,18 @@ namespace Delivery.Controllers
                     break;
             }
 
-            // 1.1. Lưu tư khóa tìm kiếm
+            //1.1. Lưu tư khóa tìm kiếm
             ViewBag.Keyword = searchString;
             ViewBag.IdCV = categoryIDCV;
             ViewBag.IdNV = categoryIDNV;
 
-            //1.3. Tìm kiếm theo searchString
+            //1.2. Tìm kiếm theo searchString
             if (!String.IsNullOrEmpty(searchString))
                 nhanViens = nhanViens.Where(b => b.TenNhanVien.Contains(searchString));
-
-            //1.4. Tìm kiếm theo CategoryIDCV
+            //1.3. Tìm kiếm theo CategoryIDCV
             if (categoryIDCV != 0)
                 nhanViens = nhanViens.Where(c => c.MaChucVu == categoryIDCV);
-            //1.5. Tìm kiếm theo CategoryIDNV
+            //1.4. Tìm kiếm theo CategoryIDNV
             if (categoryIDNV != 0)
            nhanViens = nhanViens.Where(d => d.MaNhanVien == categoryIDNV);
             //Trả kết quả về Views
@@ -130,7 +129,6 @@ namespace Delivery.Controllers
             ViewBag.MaChucVu = new SelectList(db.ChucVus, "MaChucVu", "TenChucVu", nhanVien.MaChucVu);
             return View(nhanVien);
         }
-
         // GET: NhanViens/Delete/5
         public ActionResult Delete(int? id)
         {
