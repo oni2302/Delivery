@@ -1,0 +1,96 @@
+﻿@model Delivery.Models.NhanVien
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="container" style="background-color: #F2F2F2; padding: 50px; margin: auto">
+    <div class="form-horizontal row" style="background-color: white; padding: 30px; border-radius: 1rem">
+        <h4>Thông tin cá nhân</h4>
+        <hr />
+        @*<div class="card border-0 shadow  my-5 w-75 row">*@
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.MaNhanVien)
+        <div class="col-4">
+            <div><img src="@Html.DisplayFor(model => Model.AnhDaiDien)" alt="" style="width:10rem; height:10rem" class="rounded-circle mx-auto d-block"></div>
+            <div class="text-center mt-2 fw-bold">
+                <label class=" mx-auto d-block ">
+                    @Html.DisplayFor(model => Model.TenNhanVien)
+                </label>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+                @Html.DisplayName("Mã nhân viên")
+                <div class="col mb-3 mt-2">
+                    <input class="form-control" type="text" value="@Html.DisplayFor(model => Model.MaNhanVien)" aria-label="Disabled input example" disabled readonly>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.DisplayName("Tên nhân viên")
+                <div class="col mb-3 mt-2">
+                    @Html.EditorFor(model => model.TenNhanVien, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TenNhanVien, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.DisplayName("Email")
+                <div class="col mb-3 mt-2">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.DisplayName("Chức vụ")
+                <div class="col mb-3 mt-2">
+                    <input class="form-control" type="text" value="@Html.DisplayFor(model => Model.ChucVu.TenChucVu)" aria-label="Disabled input example" disabled readonly>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="form-group" style="margin-top: 31%">
+                @Html.DisplayName("Ngày sinh")
+                <div class="col mb-3 mt-2">
+                    @Html.EditorFor(model => model.NgaySinh, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.DisplayName("Số điện thoại")
+                <div class="col mb-3 mt-2">
+                    @Html.EditorFor(model => model.SoDienThoai, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SoDienThoai, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.DisplayName("Tên tài khoản")
+                <div class="col mb-3 mt-2">
+                    <input class="form-control" type="text" value="@Html.DisplayFor(model => Model.TaiKhoan.TenTaiKhoan)" aria-label="Disabled input example" disabled readonly>
+                </div>
+            </div>
+        </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button type="submit" value="Save" class="btn btn-success " style="border-radius: 1.5rem; width: 100px; margin-top: 15px;">Save</button>
+        </div>
+
+    </div>
+ </div>
+
+    }
+
+
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
