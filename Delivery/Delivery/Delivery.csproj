@@ -212,6 +212,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\img dashboard.png" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\logo_delivery.png" />
     <Content Include="Models\Delivery.Context.tt">
@@ -303,6 +304,9 @@
     <Content Include="Views\TaiKhoan\Delete.cshtml" />
     <Content Include="Views\TaiKhoan\Index.cshtml" />
     <Content Include="Views\TaiKhoan\Edit.cshtml" />
+    <Content Include="Views\NhanViens\Delete.cshtml" />
+    <Content Include="Views\NhanViens\Create.cshtml" />
+    <Content Include="Views\NhanViens\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

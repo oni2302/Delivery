@@ -51,7 +51,7 @@
     <Key>
       <PropertyRef Name="MaNhanVien" />
     </Key>
-    <Property Name="MaNhanVien" Type="int" Nullable="false" />
+    <Property Name="MaNhanVien" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TenNhanVien" Type="nvarchar" MaxLength="100" />
     <Property Name="MaChucVu" Type="int" />
     <Property Name="NgaySinh" Type="date" />
@@ -113,19 +113,7 @@ warning 6002: The table/view 'Delivery.sys.database_firewall_rules' does not hav
     <Property Name="create_date" Type="datetime" Nullable="false" />
     <Property Name="modify_date" Type="datetime" Nullable="false" />
   </EntityType>
-  <Association Name="FK__NhanVien__MaChuc__6EF57B66">
-    <End Role="ChucVu" Type="Self.ChucVu" Multiplicity="0..1" />
-    <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ChucVu">
-        <PropertyRef Name="MaChucVu" />
-      </Principal>
-      <Dependent Role="NhanVien">
-        <PropertyRef Name="MaChucVu" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__TaiKhoan__MaNhan__68487DD7">
+  <Association Name="FK__TaiKhoan__MaNhan__3493CFA7">
     <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="1" />
     <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -160,11 +148,7 @@ warning 6002: The table/view 'Delivery.sys.database_firewall_rules' does not hav
     [database_firewall_rules].[modify_date] AS [modify_date]
     FROM [sys].[database_firewall_rules] AS [database_firewall_rules]</DefiningQuery>
     </EntitySet>
-    <AssociationSet Name="FK__NhanVien__MaChuc__6EF57B66" Association="Self.FK__NhanVien__MaChuc__6EF57B66">
-      <End Role="ChucVu" EntitySet="ChucVu" />
-      <End Role="NhanVien" EntitySet="NhanVien" />
-    </AssociationSet>
-    <AssociationSet Name="FK__TaiKhoan__MaNhan__68487DD7" Association="Self.FK__TaiKhoan__MaNhan__68487DD7">
+    <AssociationSet Name="FK__TaiKhoan__MaNhan__3493CFA7" Association="Self.FK__TaiKhoan__MaNhan__3493CFA7">
       <End Role="NhanVien" EntitySet="NhanVien" />
       <End Role="TaiKhoan" EntitySet="TaiKhoan" />
     </AssociationSet>
