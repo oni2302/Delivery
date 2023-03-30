@@ -50,7 +50,9 @@ namespace Delivery.Controllers
             if (categoryIDNV != 0)
            nhanViens = nhanViens.Where(d => d.MaNhanVien == categoryIDNV);
             //Trả kết quả về Views
-            return View(nhanViens.ToList());
+            var result = nhanViens.ToList();
+            result.Sort((a, b) => a.MaNhanVien.CompareTo(b.MaNhanVien));
+            return View(result);
         }
 
         // GET: NhanViens/Details/5
