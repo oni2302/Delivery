@@ -1,4 +1,4 @@
-﻿@model Delivery.Models.DH
+﻿@model Delivery.Models.DonHang
 
 @{
     ViewBag.Title = "Details";
@@ -23,7 +23,7 @@
                     </div>
                     <div class="col">
                         <p class="fw-bold">@Html.DisplayName("Mã trạng thái")</p>
-                        <input class="form-control" type="text" value="@Html.DisplayFor(model => model.TrangThai)" aria-label="Disabled input example" disabled readonly>
+                        <input class="form-control" type="text" value="@Html.DisplayFor(model => model.MaTrangThai)" aria-label="Disabled input example" disabled readonly>
                     </div>
                 </div>
                 @* row 2 *@
@@ -51,7 +51,7 @@
                 <div class="row mt-2">
                     <div class="col">
                         <p class="fw-bold">@Html.DisplayName("Họ tên")</p>
-                        <input class="form-control" type="text" value="@Html.DisplayFor(model => model.HotenNN)" aria-label="Disabled input example" disabled readonly>
+                        <input class="form-control" type="text" value="@Html.DisplayFor(model => model.HoTenNN)" aria-label="Disabled input example" disabled readonly>
                     </div>
                     <div class="col">
                         <p class="fw-bold">@Html.DisplayName("Địa chỉ")</p>

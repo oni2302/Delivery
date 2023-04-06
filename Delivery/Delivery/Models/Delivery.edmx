@@ -23,34 +23,19 @@
           <Property Name="MaChucVu" Type="int" Nullable="false" />
           <Property Name="TenChucVu" Type="nvarchar" MaxLength="1000" />
         </EntityType>
-        <EntityType Name="DH">
+        <EntityType Name="DonHang">
           <Key>
             <PropertyRef Name="MaDH" />
           </Key>
           <Property Name="MaDH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MaVanDon" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="HoTenNG" Type="nvarchar" MaxLength="30" />
+          <Property Name="MaVanDon" Type="int" Nullable="false" />
+          <Property Name="HoTenNG" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="DiaChiNG" Type="nvarchar" MaxLength="50" />
-          <Property Name="SdtNG" Type="nvarchar" MaxLength="30" />
-          <Property Name="HotenNN" Type="nvarchar" MaxLength="30" />
-          <Property Name="DiaChiNN" Type="nvarchar" MaxLength="30" />
-          <Property Name="SdtNN" Type="nvarchar" MaxLength="30" />
-          <Property Name="TrangThai" Type="nvarchar" MaxLength="30" />
-        </EntityType>
-        <EntityType Name="DH_DaNhan">
-          <Key>
-            <PropertyRef Name="MaDH_DaNhan" />
-          </Key>
-          <Property Name="MaDH_DaNhan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MaDH" Type="int" />
-          <Property Name="MaVanDon" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="HoTenNG" Type="nvarchar" MaxLength="30" />
-          <Property Name="DiaChiNG" Type="nvarchar" MaxLength="50" />
-          <Property Name="SdtNG" Type="nvarchar" MaxLength="30" />
-          <Property Name="HotenNN" Type="nvarchar" MaxLength="30" />
-          <Property Name="DiaChiNN" Type="nvarchar" MaxLength="30" />
-          <Property Name="SdtNN" Type="nvarchar" MaxLength="30" />
-          <Property Name="TrangThai" Type="nvarchar" MaxLength="30" />
+          <Property Name="SdtNG" Type="varchar" MaxLength="20" />
+          <Property Name="HoTenNN" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DiaChiNN" Type="nvarchar" MaxLength="50" />
+          <Property Name="SdtNN" Type="varchar" MaxLength="20" />
+          <Property Name="MaTrangThai" Type="int" />
         </EntityType>
         <EntityType Name="NhanVien">
           <Key>
@@ -95,11 +80,13 @@
           <Property Name="TenTaiKhoan" Type="varchar" MaxLength="100" />
           <Property Name="MatKhau" Type="varchar" MaxLength="100" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'Delivery.dbo.test' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="test">
-          <Property Name="test" Type="int" />
-        </EntityType>-->
+        <EntityType Name="TrangThaiDonHang">
+          <Key>
+            <PropertyRef Name="MaTrangThai" />
+          </Key>
+          <Property Name="MaTrangThai" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenTrangThai" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Delivery.sys.database_firewall_rules' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="database_firewall_rules">
@@ -130,19 +117,36 @@ warning 6002: The table/view 'Delivery.sys.database_firewall_rules' does not hav
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TT_DH">
+          <End Role="TrangThaiDonHang" Type="Self.TrangThaiDonHang" Multiplicity="0..1" />
+          <End Role="DonHang" Type="Self.DonHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TrangThaiDonHang">
+              <PropertyRef Name="MaTrangThai" />
+            </Principal>
+            <Dependent Role="DonHang">
+              <PropertyRef Name="MaTrangThai" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="getDonHang_ChuaNhan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="getDonHang_DaNhan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="LayChucNang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MaNhanVien" Type="int" Mode="In" />
+        </Function>
+        <Function Name="XacNhan_DonHang_ChuaNhan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MaDH" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="DeliveryModelStoreContainer">
           <EntitySet Name="ChucNang" EntityType="Self.ChucNang" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ChucVu" EntityType="Self.ChucVu" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DH" EntityType="Self.DH" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DH_DaNhan" EntityType="Self.DH_DaNhan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DonHang" EntityType="Self.DonHang" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NhanVien" EntityType="Self.NhanVien" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PhanChucNang" EntityType="Self.PhanChucNang" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PhanQuyen" EntityType="Self.PhanQuyen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Quyen" EntityType="Self.Quyen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TaiKhoan" EntityType="Self.TaiKhoan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TrangThaiDonHang" EntityType="Self.TrangThaiDonHang" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" store:Type="Views" store:Schema="sys">
             <DefiningQuery>SELECT 
     [database_firewall_rules].[id] AS [id], 
@@ -156,6 +160,10 @@ warning 6002: The table/view 'Delivery.sys.database_firewall_rules' does not hav
           <AssociationSet Name="FK__TaiKhoan__MaNhan__3493CFA7" Association="Self.FK__TaiKhoan__MaNhan__3493CFA7">
             <End Role="NhanVien" EntitySet="NhanVien" />
             <End Role="TaiKhoan" EntitySet="TaiKhoan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TT_DH" Association="Self.FK_TT_DH">
+            <End Role="TrangThaiDonHang" EntitySet="TrangThaiDonHang" />
+            <End Role="DonHang" EntitySet="DonHang" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -180,35 +188,6 @@ warning 6002: The table/view 'Delivery.sys.database_firewall_rules' does not hav
           <Property Name="MaChucVu" Type="Int32" Nullable="false" />
           <Property Name="TenChucVu" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="NhanViens" Relationship="DeliveryModel.FK__NhanVien__MaChuc__6EF57B66" FromRole="ChucVu" ToRole="NhanVien" />
-        </EntityType>
-        <EntityType Name="DH">
-          <Key>
-            <PropertyRef Name="MaDH" />
-          </Key>
-          <Property Name="MaDH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MaVanDon" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="HoTenNG" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="DiaChiNG" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SdtNG" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="HotenNN" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="DiaChiNN" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="SdtNN" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="TrangThai" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="DH_DaNhan">
-          <Key>
-            <PropertyRef Name="MaDH_DaNhan" />
-          </Key>
-          <Property Name="MaDH_DaNhan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MaDH" Type="Int32" />
-          <Property Name="MaVanDon" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="HoTenNG" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="DiaChiNG" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SdtNG" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="HotenNN" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="DiaChiNN" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="SdtNN" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="TrangThai" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="NhanVien">
           <Key>
@@ -271,8 +250,6 @@ warning 6002: The table/view 'Delivery.sys.database_firewall_rules' does not hav
         <EntityContainer Name="DeliveryEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ChucNangs" EntityType="Self.ChucNang" />
           <EntitySet Name="ChucVus" EntityType="Self.ChucVu" />
-          <EntitySet Name="DHs" EntityType="Self.DH" />
-          <EntitySet Name="DH_DaNhan" EntityType="Self.DH_DaNhan" />
           <EntitySet Name="NhanViens" EntityType="Self.NhanVien" />
           <EntitySet Name="PhanChucNangs" EntityType="Self.PhanChucNang" />
           <EntitySet Name="PhanQuyens" EntityType="Self.PhanQuyen" />
@@ -289,6 +266,17 @@ warning 6002: The table/view 'Delivery.sys.database_firewall_rules' does not hav
           <EntitySet Name="database_firewall_rules" EntityType="DeliveryModel.database_firewall_rules" />
           <FunctionImport Name="LayChucNang" ReturnType="Collection(DeliveryModel.LayChucNang_Result)">
           <Parameter Name="MaNhanVien" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="DonHangs" EntityType="DeliveryModel.DonHang" />
+          <EntitySet Name="TrangThaiDonHangs" EntityType="DeliveryModel.TrangThaiDonHang" />
+          <AssociationSet Name="FK_TT_DH" Association="DeliveryModel.FK_TT_DH">
+            <End Role="TrangThaiDonHang" EntitySet="TrangThaiDonHangs" />
+            <End Role="DonHang" EntitySet="DonHangs" />
+          </AssociationSet>
+          <FunctionImport Name="getDonHang_ChuaNhan" ReturnType="Collection(DeliveryModel.getDonHang_ChuaNhan_Result)" />
+          <FunctionImport Name="getDonHang_DaNhan" ReturnType="Collection(DeliveryModel.getDonHang_DaNhan_Result)" />
+          <FunctionImport Name="XacNhan_DonHang_ChuaNhan">
+          <Parameter Name="MaDH" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <Association Name="FK__NhanVien__MaChuc__6EF57B66">
@@ -327,6 +315,63 @@ warning 6002: The table/view 'Delivery.sys.database_firewall_rules' does not hav
           <Property Type="String" Name="Action" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Direction" Nullable="true" MaxLength="200" />
         </ComplexType>
+        <EntityType Name="DonHang">
+          <Key>
+            <PropertyRef Name="MaDH" />
+          </Key>
+          <Property Name="MaDH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaVanDon" Type="Int32" Nullable="false" />
+          <Property Name="HoTenNG" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChiNG" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SdtNG" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="HoTenNN" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChiNN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SdtNN" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MaTrangThai" Type="Int32" />
+          <NavigationProperty Name="TrangThaiDonHang" Relationship="DeliveryModel.FK_TT_DH" FromRole="DonHang" ToRole="TrangThaiDonHang" />
+        </EntityType>
+        <EntityType Name="TrangThaiDonHang">
+          <Key>
+            <PropertyRef Name="MaTrangThai" />
+          </Key>
+          <Property Name="MaTrangThai" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenTrangThai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DonHangs" Relationship="DeliveryModel.FK_TT_DH" FromRole="TrangThaiDonHang" ToRole="DonHang" />
+        </EntityType>
+        <Association Name="FK_TT_DH">
+          <End Type="DeliveryModel.TrangThaiDonHang" Role="TrangThaiDonHang" Multiplicity="0..1" />
+          <End Type="DeliveryModel.DonHang" Role="DonHang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TrangThaiDonHang">
+              <PropertyRef Name="MaTrangThai" />
+            </Principal>
+            <Dependent Role="DonHang">
+              <PropertyRef Name="MaTrangThai" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="getDonHang_ChuaNhan_Result">
+          <Property Type="Int32" Name="MaDH" Nullable="false" />
+          <Property Type="Int32" Name="MaVanDon" Nullable="false" />
+          <Property Type="String" Name="HoTenNG" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="DiaChiNG" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SdtNG" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="HoTenNN" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="DiaChiNN" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SdtNN" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="MaTrangThai" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="getDonHang_DaNhan_Result">
+          <Property Type="Int32" Name="MaDH" Nullable="false" />
+          <Property Type="Int32" Name="MaVanDon" Nullable="false" />
+          <Property Type="String" Name="HoTenNG" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="DiaChiNG" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SdtNG" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="HoTenNN" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="DiaChiNN" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SdtNN" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="MaTrangThai" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -350,37 +395,6 @@ warning 6002: The table/view 'Delivery.sys.database_firewall_rules' does not hav
               <MappingFragment StoreEntitySet="ChucVu">
                 <ScalarProperty Name="MaChucVu" ColumnName="MaChucVu" />
                 <ScalarProperty Name="TenChucVu" ColumnName="TenChucVu" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DHs">
-            <EntityTypeMapping TypeName="DeliveryModel.DH">
-              <MappingFragment StoreEntitySet="DH">
-                <ScalarProperty Name="MaDH" ColumnName="MaDH" />
-                <ScalarProperty Name="MaVanDon" ColumnName="MaVanDon" />
-                <ScalarProperty Name="HoTenNG" ColumnName="HoTenNG" />
-                <ScalarProperty Name="DiaChiNG" ColumnName="DiaChiNG" />
-                <ScalarProperty Name="SdtNG" ColumnName="SdtNG" />
-                <ScalarProperty Name="HotenNN" ColumnName="HotenNN" />
-                <ScalarProperty Name="DiaChiNN" ColumnName="DiaChiNN" />
-                <ScalarProperty Name="SdtNN" ColumnName="SdtNN" />
-                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DH_DaNhan">
-            <EntityTypeMapping TypeName="DeliveryModel.DH_DaNhan">
-              <MappingFragment StoreEntitySet="DH_DaNhan">
-                <ScalarProperty Name="MaDH_DaNhan" ColumnName="MaDH_DaNhan" />
-                <ScalarProperty Name="MaDH" ColumnName="MaDH" />
-                <ScalarProperty Name="MaVanDon" ColumnName="MaVanDon" />
-                <ScalarProperty Name="HoTenNG" ColumnName="HoTenNG" />
-                <ScalarProperty Name="DiaChiNG" ColumnName="DiaChiNG" />
-                <ScalarProperty Name="SdtNG" ColumnName="SdtNG" />
-                <ScalarProperty Name="HotenNN" ColumnName="HotenNN" />
-                <ScalarProperty Name="DiaChiNN" ColumnName="DiaChiNN" />
-                <ScalarProperty Name="SdtNN" ColumnName="SdtNN" />
-                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -455,6 +469,60 @@ warning 6002: The table/view 'Delivery.sys.database_firewall_rules' does not hav
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="DonHangs">
+            <EntityTypeMapping TypeName="DeliveryModel.DonHang">
+              <MappingFragment StoreEntitySet="DonHang">
+                <ScalarProperty Name="MaTrangThai" ColumnName="MaTrangThai" />
+                <ScalarProperty Name="SdtNN" ColumnName="SdtNN" />
+                <ScalarProperty Name="DiaChiNN" ColumnName="DiaChiNN" />
+                <ScalarProperty Name="HoTenNN" ColumnName="HoTenNN" />
+                <ScalarProperty Name="SdtNG" ColumnName="SdtNG" />
+                <ScalarProperty Name="DiaChiNG" ColumnName="DiaChiNG" />
+                <ScalarProperty Name="HoTenNG" ColumnName="HoTenNG" />
+                <ScalarProperty Name="MaVanDon" ColumnName="MaVanDon" />
+                <ScalarProperty Name="MaDH" ColumnName="MaDH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TrangThaiDonHangs">
+            <EntityTypeMapping TypeName="DeliveryModel.TrangThaiDonHang">
+              <MappingFragment StoreEntitySet="TrangThaiDonHang">
+                <ScalarProperty Name="TenTrangThai" ColumnName="TenTrangThai" />
+                <ScalarProperty Name="MaTrangThai" ColumnName="MaTrangThai" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="getDonHang_ChuaNhan" FunctionName="DeliveryModel.Store.getDonHang_ChuaNhan">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DeliveryModel.getDonHang_ChuaNhan_Result">
+                <ScalarProperty Name="MaDH" ColumnName="MaDH" />
+                <ScalarProperty Name="MaVanDon" ColumnName="MaVanDon" />
+                <ScalarProperty Name="HoTenNG" ColumnName="HoTenNG" />
+                <ScalarProperty Name="DiaChiNG" ColumnName="DiaChiNG" />
+                <ScalarProperty Name="SdtNG" ColumnName="SdtNG" />
+                <ScalarProperty Name="HoTenNN" ColumnName="HoTenNN" />
+                <ScalarProperty Name="DiaChiNN" ColumnName="DiaChiNN" />
+                <ScalarProperty Name="SdtNN" ColumnName="SdtNN" />
+                <ScalarProperty Name="MaTrangThai" ColumnName="MaTrangThai" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getDonHang_DaNhan" FunctionName="DeliveryModel.Store.getDonHang_DaNhan">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DeliveryModel.getDonHang_DaNhan_Result">
+                <ScalarProperty Name="MaDH" ColumnName="MaDH" />
+                <ScalarProperty Name="MaVanDon" ColumnName="MaVanDon" />
+                <ScalarProperty Name="HoTenNG" ColumnName="HoTenNG" />
+                <ScalarProperty Name="DiaChiNG" ColumnName="DiaChiNG" />
+                <ScalarProperty Name="SdtNG" ColumnName="SdtNG" />
+                <ScalarProperty Name="HoTenNN" ColumnName="HoTenNN" />
+                <ScalarProperty Name="DiaChiNN" ColumnName="DiaChiNN" />
+                <ScalarProperty Name="SdtNN" ColumnName="SdtNN" />
+                <ScalarProperty Name="MaTrangThai" ColumnName="MaTrangThai" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="XacNhan_DonHang_ChuaNhan" FunctionName="DeliveryModel.Store.XacNhan_DonHang_ChuaNhan" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -40,10 +40,10 @@
                     </div>
                     <div class="user-option-dropdown-menu-wrap shadow-sm">
                         <ul class="user-option-dropdown-menu">
-                            <li><a href="">@CommonConstants.OPTION_1</a></li>
-                            <li><a href="">@CommonConstants.OPTION_2</a></li>
-                            <li><a href="">@CommonConstants.OPTION_3</a></li>
-                            <li class="cross-line"><a href="">@CommonConstants.OPTION_LOGOUT</a></li>
+                            <li><a href="@Url.Action("Edit","NhanViens")">@CommonConstants.OPTION_1</a></li>
+                            <li><a href="#">@CommonConstants.OPTION_2</a></li>
+                            <li><a href="#">@CommonConstants.OPTION_3</a></li>
+                            <li class="cross-line"><a href="@Url.Action("Login","Account")">@CommonConstants.OPTION_LOGOUT</a></li>
                         </ul>
                     </div>
                 </div>
@@ -71,7 +71,8 @@
                     </div>
                 </div>
                 <ul class="main-menu">
-                    @if(session!=null){
+                    @if (session != null)
+                    {
                         foreach (var chucNang in session)
                         {
                             <li class="main-menu-item-wrap @if (chucNang.Controller == controller) { Write("active"); } ">

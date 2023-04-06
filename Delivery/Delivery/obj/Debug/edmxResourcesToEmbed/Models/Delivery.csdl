@@ -19,35 +19,6 @@
     <Property Name="TenChucVu" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="NhanViens" Relationship="DeliveryModel.FK__NhanVien__MaChuc__6EF57B66" FromRole="ChucVu" ToRole="NhanVien" />
   </EntityType>
-  <EntityType Name="DH">
-    <Key>
-      <PropertyRef Name="MaDH" />
-    </Key>
-    <Property Name="MaDH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="MaVanDon" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="HoTenNG" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="DiaChiNG" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="SdtNG" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="HotenNN" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="DiaChiNN" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="SdtNN" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="TrangThai" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="DH_DaNhan">
-    <Key>
-      <PropertyRef Name="MaDH_DaNhan" />
-    </Key>
-    <Property Name="MaDH_DaNhan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="MaDH" Type="Int32" />
-    <Property Name="MaVanDon" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="HoTenNG" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="DiaChiNG" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="SdtNG" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="HotenNN" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="DiaChiNN" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="SdtNN" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="TrangThai" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-  </EntityType>
   <EntityType Name="NhanVien">
     <Key>
       <PropertyRef Name="MaNhanVien" />
@@ -109,8 +80,6 @@
   <EntityContainer Name="DeliveryEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="ChucNangs" EntityType="Self.ChucNang" />
     <EntitySet Name="ChucVus" EntityType="Self.ChucVu" />
-    <EntitySet Name="DHs" EntityType="Self.DH" />
-    <EntitySet Name="DH_DaNhan" EntityType="Self.DH_DaNhan" />
     <EntitySet Name="NhanViens" EntityType="Self.NhanVien" />
     <EntitySet Name="PhanChucNangs" EntityType="Self.PhanChucNang" />
     <EntitySet Name="PhanQuyens" EntityType="Self.PhanQuyen" />
@@ -127,6 +96,17 @@
     <EntitySet Name="database_firewall_rules" EntityType="DeliveryModel.database_firewall_rules" />
     <FunctionImport Name="LayChucNang" ReturnType="Collection(DeliveryModel.LayChucNang_Result)">
       <Parameter Name="MaNhanVien" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="DonHangs" EntityType="DeliveryModel.DonHang" />
+    <EntitySet Name="TrangThaiDonHangs" EntityType="DeliveryModel.TrangThaiDonHang" />
+    <AssociationSet Name="FK_TT_DH" Association="DeliveryModel.FK_TT_DH">
+      <End Role="TrangThaiDonHang" EntitySet="TrangThaiDonHangs" />
+      <End Role="DonHang" EntitySet="DonHangs" />
+    </AssociationSet>
+    <FunctionImport Name="getDonHang_ChuaNhan" ReturnType="Collection(DeliveryModel.getDonHang_ChuaNhan_Result)" />
+    <FunctionImport Name="getDonHang_DaNhan" ReturnType="Collection(DeliveryModel.getDonHang_DaNhan_Result)" />
+    <FunctionImport Name="XacNhan_DonHang_ChuaNhan">
+      <Parameter Name="MaDH" Mode="In" Type="Int32" />
     </FunctionImport>
   </EntityContainer>
   <Association Name="FK__NhanVien__MaChuc__6EF57B66">
@@ -164,5 +144,62 @@
     <Property Type="String" Name="Controller" Nullable="true" MaxLength="100" />
     <Property Type="String" Name="Action" Nullable="true" MaxLength="100" />
     <Property Type="String" Name="Direction" Nullable="true" MaxLength="200" />
+  </ComplexType>
+  <EntityType Name="DonHang">
+    <Key>
+      <PropertyRef Name="MaDH" />
+    </Key>
+    <Property Name="MaDH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MaVanDon" Type="Int32" Nullable="false" />
+    <Property Name="HoTenNG" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DiaChiNG" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SdtNG" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="HoTenNN" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DiaChiNN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SdtNN" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="MaTrangThai" Type="Int32" />
+    <NavigationProperty Name="TrangThaiDonHang" Relationship="DeliveryModel.FK_TT_DH" FromRole="DonHang" ToRole="TrangThaiDonHang" />
+  </EntityType>
+  <EntityType Name="TrangThaiDonHang">
+    <Key>
+      <PropertyRef Name="MaTrangThai" />
+    </Key>
+    <Property Name="MaTrangThai" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenTrangThai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="DonHangs" Relationship="DeliveryModel.FK_TT_DH" FromRole="TrangThaiDonHang" ToRole="DonHang" />
+  </EntityType>
+  <Association Name="FK_TT_DH">
+    <End Type="DeliveryModel.TrangThaiDonHang" Role="TrangThaiDonHang" Multiplicity="0..1" />
+    <End Type="DeliveryModel.DonHang" Role="DonHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TrangThaiDonHang">
+        <PropertyRef Name="MaTrangThai" />
+      </Principal>
+      <Dependent Role="DonHang">
+        <PropertyRef Name="MaTrangThai" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="getDonHang_ChuaNhan_Result">
+    <Property Type="Int32" Name="MaDH" Nullable="false" />
+    <Property Type="Int32" Name="MaVanDon" Nullable="false" />
+    <Property Type="String" Name="HoTenNG" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="DiaChiNG" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="SdtNG" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="HoTenNN" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="DiaChiNN" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="SdtNN" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="MaTrangThai" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="getDonHang_DaNhan_Result">
+    <Property Type="Int32" Name="MaDH" Nullable="false" />
+    <Property Type="Int32" Name="MaVanDon" Nullable="false" />
+    <Property Type="String" Name="HoTenNG" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="DiaChiNG" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="SdtNG" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="HoTenNN" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="DiaChiNN" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="SdtNN" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="MaTrangThai" Nullable="true" />
   </ComplexType>
 </Schema>

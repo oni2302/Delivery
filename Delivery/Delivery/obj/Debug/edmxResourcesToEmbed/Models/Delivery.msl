@@ -21,37 +21,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="DHs">
-      <EntityTypeMapping TypeName="DeliveryModel.DH">
-        <MappingFragment StoreEntitySet="DH">
-          <ScalarProperty Name="MaDH" ColumnName="MaDH" />
-          <ScalarProperty Name="MaVanDon" ColumnName="MaVanDon" />
-          <ScalarProperty Name="HoTenNG" ColumnName="HoTenNG" />
-          <ScalarProperty Name="DiaChiNG" ColumnName="DiaChiNG" />
-          <ScalarProperty Name="SdtNG" ColumnName="SdtNG" />
-          <ScalarProperty Name="HotenNN" ColumnName="HotenNN" />
-          <ScalarProperty Name="DiaChiNN" ColumnName="DiaChiNN" />
-          <ScalarProperty Name="SdtNN" ColumnName="SdtNN" />
-          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="DH_DaNhan">
-      <EntityTypeMapping TypeName="DeliveryModel.DH_DaNhan">
-        <MappingFragment StoreEntitySet="DH_DaNhan">
-          <ScalarProperty Name="MaDH_DaNhan" ColumnName="MaDH_DaNhan" />
-          <ScalarProperty Name="MaDH" ColumnName="MaDH" />
-          <ScalarProperty Name="MaVanDon" ColumnName="MaVanDon" />
-          <ScalarProperty Name="HoTenNG" ColumnName="HoTenNG" />
-          <ScalarProperty Name="DiaChiNG" ColumnName="DiaChiNG" />
-          <ScalarProperty Name="SdtNG" ColumnName="SdtNG" />
-          <ScalarProperty Name="HotenNN" ColumnName="HotenNN" />
-          <ScalarProperty Name="DiaChiNN" ColumnName="DiaChiNN" />
-          <ScalarProperty Name="SdtNN" ColumnName="SdtNN" />
-          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="NhanViens">
       <EntityTypeMapping TypeName="DeliveryModel.NhanVien">
         <MappingFragment StoreEntitySet="NhanVien">
@@ -123,5 +92,59 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="DonHangs">
+      <EntityTypeMapping TypeName="DeliveryModel.DonHang">
+        <MappingFragment StoreEntitySet="DonHang">
+          <ScalarProperty Name="MaTrangThai" ColumnName="MaTrangThai" />
+          <ScalarProperty Name="SdtNN" ColumnName="SdtNN" />
+          <ScalarProperty Name="DiaChiNN" ColumnName="DiaChiNN" />
+          <ScalarProperty Name="HoTenNN" ColumnName="HoTenNN" />
+          <ScalarProperty Name="SdtNG" ColumnName="SdtNG" />
+          <ScalarProperty Name="DiaChiNG" ColumnName="DiaChiNG" />
+          <ScalarProperty Name="HoTenNG" ColumnName="HoTenNG" />
+          <ScalarProperty Name="MaVanDon" ColumnName="MaVanDon" />
+          <ScalarProperty Name="MaDH" ColumnName="MaDH" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TrangThaiDonHangs">
+      <EntityTypeMapping TypeName="DeliveryModel.TrangThaiDonHang">
+        <MappingFragment StoreEntitySet="TrangThaiDonHang">
+          <ScalarProperty Name="TenTrangThai" ColumnName="TenTrangThai" />
+          <ScalarProperty Name="MaTrangThai" ColumnName="MaTrangThai" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="getDonHang_ChuaNhan" FunctionName="DeliveryModel.Store.getDonHang_ChuaNhan">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DeliveryModel.getDonHang_ChuaNhan_Result">
+          <ScalarProperty Name="MaDH" ColumnName="MaDH" />
+          <ScalarProperty Name="MaVanDon" ColumnName="MaVanDon" />
+          <ScalarProperty Name="HoTenNG" ColumnName="HoTenNG" />
+          <ScalarProperty Name="DiaChiNG" ColumnName="DiaChiNG" />
+          <ScalarProperty Name="SdtNG" ColumnName="SdtNG" />
+          <ScalarProperty Name="HoTenNN" ColumnName="HoTenNN" />
+          <ScalarProperty Name="DiaChiNN" ColumnName="DiaChiNN" />
+          <ScalarProperty Name="SdtNN" ColumnName="SdtNN" />
+          <ScalarProperty Name="MaTrangThai" ColumnName="MaTrangThai" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="getDonHang_DaNhan" FunctionName="DeliveryModel.Store.getDonHang_DaNhan">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DeliveryModel.getDonHang_DaNhan_Result">
+          <ScalarProperty Name="MaDH" ColumnName="MaDH" />
+          <ScalarProperty Name="MaVanDon" ColumnName="MaVanDon" />
+          <ScalarProperty Name="HoTenNG" ColumnName="HoTenNG" />
+          <ScalarProperty Name="DiaChiNG" ColumnName="DiaChiNG" />
+          <ScalarProperty Name="SdtNG" ColumnName="SdtNG" />
+          <ScalarProperty Name="HoTenNN" ColumnName="HoTenNN" />
+          <ScalarProperty Name="DiaChiNN" ColumnName="DiaChiNN" />
+          <ScalarProperty Name="SdtNN" ColumnName="SdtNN" />
+          <ScalarProperty Name="MaTrangThai" ColumnName="MaTrangThai" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="XacNhan_DonHang_ChuaNhan" FunctionName="DeliveryModel.Store.XacNhan_DonHang_ChuaNhan" />
   </EntityContainerMapping>
 </Mapping>

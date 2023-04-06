@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -33,17 +34,17 @@ namespace Delivery.Controllers
             }
 
             ViewBag.KeywordTK = searchString;
-            ViewBag.KeyworkTenNV = TenNVString;
+            ViewBag.KeywordTenNV = TenNVString;
             ViewBag.KeywordCV = CVString;
+            
             if (!String.IsNullOrEmpty(searchString))
                 taiKhoans = taiKhoans.Where(b => b.TenTaiKhoan.Contains(searchString));
-            
-            if (!String.IsNullOrEmpty(CVString))
-                taiKhoans = taiKhoans.Where(c => c.NhanVien.ChucVu.TenChucVu.Contains(CVString));
-
+                       
             if (!String.IsNullOrEmpty(TenNVString))
-                  taiKhoans = taiKhoans.Where(d => d.NhanVien.TenNhanVien.Contains(TenNVString));
+                taiKhoans = taiKhoans.Where(c => c.NhanVien.TenNhanVien.Contains(TenNVString));
 
+            if (!String.IsNullOrEmpty(CVString))
+                taiKhoans = taiKhoans.Where(d => d.NhanVien.ChucVu.TenChucVu.Contains(CVString));
 
             return View(taiKhoans.ToList());
         }
@@ -51,7 +52,8 @@ namespace Delivery.Controllers
         // GET: TaiKhoan/Create
         public ActionResult Create()
         {
-            ViewBag.MaNhanVien = new SelectList(db.NhanViens, "MaNhanVien", "TenNhanVien");
+            ViewBag.MaChucVu = new SelectList(db.ChucVus, "MaChucVu", "TenChucVu");
+            ViewBag.MaNhanVien = new SelectList(db.NhanViens.Where(nv => nv.TaiKhoan.NhanVien == null), "MaNhanVien", "TenNhanVien");
             return View();
         }
 
@@ -108,7 +110,7 @@ namespace Delivery.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.MaNhanVien = new SelectList(db.NhanViens, "MaNhanVien", "TenNhanVien", taiKhoan.MaNhanVien);
-            return RedirectToAction("index","Home");
+            return RedirectToAction("index", "Home");
         }
 
         // GET: TaiKhoan/Delete/5
@@ -144,7 +146,7 @@ namespace Delivery.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            else 
+            else
             {
                 taiKhoan.MatKhau = taiKhoan.TenTaiKhoan + "123";
                 db.Entry(taiKhoan).State = EntityState.Modified;
