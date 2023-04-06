@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Delivery.Common;
 using Delivery.Models;
 
 namespace Delivery.Controllers
@@ -20,8 +21,8 @@ namespace Delivery.Controllers
         {
             // 1. Thêm biến NameSortParm để biết trạng thái sắp xếp tăng, giảm ở View
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            //2.Tạo câu truy vấn kết 3 bảng Book, Author, Category
-            var nhanViens = db.NhanViens.Include(n => n.TaiKhoan).Include(n => n.ChucVu);
+            //2.Tạo câu truy vấn kết các bảng
+            var nhanViens = db.NhanViens.Include(n => n.TaiKhoan);
             //3. Sắp xếp theo sortOrder
             switch (sortOrder)
             {
@@ -48,11 +49,9 @@ namespace Delivery.Controllers
                 nhanViens = nhanViens.Where(c => c.MaChucVu == categoryIDCV);
             //1.4. Tìm kiếm theo CategoryIDNV
             if (categoryIDNV != 0)
-           nhanViens = nhanViens.Where(d => d.MaNhanVien == categoryIDNV);
+                nhanViens = nhanViens.Where(d => d.MaNhanVien == categoryIDNV);
             //Trả kết quả về Views
-            var result = nhanViens.ToList();
-            result.Sort((a, b) => a.MaNhanVien.CompareTo(b.MaNhanVien));
-            return View(result);
+            return View(nhanViens.ToList());
         }
 
         // GET: NhanViens/Details/5
@@ -102,7 +101,7 @@ namespace Delivery.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                id = ((TaiKhoan)Session[CommonConstants.NGUOI_DUNG]).MaNhanVien;
             }
             NhanVien nhanVien = db.NhanViens.Find(id);
             if (nhanVien == null)

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Delivery.Models.DH_DaNhan>
+﻿@model IEnumerable<Delivery.Models.getDonHang_DaNhan_Result>
 
 @{
     ViewBag.Title = "Index";
@@ -24,6 +24,9 @@
                         @Html.DisplayName("Mã vận đơn")
                     </th>
                     <th>
+                        @Html.DisplayName("Người Gửi")
+                    </th>
+                    <th>
                         @Html.DisplayName("Trạng thái")
                     </th>
                     <th class="text-center">
@@ -33,21 +36,27 @@
 
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.MaDH)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.MaVanDon)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TrangThai)
-                        </td>
-                        <td class="text-center">
-                            @Html.ActionLink("Xem chi tiết", "Details", "DH_DaNhan", new { id = item.MaDH_DaNhan }, new { @class = "btn btn-outline-success mx-2" })
-                            @*@Html.ActionLink("Xóa","Delete","DH_DaNhan",new { id = item.MaDH_DaNhan }, new { @class = "btn btn-outline-success mx-2" })*@
-                        </td>
-                    </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaDH)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaVanDon)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HoTenNG)
+                </td>
+                <td>
+                    @if (Convert.ToInt32(@item.MaTrangThai) == 2)
+                    {
+                        @Html.DisplayName("Đã nhận")
+                    }
+                </td>
+                <td class="text-center">
+                    @Html.ActionLink("Xem chi tiết", "Details", "DH_DaNhan", new { id = item.MaDH }, new { @class = "btn btn-outline-success mx-2" })
+                    @*@Html.ActionLink("Xóa","Delete","DH_DaNhan",new { id = item.MaDH_DaNhan }, new { @class = "btn btn-outline-success mx-2" })*@
+                </td>
+            </tr>
                 }
             </table>
         </div>
