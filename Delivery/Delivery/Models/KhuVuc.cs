@@ -12,20 +12,17 @@ namespace Delivery.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Quyen
+    public partial class KhuVuc
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Quyen()
+        public KhuVuc()
         {
-            this.ChucNangs = new HashSet<ChucNang>();
             this.ChucVus = new HashSet<ChucVu>();
         }
     
-        public int MaQuyen { get; set; }
-        public string TenQuyen { get; set; }
+        public int MaKhuVuc { get; set; }
+        public string TenKhuVuc { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ChucNang> ChucNangs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChucVu> ChucVus { get; set; }
     }

@@ -10,15 +10,13 @@
 namespace Delivery.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class TaiKhoan
+    public partial class sp_helpdiagrams_Result
     {
-        public int MaNhanVien { get; set; }
-        public string TenTaiKhoan { get; set; }
-        public string MatKhau { get; set; }
-        public Nullable<bool> TrangThai { get; set; }
-    
-        public virtual NhanVien NhanVien { get; set; }
+        public string Database { get; set; }
+        public string Name { get; set; }
+        public int ID { get; set; }
+        public string Owner { get; set; }
+        public int OwnerID { get; set; }
     }
 }

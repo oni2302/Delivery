@@ -14,11 +14,19 @@ namespace Delivery.Models
     
     public partial class ChucNang
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ChucNang()
+        {
+            this.Quyens = new HashSet<Quyen>();
+        }
+    
         public int MaChucNang { get; set; }
         public string TenChucNang { get; set; }
         public string BieuTuong { get; set; }
         public string Controller { get; set; }
-        public string Action { get; set; }
-        public string Direction { get; set; }
+        public string RouteName { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Quyen> Quyens { get; set; }
     }
 }
