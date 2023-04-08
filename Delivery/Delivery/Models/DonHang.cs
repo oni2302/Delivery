@@ -14,16 +14,17 @@ namespace Delivery.Models
     
     public partial class DonHang
     {
-        public int MaDH { get; set; }
-        public int MaVanDon { get; set; }
-        public string HoTenNG { get; set; }
-        public string DiaChiNG { get; set; }
-        public string SdtNG { get; set; }
-        public string HoTenNN { get; set; }
-        public string DiaChiNN { get; set; }
-        public string SdtNN { get; set; }
-        public Nullable<int> MaTrangThai { get; set; }
+        public int MaDonHang { get; set; }
+        public string Tu { get; set; }
+        public string NguoiGui { get; set; }
+        public string Den { get; set; }
+        public string NguoiNhan { get; set; }
+        public string Sdt { get; set; }
+        public string GhiChu { get; set; }
+        public Nullable<int> TrangThai { get; set; }
+        public string SdtNguoiGui { get; set; }
     
         public virtual TrangThaiDonHang TrangThaiDonHang { get; set; }
+        public virtual NhanDon NhanDon { get; set; }
     }
 }

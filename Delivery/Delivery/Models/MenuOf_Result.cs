@@ -10,15 +10,13 @@
 namespace Delivery.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class TaiKhoan
+    public partial class MenuOf_Result
     {
-        public int MaNhanVien { get; set; }
-        public string TenTaiKhoan { get; set; }
-        public string MatKhau { get; set; }
-        public Nullable<bool> TrangThai { get; set; }
-    
-        public virtual NhanVien NhanVien { get; set; }
+        public int MaChucNang { get; set; }
+        public string TenChucNang { get; set; }
+        public string BieuTuong { get; set; }
+        public string Controller { get; set; }
+        public string RouteName { get; set; }
     }
 }

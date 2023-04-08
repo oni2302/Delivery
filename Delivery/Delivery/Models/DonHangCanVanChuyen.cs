@@ -12,13 +12,14 @@ namespace Delivery.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TaiKhoan
+    public partial class DonHangCanVanChuyen
     {
-        public int MaNhanVien { get; set; }
-        public string TenTaiKhoan { get; set; }
-        public string MatKhau { get; set; }
-        public Nullable<bool> TrangThai { get; set; }
+        public int MaVanDon { get; set; }
+        public Nullable<int> MaDonHang { get; set; }
+        public Nullable<int> NhanVienVanChuyen { get; set; }
+        public Nullable<double> PhiVanChuyen { get; set; }
     
+        public virtual PhanPhoi PhanPhoi { get; set; }
         public virtual NhanVien NhanVien { get; set; }
     }
 }

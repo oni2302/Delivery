@@ -140,10 +140,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ChucNang.cs">
-      <DependentUpon>Delivery.tt</DependentUpon>
+      <DependentUpon>GiaoHang.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ChucVu.cs">
-      <DependentUpon>Delivery.tt</DependentUpon>
+      <DependentUpon>GiaoHang.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\database_firewall_rules.cs">
       <DependentUpon>Delivery.tt</DependentUpon>
@@ -164,7 +164,10 @@
       <DependentUpon>Delivery.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\DonHang.cs">
-      <DependentUpon>Delivery.tt</DependentUpon>
+      <DependentUpon>GiaoHang.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DonHangCanVanChuyen.cs">
+      <DependentUpon>GiaoHang.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\getDonHang_ChuaNhan_Result.cs">
       <DependentUpon>Delivery.tt</DependentUpon>
@@ -172,26 +175,71 @@
     <Compile Include="Models\getDonHang_DaNhan_Result.cs">
       <DependentUpon>Delivery.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GiaoHang.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GiaoHang.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GiaoHang.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GiaoHang.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GiaoHang.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GiaoHang.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KhuVuc.cs">
+      <DependentUpon>GiaoHang.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\LayChucNang_Result.cs">
       <DependentUpon>Delivery.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MenuOf_Result.cs">
+      <DependentUpon>GiaoHang.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NhanDon.cs">
+      <DependentUpon>GiaoHang.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\NhanVien.cs">
-      <DependentUpon>Delivery.tt</DependentUpon>
+      <DependentUpon>GiaoHang.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NhanVien_ChiTiet_Result.cs">
+      <DependentUpon>GiaoHang.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NhanVien_DanhSach_Result.cs">
+      <DependentUpon>GiaoHang.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PhanChucNang.cs">
       <DependentUpon>Delivery.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PhanPhoi.cs">
+      <DependentUpon>GiaoHang.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PhanQuyen.cs">
       <DependentUpon>Delivery.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Quyen.cs">
-      <DependentUpon>Delivery.tt</DependentUpon>
+      <DependentUpon>GiaoHang.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>GiaoHang.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>GiaoHang.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>GiaoHang.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TaiKhoan.cs">
-      <DependentUpon>Delivery.tt</DependentUpon>
+      <DependentUpon>GiaoHang.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TaiKhoan_DangNhap_Result.cs">
+      <DependentUpon>GiaoHang.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TrangThaiDonHang.cs">
-      <DependentUpon>Delivery.tt</DependentUpon>
+      <DependentUpon>GiaoHang.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -230,6 +278,16 @@
       <DependentUpon>Delivery.edmx</DependentUpon>
       <LastGenOutput>Delivery.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\GiaoHang.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GiaoHang.edmx</DependentUpon>
+      <LastGenOutput>GiaoHang.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\GiaoHang.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GiaoHang.edmx</DependentUpon>
+      <LastGenOutput>GiaoHang.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\App\layout.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -265,6 +323,13 @@
     </EntityDeploy>
     <Content Include="Models\Delivery.edmx.diagram">
       <DependentUpon>Delivery.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\GiaoHang.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>GiaoHang.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\GiaoHang.edmx.diagram">
+      <DependentUpon>GiaoHang.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

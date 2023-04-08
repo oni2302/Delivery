@@ -14,15 +14,32 @@ namespace Delivery.Models
     
     public partial class NhanVien
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public NhanVien()
+        {
+            this.DonHangCanVanChuyens = new HashSet<DonHangCanVanChuyen>();
+            this.NhanDons = new HashSet<NhanDon>();
+            this.PhanPhois = new HashSet<PhanPhoi>();
+            this.TaiKhoans = new HashSet<TaiKhoan>();
+        }
+    
         public int MaNhanVien { get; set; }
         public string TenNhanVien { get; set; }
-        public Nullable<int> MaChucVu { get; set; }
         public Nullable<System.DateTime> NgaySinh { get; set; }
         public string Email { get; set; }
         public string SoDienThoai { get; set; }
-        public string AnhDaiDien { get; set; }
+        public byte[] AnhDaiDien { get; set; }
+        public Nullable<int> ChucVu { get; set; }
+        public Nullable<bool> TrangThai { get; set; }
     
-        public virtual TaiKhoan TaiKhoan { get; set; }
-        public virtual ChucVu ChucVu { get; set; }
+        public virtual ChucVu ChucVu1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DonHangCanVanChuyen> DonHangCanVanChuyens { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NhanDon> NhanDons { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PhanPhoi> PhanPhois { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TaiKhoan> TaiKhoans { get; set; }
     }
 }

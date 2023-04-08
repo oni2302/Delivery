@@ -18,12 +18,17 @@ namespace Delivery.Models
         public ChucVu()
         {
             this.NhanViens = new HashSet<NhanVien>();
+            this.Quyens = new HashSet<Quyen>();
         }
     
         public int MaChucVu { get; set; }
         public string TenChucVu { get; set; }
+        public Nullable<int> KhuVucHoatDong { get; set; }
     
+        public virtual KhuVuc KhuVuc { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NhanVien> NhanViens { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Quyen> Quyens { get; set; }
     }
 }
