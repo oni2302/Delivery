@@ -6,8 +6,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     FrameLayout frameLayout;
 
     Button btnLogin;
+    EditText edituser,editPassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.add(R.id.frame, Login );
         fragmentTransaction.commit();
 
-        btnLogin = findViewById()
 
 
         //Cách dùng ApiHelper
@@ -54,5 +56,7 @@ public class MainActivity extends AppCompatActivity {
 //                textView.setText(loi.toString());
 //            }
 //        });
+    }
+    public void insertIntoDb(View v) {
     }
 }

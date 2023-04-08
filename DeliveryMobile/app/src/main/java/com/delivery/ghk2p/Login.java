@@ -38,11 +38,10 @@ public class Login extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        View view = inflater.inflate(R.layout.fragment_login, container, false);
+        btnLogin = view.findViewById(R.id.BtnLogin);
         edituser = view.findViewById(R.id.editUser);
         editPassword = view.findViewById(R.id.editPassword);
-        btnLogin = view.findViewById(R.id.BtnLogin);
-
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,8 +62,9 @@ public class Login extends Fragment {
                 });
             }
         });
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false);
+        //Return view :)))) chứ k phải inflater.inflate(R.layout.fragment_login, container, false
+        //Ảo chưa
+        return view;
 
 
     }
