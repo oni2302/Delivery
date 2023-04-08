@@ -1,9 +1,14 @@
 package com.delivery.ghk2p;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.VolleyError;
@@ -11,7 +16,9 @@ import com.android.volley.VolleyError;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
-    TextView textView;
+    FrameLayout frameLayout;
+
+    Button btnLogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,10 +26,18 @@ public class MainActivity extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+        Fragment Login = new Login();
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.frame, Login );
+        fragmentTransaction.commit();
+
+        btnLogin = findViewById()
 
 
         //Cách dùng ApiHelper
-        textView = findViewById(R.id.textView);
+//        textView = findViewById(R.id.textView);
 
 
 //        String action = "alo";
