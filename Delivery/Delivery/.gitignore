@@ -1,6 +1,4 @@
-<<<<<<< HEAD
 
-=======
 ###################
 # compiled source #
 ###################
@@ -20,12 +18,12 @@
 UpgradeLog.XML
 _UpgradeReport_Files/
 ###############
->>>>>>> 8815ef7646a8ff2656ddd02f9d97f5edc83fa603
 # Directories #
 ###############
 bin/
 obj/
 TestResults/
+
 .DS_Store?
 ehthumbs.db
 Icon?
@@ -45,3 +43,5 @@ _[Ss]cripts
 *.nupkg
 *.ncrunchsolution
 *.dot[Cc]over
+
+.vs/
