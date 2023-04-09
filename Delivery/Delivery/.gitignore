@@ -1,4 +1,26 @@
+<<<<<<< HEAD
 
+=======
+###################
+# compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.pdb
+*.dll.config
+*.cache
+*.suo
+# Include dlls if they're in the CommonReferences directory
+!*CommonReferences/*.dll
+####################
+# VS Upgrade stuff #
+####################
+UpgradeLog.XML
+_UpgradeReport_Files/
+###############
+>>>>>>> 8815ef7646a8ff2656ddd02f9d97f5edc83fa603
 # Directories #
 ###############
 bin/
