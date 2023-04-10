@@ -22,6 +22,7 @@ public class ApiHelper {
     private Context context;
 
     public ApiHelper(Context context,String action) {
+        this.ApiUrl = "http://10.21.4.96:2302/";
         this.ApiUrl = ApiUrl+action;
         this.context = context;
     }
