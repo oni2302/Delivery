@@ -2,10 +2,13 @@ const express = require("express");
 const app = express();
 const port = 2302;
 
-
-var Products =require('./Products');
-
+var Products = require('./Products');
+var extenalip = require('externalip').getip;
 var databaseOperation = require('./databaseOperation');
+
+extenalip(function (err, ip) {
+  console.log(ip); // => 8.8.8.8
+});
 
 app.get("/alo", (req, res) => {
     databaseOperation.getOrders().then(result =>{
@@ -20,5 +23,5 @@ app.get("/alo", (req, res) => {
   });
 
   app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`);
+    console.log(`Example app listening at http://${IP}:${port}`);
   });
