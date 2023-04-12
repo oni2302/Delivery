@@ -119,12 +119,15 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Common\CommonConstants.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DHsController.cs" />
     <Compile Include="Controllers\DH_DaNhanController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\NhanViensController.cs" />
+    <Compile Include="Controllers\NhanVienController.cs" />
     <Compile Include="Controllers\TaiKhoanController.cs" />
+    <Compile Include="Entities\CreateNhanVien.cs" />
+    <Compile Include="Entities\PasswordOption.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -212,6 +215,15 @@
     <Compile Include="Models\Quyen.cs">
       <DependentUpon>GiaoHang.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SelectCV_Result.cs">
+      <DependentUpon>GiaoHang.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SelectNV_Result.cs">
+      <DependentUpon>GiaoHang.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SelectRole_Result.cs">
+      <DependentUpon>GiaoHang.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>GiaoHang.tt</DependentUpon>
     </Compile>
@@ -224,7 +236,13 @@
     <Compile Include="Models\TaiKhoan.cs">
       <DependentUpon>GiaoHang.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TaiKhoan_ChiTiet_Result.cs">
+      <DependentUpon>GiaoHang.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TaiKhoan_DangNhap_Result.cs">
+      <DependentUpon>GiaoHang.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TaiKhoan_DanhSach1_Result.cs">
       <DependentUpon>GiaoHang.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TrangThaiDonHang.cs">
@@ -344,6 +362,8 @@
     <Content Include="Views\NhanViens\Create.cshtml" />
     <Content Include="Views\NhanViens\Edit.cshtml" />
     <Content Include="Views\DHs\Index.cshtml" />
+    <Content Include="Views\Authentication\Login.cshtml" />
+    <Content Include="Views\NhanVien\DanhSach.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

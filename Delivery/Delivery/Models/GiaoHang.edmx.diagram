@@ -29,6 +29,7 @@
         <AssociationConnector Association="GiaoHangModel.FK__TaiKhoan__MaNhan__2180FB33" ManuallyRouted="false" />
         <AssociationConnector Association="GiaoHangModel.PhanChucNang" ManuallyRouted="false" />
         <AssociationConnector Association="GiaoHangModel.PhanQuyen" ManuallyRouted="false" />
+        <AssociationConnector Association="GiaoHangModel.FK_NhanVien_KhuVuc" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

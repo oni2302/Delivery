@@ -14,7 +14,7 @@ namespace Delivery.Models
 
 using System;
     
-public partial class NhanVien_ChiTiet_Result
+public partial class SelectNV_Result
 {
 
     public int MaNhanVien { get; set; }
@@ -32,6 +32,12 @@ public partial class NhanVien_ChiTiet_Result
     public Nullable<int> ChucVu { get; set; }
 
     public Nullable<bool> TrangThai { get; set; }
+
+    public Nullable<int> KhuVucHoatDong { get; set; }
+
+    public string TenTaiKhoan { get; set; }
+
+    public string MatKhau { get; set; }
 
 }
 

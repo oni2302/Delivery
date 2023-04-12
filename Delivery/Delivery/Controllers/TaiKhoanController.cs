@@ -8,19 +8,19 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Delivery.Models;
+using Delivery.Controllers;
 
 namespace Delivery.Controllers
 {
-    public class TaiKhoanController : Controller
+    public class TaiKhoanController : BaseController
     {
-        private DeliveryEntities db = new DeliveryEntities();
 
         // GET: TaiKhoan
         public ActionResult Index(string sortOrder, string TenNVString, string CVString, string searchString)
         {
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
 
-            var taiKhoans = db.TaiKhoans.Include(t => t.NhanVien);
+            var taiKhoans = database.TaiKhoans.Include(t => t.NhanVien);
 
             switch (sortOrder)
             {
@@ -36,24 +36,26 @@ namespace Delivery.Controllers
             ViewBag.KeywordTK = searchString;
             ViewBag.KeywordTenNV = TenNVString;
             ViewBag.KeywordCV = CVString;
-            
+
             if (!String.IsNullOrEmpty(searchString))
                 taiKhoans = taiKhoans.Where(b => b.TenTaiKhoan.Contains(searchString));
-                       
+
             if (!String.IsNullOrEmpty(TenNVString))
                 taiKhoans = taiKhoans.Where(c => c.NhanVien.TenNhanVien.Contains(TenNVString));
 
             if (!String.IsNullOrEmpty(CVString))
-                taiKhoans = taiKhoans.Where(d => d.NhanVien.ChucVu.TenChucVu.Contains(CVString));
+                taiKhoans = taiKhoans.Where(d => d.NhanVien.ChucVu1.TenChucVu.Contains(CVString));
 
-            return View(taiKhoans.ToList());
+            ViewBag.DanhSachTaiKhoan = database.TaiKhoan_DanhSach1().ToList();
+
+            return View();
         }
 
         // GET: TaiKhoan/Create
         public ActionResult Create()
         {
-            ViewBag.MaChucVu = new SelectList(db.ChucVus, "MaChucVu", "TenChucVu");
-            ViewBag.MaNhanVien = new SelectList(db.NhanViens.Where(nv => nv.TaiKhoan.NhanVien == null), "MaNhanVien", "TenNhanVien");
+            ViewBag.MaChucVu = new SelectList(database.SelectCV(), "MaChucVu", "TenChucVu");
+            ViewBag.MaNhanVien = new SelectList(database.SelectNV(), "MaNhanVien", "TenNhanVien");
             return View();
         }
 
@@ -66,12 +68,11 @@ namespace Delivery.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.TaiKhoans.Add(taiKhoan);
-                db.SaveChanges();
+                database.TaiKhoan_Them(taiKhoan.TenTaiKhoan, taiKhoan.MatKhau,taiKhoan.MaNhanVien);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.MaNhanVien = new SelectList(db.NhanViens, "MaNhanVien", "TenNhanVien", taiKhoan.MaNhanVien);
+            ViewBag.MaChucVu = new SelectList(database.SelectCV(), "MaChucVu", "TenChucVu");
             return View(taiKhoan);
         }
 
@@ -82,7 +83,7 @@ namespace Delivery.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TaiKhoan taiKhoan = db.TaiKhoans.Find(id);
+            TaiKhoan taiKhoan = database.TaiKhoans.Find(id);
             if (taiKhoan == null)
             {
                 return HttpNotFound();
@@ -91,7 +92,7 @@ namespace Delivery.Controllers
             {
                 return View(taiKhoan);
             }
-            ViewBag.MaNhanVien = new SelectList(db.NhanViens, "MaNhanVien", "TenNhanVien", taiKhoan.MaNhanVien);
+            ViewBag.MaNhanVien = new SelectList(database.NhanViens, "MaNhanVien", "TenNhanVien", taiKhoan.MaNhanVien);
 
             return View(taiKhoan);
         }
@@ -105,11 +106,11 @@ namespace Delivery.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(taiKhoan).State = EntityState.Modified;
-                db.SaveChanges();
+                database.Entry(taiKhoan).State = EntityState.Modified;
+                database.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.MaNhanVien = new SelectList(db.NhanViens, "MaNhanVien", "TenNhanVien", taiKhoan.MaNhanVien);
+            ViewBag.MaNhanVien = new SelectList(database.NhanViens, "MaNhanVien", "TenNhanVien", taiKhoan.MaNhanVien);
             return RedirectToAction("index", "Home");
         }
 
@@ -120,12 +121,13 @@ namespace Delivery.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TaiKhoan taiKhoan = db.TaiKhoans.Find(id);
-            if (taiKhoan == null)
+            var tk = database.TaiKhoan_ChiTiet(id).Single();
+            if (tk == null)
             {
                 return HttpNotFound();
             }
-            return View(taiKhoan);
+            ViewBag.del = tk;
+            return View(tk);
         }
 
         // POST: TaiKhoan/Delete/5
@@ -133,25 +135,20 @@ namespace Delivery.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            TaiKhoan taiKhoan = db.TaiKhoans.Find(id);
-            db.TaiKhoans.Remove(taiKhoan);
-            db.SaveChanges();
+            database.TaiKhoan_Xoa(id);
             return RedirectToAction("Index");
         }
 
-        public ActionResult Reset(int? id, TaiKhoan taiKhoan)
+        public ActionResult Reset(int? id)
         {
-            taiKhoan = db.TaiKhoans.Find(id);
-            if (id == null)
+            if (id != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                database.ResetPass(id);               
+                return RedirectToAction("Index");
             }
             else
             {
-                taiKhoan.MatKhau = taiKhoan.TenTaiKhoan + "123";
-                db.Entry(taiKhoan).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return HttpNotFound();
             }
         }
 
@@ -159,7 +156,7 @@ namespace Delivery.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                database.Dispose();
             }
             base.Dispose(disposing);
         }

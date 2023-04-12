@@ -1,5 +1,4 @@
-﻿@model IEnumerable<Delivery.Models.TaiKhoan>
-
+﻿
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -54,23 +53,23 @@
                 </th>
             </tr>
 
-            @foreach (var item in Model)
+            @foreach (var item in ViewBag.DanhSachTaiKhoan)
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.TenTaiKhoan)
+                        @item.TenTaiKhoan
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.MatKhau)
+                        @item.MatKhau
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.NhanVien.TenNhanVien)
+                        @item.TenNhanVien
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.NhanVien.ChucVu.TenChucVu)
+                        @item.TenChucVu
                     </td>
                     <td>
-                        <a style="text-decoration: none; color:black; margin-right:10px;" href="@Url.Action("Reset", "TaiKhoan",new { id = item.MaNhanVien })">
+                        <a style="text-decoration: none; color:black; margin-right:10px;" href="@Url.Action("Reset", "TaiKhoan", new { id = item.MaNhanVien} )">
                             <i class="fas fa-sync-alt"></i>
                         </a>
                         <a style="text-decoration: none; color: black;" href="@Url.Action("Delete", "TaiKhoan",new { id = item.MaNhanVien })">

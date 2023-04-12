@@ -1,6 +1,6 @@
-﻿@model Delivery.Models.TaiKhoan
-@{
+﻿@{
     ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_AccountLayout.cshtml";
 }
 
 @using (Html.BeginForm())
@@ -20,11 +20,11 @@
                                 @Html.ValidationSummary(true, null, new { @class = "text-danger" })
                                 <div class="mb-3">
                                     <label for="" class="form-label">Username</label>
-                                    @Html.EditorFor(model => model.TenTaiKhoan, new { htmlAttributes = new { @class = "form-control mw-100", @maxlength = "50" } })
+                                    <input type="text" name="username" value="" placeholder="Tên đăng nhập" class = "form-control mw-100" maxlength = "50"/>
                                 </div>
                                 <div class="mb-3">
                                     <label for="" class="form-label ">Password</label>
-                                    @Html.EditorFor(model => model.MatKhau, new { htmlAttributes = new { @class = "form-control mw-100", @type = "password" } })
+                                    <input type="password" name="password" value="" placeholder="Mật khẩu" class="form-control mw-100" />
                                 </div>
                                 <button style="background: linear-gradient(90deg, #54BF5A 0%, #228542 100%); border: none; border-radius: 25px; font-size: 1.2rem;"
                                         type="submit" class="btn btn-primary p-2 w-100 mt-4">
@@ -38,4 +38,5 @@
         </div>
     </body>
 }
+
 

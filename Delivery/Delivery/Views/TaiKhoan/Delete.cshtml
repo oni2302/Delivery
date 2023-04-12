@@ -1,8 +1,9 @@
-﻿@model Delivery.Models.TaiKhoan
+﻿
 
 @{
     ViewBag.Title = "Delete";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 
 <div class="container" style="background-color: #F2F2F2; padding: 50px; margin: auto">
@@ -13,22 +14,22 @@
             <dt>
                 @Html.DisplayName("Mã Nhân Viên")
             </dt>
-
+                @ViewBag.del.MaNhanVien
             <dd>
-                @Html.DisplayFor(model => model.MaNhanVien)
+                
             </dd>
             <dt>
                 @Html.DisplayName("Tên Nhân Viên")
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.NhanVien.TenNhanVien)
+                @ViewBag.del.TenNhanVien
             </dd>
             <dt>
                 @Html.DisplayName("Tên tài khoản")
             </dt>
-
+                
             <dd>
-                @Html.DisplayFor(model => model.TenTaiKhoan)
+                @ViewBag.del.TenTaiKhoan
             </dd>
         </dl>
 

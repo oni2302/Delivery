@@ -14,24 +14,12 @@ namespace Delivery.Models
 
 using System;
     
-public partial class NhanVien_ChiTiet_Result
+public partial class SelectCV_Result
 {
 
-    public int MaNhanVien { get; set; }
+    public int MaChucVu { get; set; }
 
-    public string TenNhanVien { get; set; }
-
-    public Nullable<System.DateTime> NgaySinh { get; set; }
-
-    public string Email { get; set; }
-
-    public string SoDienThoai { get; set; }
-
-    public byte[] AnhDaiDien { get; set; }
-
-    public Nullable<int> ChucVu { get; set; }
-
-    public Nullable<bool> TrangThai { get; set; }
+    public string TenChucVu { get; set; }
 
 }
 
