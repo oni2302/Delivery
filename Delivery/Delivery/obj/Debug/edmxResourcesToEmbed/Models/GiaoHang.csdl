@@ -56,6 +56,7 @@
     <Property Name="MaKhuVuc" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="TenKhuVuc" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="ChucVus" Relationship="Self.FK__ChucVu__KhuVucHo__5EBF139D" FromRole="KhuVuc" ToRole="ChucVu" />
+    <NavigationProperty Name="NhanViens" Relationship="GiaoHangModel.FK_NhanVien_KhuVuc" FromRole="KhuVuc" ToRole="NhanVien" />
   </EntityType>
   <EntityType Name="NhanDon">
     <Key>
@@ -85,6 +86,8 @@
     <NavigationProperty Name="NhanDons" Relationship="Self.FK__NhanDon__NhanVie__787EE5A0" FromRole="NhanVien" ToRole="NhanDon" />
     <NavigationProperty Name="PhanPhois" Relationship="Self.FK__PhanPhoi__NhanVi__2739D489" FromRole="NhanVien" ToRole="PhanPhoi" />
     <NavigationProperty Name="TaiKhoans" Relationship="Self.FK__TaiKhoan__MaNhan__2180FB33" FromRole="NhanVien" ToRole="TaiKhoan" />
+    <Property Name="KhuVucHoatDong" Type="Int32" />
+    <NavigationProperty Name="KhuVuc" Relationship="GiaoHangModel.FK_NhanVien_KhuVuc" FromRole="NhanVien" ToRole="KhuVuc" />
   </EntityType>
   <EntityType Name="PhanPhoi">
     <Key>
@@ -388,6 +391,43 @@
     <FunctionImport Name="TaiKhoan_LayMatKhau" ReturnType="Collection(String)">
       <Parameter Name="TenTaiKhoan" Mode="In" Type="String" />
     </FunctionImport>
+    <AssociationSet Name="FK_NhanVien_KhuVuc" Association="GiaoHangModel.FK_NhanVien_KhuVuc">
+      <End Role="KhuVuc" EntitySet="KhuVucs" />
+      <End Role="NhanVien" EntitySet="NhanViens" />
+    </AssociationSet>
+    <FunctionImport Name="ResetPass">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SelectNV" ReturnType="Collection(GiaoHangModel.SelectNV_Result)" />
+    <FunctionImport Name="SelectRole" ReturnType="Collection(GiaoHangModel.SelectRole_Result)" />
+    <FunctionImport Name="TaiKhoan_DanhSach" ReturnType="Collection(GiaoHangModel.TaiKhoan_DanhSach_Result)" />
+    <FunctionImport Name="TaiKhoan_Them" ReturnType="Collection(String)">
+      <Parameter Name="Username" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+      <Parameter Name="MaNV" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SelectCV" ReturnType="Collection(GiaoHangModel.SelectCV_Result)" />
+    <FunctionImport Name="TaiKhoan_LayID" ReturnType="Collection(Int32)">
+      <Parameter Name="manv" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Profile_Get" ReturnType="Collection(GiaoHangModel.Profile_Get_Result)">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Profile_Sua" ReturnType="Collection(Int32)">
+      <Parameter Name="MaNhanVien" Mode="In" Type="Int32" />
+      <Parameter Name="TenNhanVien" Mode="In" Type="String" />
+      <Parameter Name="NgaySinh" Mode="In" Type="DateTime" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="SoDienThoai" Mode="In" Type="String" />
+      <Parameter Name="AnhDaiDien" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="TaiKhoan_DoiMK" ReturnType="Collection(GiaoHangModel.TaiKhoan_DoiMK_Result)">
+      <Parameter Name="MaNhanVien" Mode="In" Type="Int32" />
+      <Parameter Name="MatKhau" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="TaiKhoan_Profile" ReturnType="Collection(GiaoHangModel.TaiKhoan_Profile_Result)">
+      <Parameter Name="MaNhanVien" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="MenuOf_Result">
     <Property Type="Int32" Name="MaChucNang" Nullable="false" />
@@ -437,5 +477,76 @@
     <Property Type="Int32" Name="ChucVu" Nullable="true" />
     <Property Type="Boolean" Name="TrangThai" Nullable="true" />
     <Property Type="String" Name="TenTaiKhoan" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <Association Name="FK_NhanVien_KhuVuc">
+    <End Type="GiaoHangModel.KhuVuc" Role="KhuVuc" Multiplicity="0..1" />
+    <End Type="GiaoHangModel.NhanVien" Role="NhanVien" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KhuVuc">
+        <PropertyRef Name="MaKhuVuc" />
+      </Principal>
+      <Dependent Role="NhanVien">
+        <PropertyRef Name="KhuVucHoatDong" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="SelectNV_Result">
+    <Property Type="Int32" Name="MaNhanVien" Nullable="false" />
+    <Property Type="String" Name="TenNhanVien" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="NgaySinh" Nullable="true" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="SoDienThoai" Nullable="true" MaxLength="10" />
+    <Property Type="Binary" Name="AnhDaiDien" Nullable="true" />
+    <Property Type="Int32" Name="ChucVu" Nullable="true" />
+    <Property Type="Boolean" Name="TrangThai" Nullable="true" />
+    <Property Type="Int32" Name="KhuVucHoatDong" Nullable="true" />
+    <Property Type="String" Name="TenTaiKhoan" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="MatKhau" Nullable="false" MaxLength="4000" />
+  </ComplexType>
+  <ComplexType Name="SelectRole_Result">
+    <Property Type="Int32" Name="MaNhanVien" Nullable="false" />
+    <Property Type="String" Name="TenNhanVien" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="NgaySinh" Nullable="true" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="SoDienThoai" Nullable="true" MaxLength="10" />
+    <Property Type="Binary" Name="AnhDaiDien" Nullable="true" />
+    <Property Type="Int32" Name="ChucVu" Nullable="true" />
+    <Property Type="Boolean" Name="TrangThai" Nullable="true" />
+    <Property Type="Int32" Name="KhuVucHoatDong" Nullable="true" />
+    <Property Type="String" Name="TenChucVu" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="TaiKhoan_DanhSach_Result">
+    <Property Type="Int32" Name="MaNhanVien" Nullable="false" />
+    <Property Type="String" Name="TenTaiKhoan" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="MatKhau" Nullable="false" MaxLength="4000" />
+    <Property Type="Boolean" Name="TrangThai" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="SelectCV_Result">
+    <Property Type="Int32" Name="MaChucVu" Nullable="false" />
+    <Property Type="String" Name="TenChucVu" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="Profile_Get_Result">
+    <Property Type="Int32" Name="MaNhanVien" Nullable="false" />
+    <Property Type="String" Name="TenNhanVien" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="NgaySinh" Nullable="true" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="SoDienThoai" Nullable="true" MaxLength="10" />
+    <Property Type="Binary" Name="AnhDaiDien" Nullable="true" />
+    <Property Type="Boolean" Name="TrangThai" Nullable="true" />
+    <Property Type="Int32" Name="KhuVucHoatDong" Nullable="true" />
+    <Property Type="String" Name="TenChucVu" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="TenTaiKhoan" Nullable="false" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="TaiKhoan_DoiMK_Result">
+    <Property Type="Int32" Name="MaNhanVien" Nullable="false" />
+    <Property Type="String" Name="TenTaiKhoan" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="MatKhau" Nullable="false" MaxLength="4000" />
+    <Property Type="Boolean" Name="TrangThai" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="TaiKhoan_Profile_Result">
+    <Property Type="Int32" Name="MaNhanVien" Nullable="false" />
+    <Property Type="String" Name="TenTaiKhoan" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="MatKhau" Nullable="false" MaxLength="4000" />
+    <Property Type="Boolean" Name="TrangThai" Nullable="true" />
   </ComplexType>
 </Schema>

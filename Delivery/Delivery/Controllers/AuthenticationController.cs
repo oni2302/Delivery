@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Delivery.Models;
 
-namespace GiaoHang.Controllers
+namespace Delivery.Controllers
 {
-    public class AuthenticationController : BaseController
+    public class AuthenticationController : Controller
     {
+        GiaoHangEntities database = new GiaoHangEntities();
         // GET: Authentication
         public ActionResult Login()
         {
@@ -23,17 +25,21 @@ namespace GiaoHang.Controllers
             if (username != null && password != null)
             {   
                 //Xử lí mã hóa ở đây
-                string truePass = database.TaiKhoan_LayMatKhau(username).Single();
-                    //truePass = PasswordOption.Decrypt(truePass); 
-                    
+                string truePass = database.TaiKhoan_LayMatKhau(username).FirstOrDefault();
+                //truePass = PasswordOption.Decrypt(truePass); 
+                if(truePass == null)
+                {
+                    ModelState.AddModelError("", "Tài khoản không đúng hoặc bị khóa !");
+                    return Login();
+                }    
                 //
                 if (truePass == password)
                 {
                     //Lấy thông tin nhân viên 
-                    var userInfo = database.TaiKhoan_DangNhap(username).Single();
-                    Session.Add(CommonConstants.TEN_NGUOI_DUNG,userInfo);
+                    var userInfo = database.TaiKhoan_DangNhap(username).SingleOrDefault();
+                    Session.Add(CommonConstants.NGUOI_DUNG,userInfo);
                     //Lấy menu của nhân viên
-                    Session.Add(CommonConstants.CHUC_NANG, database.MenuOf(userInfo.MaNhanVien).ToList());
+                    Session.Add(CommonConstants.MENU, database.MenuOf(userInfo.MaNhanVien).ToList());
 
                     //Trang thông tin cá nhân
                     //return RedirectToRoute("ThongTinCaNhan");
@@ -41,29 +47,22 @@ namespace GiaoHang.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Tài khoản hoặc mật khẩu không đúng !");
+                    ModelState.AddModelError("", "Mật khẩu không đúng !");
                     //return RedirectToRoute("DangNhap");
-                    return RedirectToAction("Login");
+                    return Login();
                 }
             }
             else
             {
                 ModelState.AddModelError("", "Chưa nhập tài khoản hoặc mật khẩu !");
-                return RedirectToRoute("DangNhap");
+                return RedirectToAction("Login");
             }
         }
 
 
-
-
-
-
-
-
-
         public ActionResult Logout() {
-            Session.Remove(CommonConstants.TEN_NGUOI_DUNG);
-            return RedirectToRoute("Login");
+            Session.Clear();
+            return RedirectToAction("Login");
         }
     }
 }

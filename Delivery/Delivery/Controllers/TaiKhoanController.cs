@@ -8,7 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Delivery.Models;
-using GiaoHang.Controllers;
+using Delivery.Controllers;
 
 namespace Delivery.Controllers
 {
@@ -36,24 +36,26 @@ namespace Delivery.Controllers
             ViewBag.KeywordTK = searchString;
             ViewBag.KeywordTenNV = TenNVString;
             ViewBag.KeywordCV = CVString;
-            
+
             if (!String.IsNullOrEmpty(searchString))
                 taiKhoans = taiKhoans.Where(b => b.TenTaiKhoan.Contains(searchString));
-                       
+
             if (!String.IsNullOrEmpty(TenNVString))
                 taiKhoans = taiKhoans.Where(c => c.NhanVien.TenNhanVien.Contains(TenNVString));
 
             if (!String.IsNullOrEmpty(CVString))
                 taiKhoans = taiKhoans.Where(d => d.NhanVien.ChucVu1.TenChucVu.Contains(CVString));
 
-            return View(taiKhoans.ToList());
+            ViewBag.DanhSachTaiKhoan = database.TaiKhoan_DanhSach().ToList();
+
+            return View(database.TaiKhoan_DanhSach().ToList());
         }
 
         // GET: TaiKhoan/Create
         public ActionResult Create()
         {
-            ViewBag.MaChucVu = new SelectList(database.ChucVus, "MaChucVu", "TenChucVu");
-            //ViewBag.MaNhanVien = new SelectList(database.NhanViens.Where(nv =>   == null), "MaNhanVien", "TenNhanVien");
+            ViewBag.MaChucVu = new SelectList(database.SelectCV(), "MaChucVu", "TenChucVu");
+            ViewBag.MaNhanVien = new SelectList(database.SelectNV(), "MaNhanVien", "tennhanvien");
             return View();
         }
 
@@ -66,12 +68,11 @@ namespace Delivery.Controllers
         {
             if (ModelState.IsValid)
             {
-                database.TaiKhoans.Add(taiKhoan);
-                database.SaveChanges();
+                database.TaiKhoan_Them(taiKhoan.TenTaiKhoan, taiKhoan.MatKhau,taiKhoan.MaNhanVien);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.MaNhanVien = new SelectList(database.NhanViens, "MaNhanVien", "TenNhanVien", taiKhoan.MaNhanVien);
+            ViewBag.MaChucVu = new SelectList(database.SelectCV(), "MaChucVu", "TenChucVu");
             return View(taiKhoan);
         }
 
@@ -141,14 +142,14 @@ namespace Delivery.Controllers
 
         public ActionResult Reset(int? id, TaiKhoan taiKhoan)
         {
-            taiKhoan = database.TaiKhoans.Find(id);
-            if (id == null)
+            var find = database.TaiKhoan_LayID(id);
+            if (find == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             else
             {
-                
+                database.ResetPass(taiKhoan.MaNhanVien);
                 database.SaveChanges();
                 return RedirectToAction("Index");
             }

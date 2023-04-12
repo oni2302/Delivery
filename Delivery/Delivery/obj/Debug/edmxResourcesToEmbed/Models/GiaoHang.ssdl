@@ -16,7 +16,6 @@
     </Key>
     <Property Name="MaChucVu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TenChucVu" Type="nvarchar" MaxLength="100" />
-    <Property Name="KhuVucHoatDong" Type="int" />
   </EntityType>
   <EntityType Name="DonHang">
     <Key>
@@ -68,14 +67,15 @@
     <Property Name="AnhDaiDien" Type="varbinary(max)" />
     <Property Name="ChucVu" Type="int" />
     <Property Name="TrangThai" Type="bit" />
+    <Property Name="KhuVucHoatDong" Type="int" />
   </EntityType>
   <EntityType Name="PhanChucNang">
     <Key>
-      <PropertyRef Name="MaChucNang" />
       <PropertyRef Name="MaQuyen" />
+      <PropertyRef Name="MaChucNang" />
     </Key>
-    <Property Name="MaChucNang" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="MaQuyen" Type="int" Nullable="false" />
+    <Property Name="MaChucNang" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="PhanPhoi">
     <Key>
@@ -88,9 +88,9 @@
   </EntityType>
   <EntityType Name="PhanQuyen">
     <Key>
-      <PropertyRef Name="MaQuyen" />
-      <PropertyRef Name="MaChucVu" />
+      <PropertyRef Name="MaPhanQuyen" />
     </Key>
+    <Property Name="MaPhanQuyen" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="MaQuyen" Type="int" Nullable="false" />
     <Property Name="MaChucVu" Type="int" Nullable="false" />
   </EntityType>
@@ -128,18 +128,6 @@
     <Property Name="MaTrangThai" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TenTrangThai" Type="nvarchar" MaxLength="100" />
   </EntityType>
-  <Association Name="FK__ChucVu__KhuVucHo__5EBF139D">
-    <End Role="KhuVuc" Type="Self.KhuVuc" Multiplicity="0..1" />
-    <End Role="ChucVu" Type="Self.ChucVu" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="KhuVuc">
-        <PropertyRef Name="MaKhuVuc" />
-      </Principal>
-      <Dependent Role="ChucVu">
-        <PropertyRef Name="KhuVucHoatDong" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__DonHang__TrangTh__74AE54BC">
     <End Role="TrangThaiDonHang" Type="Self.TrangThaiDonHang" Multiplicity="0..1" />
     <End Role="DonHang" Type="Self.DonHang" Multiplicity="*" />
@@ -212,7 +200,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__PhanChucN__MaChu__6B24EA82">
+  <Association Name="FK__PhanChucN__MaChu__32AB8735">
     <End Role="ChucNang" Type="Self.ChucNang" Multiplicity="1" />
     <End Role="PhanChucNang" Type="Self.PhanChucNang" Multiplicity="*" />
     <ReferentialConstraint>
@@ -224,7 +212,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__PhanChucN__MaQuy__6C190EBB">
+  <Association Name="FK__PhanChucN__MaQuy__339FAB6E">
     <End Role="Quyen" Type="Self.Quyen" Multiplicity="1" />
     <End Role="PhanChucNang" Type="Self.PhanChucNang" Multiplicity="*" />
     <ReferentialConstraint>
@@ -260,7 +248,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__PhanQuyen__MaChu__6FE99F9F">
+  <Association Name="FK__PhanQuyen__MaChu__2B0A656D">
     <End Role="ChucVu" Type="Self.ChucVu" Multiplicity="1" />
     <End Role="PhanQuyen" Type="Self.PhanQuyen" Multiplicity="*" />
     <ReferentialConstraint>
@@ -272,7 +260,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__PhanQuyen__MaQuy__6EF57B66">
+  <Association Name="FK__PhanQuyen__MaQuy__2BFE89A6">
     <End Role="Quyen" Type="Self.Quyen" Multiplicity="1" />
     <End Role="PhanQuyen" Type="Self.PhanQuyen" Multiplicity="*" />
     <ReferentialConstraint>
@@ -296,6 +284,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_NhanVien_KhuVuc">
+    <End Role="KhuVuc" Type="Self.KhuVuc" Multiplicity="0..1" />
+    <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KhuVuc">
+        <PropertyRef Name="MaKhuVuc" />
+      </Principal>
+      <Dependent Role="NhanVien">
+        <PropertyRef Name="KhuVucHoatDong" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
   <Function Name="MenuOf" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="MaNhanVien" Type="int" Mode="In" />
@@ -313,17 +313,25 @@
     <Parameter Name="AnhDaiDien" Type="varbinary(max)" Mode="In" />
     <Parameter Name="ChucVu" Type="int" Mode="In" />
   </Function>
-  <Function Name="NhanVien_Them" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+  <Function Name="NhanVien_Xoa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MaNhanVien" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Profile_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Profile_Sua" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MaNhanVien" Type="int" Mode="In" />
     <Parameter Name="TenNhanVien" Type="nvarchar" Mode="In" />
     <Parameter Name="NgaySinh" Type="date" Mode="In" />
     <Parameter Name="Email" Type="varchar" Mode="In" />
     <Parameter Name="SoDienThoai" Type="char" Mode="In" />
     <Parameter Name="AnhDaiDien" Type="varbinary(max)" Mode="In" />
-    <Parameter Name="ChucVu" Type="int" Mode="In" />
   </Function>
-  <Function Name="NhanVien_Xoa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="MaNhanVien" Type="int" Mode="In" />
+  <Function Name="ResetPass" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
   </Function>
+  <Function Name="SelectCV" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SelectNV" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
     <Parameter Name="owner_id" Type="int" Mode="In" />
@@ -357,8 +365,24 @@
   <Function Name="TaiKhoan_DangNhap" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="TenTaiKhoan" Type="varchar" Mode="In" />
   </Function>
+  <Function Name="TaiKhoan_DanhSach" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="TaiKhoan_DoiMK" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MaNhanVien" Type="int" Mode="In" />
+    <Parameter Name="MatKhau" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="TaiKhoan_LayID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="manv" Type="int" Mode="In" />
+  </Function>
   <Function Name="TaiKhoan_LayMatKhau" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="TenTaiKhoan" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="TaiKhoan_Profile" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MaNhanVien" Type="int" Mode="In" />
+  </Function>
+  <Function Name="TaiKhoan_Them" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Username" Type="varchar" Mode="In" />
+    <Parameter Name="Password" Type="varchar" Mode="In" />
+    <Parameter Name="MaNV" Type="int" Mode="In" />
   </Function>
   <EntityContainer Name="GiaoHangModelStoreContainer">
     <EntitySet Name="ChucNang" EntityType="Self.ChucNang" Schema="dbo" store:Type="Tables" />
@@ -375,10 +399,6 @@
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TaiKhoan" EntityType="Self.TaiKhoan" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TrangThaiDonHang" EntityType="Self.TrangThaiDonHang" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__ChucVu__KhuVucHo__5EBF139D" Association="Self.FK__ChucVu__KhuVucHo__5EBF139D">
-      <End Role="KhuVuc" EntitySet="KhuVuc" />
-      <End Role="ChucVu" EntitySet="ChucVu" />
-    </AssociationSet>
     <AssociationSet Name="FK__DonHang__TrangTh__74AE54BC" Association="Self.FK__DonHang__TrangTh__74AE54BC">
       <End Role="TrangThaiDonHang" EntitySet="TrangThaiDonHang" />
       <End Role="DonHang" EntitySet="DonHang" />
@@ -403,11 +423,11 @@
       <End Role="ChucVu" EntitySet="ChucVu" />
       <End Role="NhanVien" EntitySet="NhanVien" />
     </AssociationSet>
-    <AssociationSet Name="FK__PhanChucN__MaChu__6B24EA82" Association="Self.FK__PhanChucN__MaChu__6B24EA82">
+    <AssociationSet Name="FK__PhanChucN__MaChu__32AB8735" Association="Self.FK__PhanChucN__MaChu__32AB8735">
       <End Role="ChucNang" EntitySet="ChucNang" />
       <End Role="PhanChucNang" EntitySet="PhanChucNang" />
     </AssociationSet>
-    <AssociationSet Name="FK__PhanChucN__MaQuy__6C190EBB" Association="Self.FK__PhanChucN__MaQuy__6C190EBB">
+    <AssociationSet Name="FK__PhanChucN__MaQuy__339FAB6E" Association="Self.FK__PhanChucN__MaQuy__339FAB6E">
       <End Role="Quyen" EntitySet="Quyen" />
       <End Role="PhanChucNang" EntitySet="PhanChucNang" />
     </AssociationSet>
@@ -419,17 +439,21 @@
       <End Role="NhanVien" EntitySet="NhanVien" />
       <End Role="PhanPhoi" EntitySet="PhanPhoi" />
     </AssociationSet>
-    <AssociationSet Name="FK__PhanQuyen__MaChu__6FE99F9F" Association="Self.FK__PhanQuyen__MaChu__6FE99F9F">
+    <AssociationSet Name="FK__PhanQuyen__MaChu__2B0A656D" Association="Self.FK__PhanQuyen__MaChu__2B0A656D">
       <End Role="ChucVu" EntitySet="ChucVu" />
       <End Role="PhanQuyen" EntitySet="PhanQuyen" />
     </AssociationSet>
-    <AssociationSet Name="FK__PhanQuyen__MaQuy__6EF57B66" Association="Self.FK__PhanQuyen__MaQuy__6EF57B66">
+    <AssociationSet Name="FK__PhanQuyen__MaQuy__2BFE89A6" Association="Self.FK__PhanQuyen__MaQuy__2BFE89A6">
       <End Role="Quyen" EntitySet="Quyen" />
       <End Role="PhanQuyen" EntitySet="PhanQuyen" />
     </AssociationSet>
     <AssociationSet Name="FK__TaiKhoan__MaNhan__2180FB33" Association="Self.FK__TaiKhoan__MaNhan__2180FB33">
       <End Role="NhanVien" EntitySet="NhanVien" />
       <End Role="TaiKhoan" EntitySet="TaiKhoan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NhanVien_KhuVuc" Association="Self.FK_NhanVien_KhuVuc">
+      <End Role="KhuVuc" EntitySet="KhuVuc" />
+      <End Role="NhanVien" EntitySet="NhanVien" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

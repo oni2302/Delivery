@@ -1,0 +1,117 @@
+﻿
+
+@{
+    ViewBag.Title = "Suaprofile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="container" style="background-color: #F2F2F2; padding: 50px; margin: auto">
+    <div class="form-horizontal row" style="background-color: white; padding: 30px; border-radius: 1rem">
+        <h4>Thông tin cá nhân</h4>
+        <hr />
+        @*<div class="card border-0 shadow  my-5 w-75 row">*@
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="col-4">
+            <div><img src="@ViewBag.sua.AnhDaiDien" alt="" style="width:10rem; height:10rem" class="rounded-circle mx-auto d-block"></div>
+            <div class="text-center mt-2 fw-bold">
+                <label class=" mx-auto d-block ">
+                    @ViewBag.sua.TenNhanVien
+                </label>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+                <label for="" class="form-label my-3">Mã nhân viên</label>
+                <div class="col mb-3 mt-2">
+                    <input class="form-control" type="text" value="@ViewBag.sua.MaNhanVien" aria-label=" input example" readonly>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="" class="form-label my-3">Tên nhân viên</label>
+                <div class="col mb-3 mt-2">
+                    <input type="type" name="ProductName" class="form-control" value="@ViewBag.sua.TenNhanVien" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="" class="form-label my-3">Email</label>
+                <div class="col mb-3 mt-2">
+                    <input type="type" name="ProductName" class="form-control" value="@ViewBag.sua.Email" />
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="" class="form-label my-3">Ngày sinh</label>
+                <div class="col mb-3 mt-2">
+                    <input type="date" name="ProductName" class="form-control" value="@ViewBag.sua.NgaySinh" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="" class="form-label my-3">Tên chức vụ</label>
+                <div class="col mb-3 mt-2">
+                    <input class="form-control" type="text" value="@ViewBag.sua.TenChucVu" aria-label="Disabled input example" readonly>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="col-4">
+
+
+            <div class="form-group">
+                <label for="" class="form-label my-3">Số điện thoại</label>
+                <div class="col mb-3 mt-2">
+                    <input type="type" name="ProductName" class="form-control" value="@ViewBag.sua.SoDienThoai" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="" class="form-label my-3">Ảnh đại diện</label>
+                <div class="col mb-3 mt-2">
+                    <input type="type" name="ProductName" class="form-control" value="@ViewBag.sua.AnhDaiDien" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="" class="form-label my-3">Trạng thái</label>
+                <div class="col mb-3 mt-2">
+                    <input type="type" name="ProductName" class="form-control" value="@ViewBag.sua.TrangThai" readonly />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="" class="form-label my-3">Khu vực hoạt động</label>
+                <div class="col mb-3 mt-2">
+                    <input type="type" name="ProductName" class="form-control" value="@ViewBag.sua.KhuVucHoatDong" readonly />
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <label for="" class="form-label my-3">Tên tài khoản</label>
+                <div class="col mb-3 mt-2">
+                    <input class="form-control" type="text" value="@ViewBag.sua.TenTaiKhoan" aria-label="Disabled input example" readonly />
+                </div>
+            </div>
+        </div>
+
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button type="submit" value="Save" class="btn btn-success " style="border-radius: 1.5rem; width: 100px; margin-top: 15px;">Save</button>
+        </div>
+    </div>
+    
+</div>
+
+}
+
