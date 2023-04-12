@@ -1,5 +1,7 @@
 package com.delivery.ghk2p;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,7 +16,7 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 
-public class Home extends Fragment {
+public class Home extends FragmentHelper {
 
     Button btnLogout;
     ApiHelper apiHelper;
@@ -38,13 +40,13 @@ public class Home extends Fragment {
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("Session", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.clear();
+                editor.apply();
 
                 Fragment login = new Login();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.frame, login);
-                fragmentTransaction.commit();
-
+                ChuyenTrang(login);
             }
 
         });

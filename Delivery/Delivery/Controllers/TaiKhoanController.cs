@@ -8,19 +8,19 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Delivery.Models;
+using GiaoHang.Controllers;
 
 namespace Delivery.Controllers
 {
-    public class TaiKhoanController : Controller
+    public class TaiKhoanController : BaseController
     {
-        private DeliveryEntities db = new DeliveryEntities();
 
         // GET: TaiKhoan
         public ActionResult Index(string sortOrder, string TenNVString, string CVString, string searchString)
         {
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
 
-            var taiKhoans = db.TaiKhoans.Include(t => t.NhanVien);
+            var taiKhoans = database.TaiKhoans.Include(t => t.NhanVien);
 
             switch (sortOrder)
             {
@@ -44,7 +44,7 @@ namespace Delivery.Controllers
                 taiKhoans = taiKhoans.Where(c => c.NhanVien.TenNhanVien.Contains(TenNVString));
 
             if (!String.IsNullOrEmpty(CVString))
-                taiKhoans = taiKhoans.Where(d => d.NhanVien.ChucVu.TenChucVu.Contains(CVString));
+                taiKhoans = taiKhoans.Where(d => d.NhanVien.ChucVu1.TenChucVu.Contains(CVString));
 
             return View(taiKhoans.ToList());
         }
@@ -52,8 +52,8 @@ namespace Delivery.Controllers
         // GET: TaiKhoan/Create
         public ActionResult Create()
         {
-            ViewBag.MaChucVu = new SelectList(db.ChucVus, "MaChucVu", "TenChucVu");
-            ViewBag.MaNhanVien = new SelectList(db.NhanViens.Where(nv => nv.TaiKhoan.NhanVien == null), "MaNhanVien", "TenNhanVien");
+            ViewBag.MaChucVu = new SelectList(database.ChucVus, "MaChucVu", "TenChucVu");
+            //ViewBag.MaNhanVien = new SelectList(database.NhanViens.Where(nv =>   == null), "MaNhanVien", "TenNhanVien");
             return View();
         }
 
@@ -66,12 +66,12 @@ namespace Delivery.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.TaiKhoans.Add(taiKhoan);
-                db.SaveChanges();
+                database.TaiKhoans.Add(taiKhoan);
+                database.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.MaNhanVien = new SelectList(db.NhanViens, "MaNhanVien", "TenNhanVien", taiKhoan.MaNhanVien);
+            ViewBag.MaNhanVien = new SelectList(database.NhanViens, "MaNhanVien", "TenNhanVien", taiKhoan.MaNhanVien);
             return View(taiKhoan);
         }
 
@@ -82,7 +82,7 @@ namespace Delivery.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TaiKhoan taiKhoan = db.TaiKhoans.Find(id);
+            TaiKhoan taiKhoan = database.TaiKhoans.Find(id);
             if (taiKhoan == null)
             {
                 return HttpNotFound();
@@ -91,7 +91,7 @@ namespace Delivery.Controllers
             {
                 return View(taiKhoan);
             }
-            ViewBag.MaNhanVien = new SelectList(db.NhanViens, "MaNhanVien", "TenNhanVien", taiKhoan.MaNhanVien);
+            ViewBag.MaNhanVien = new SelectList(database.NhanViens, "MaNhanVien", "TenNhanVien", taiKhoan.MaNhanVien);
 
             return View(taiKhoan);
         }
@@ -105,11 +105,11 @@ namespace Delivery.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(taiKhoan).State = EntityState.Modified;
-                db.SaveChanges();
+                database.Entry(taiKhoan).State = EntityState.Modified;
+                database.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.MaNhanVien = new SelectList(db.NhanViens, "MaNhanVien", "TenNhanVien", taiKhoan.MaNhanVien);
+            ViewBag.MaNhanVien = new SelectList(database.NhanViens, "MaNhanVien", "TenNhanVien", taiKhoan.MaNhanVien);
             return RedirectToAction("index", "Home");
         }
 
@@ -120,7 +120,7 @@ namespace Delivery.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TaiKhoan taiKhoan = db.TaiKhoans.Find(id);
+            TaiKhoan taiKhoan = database.TaiKhoans.Find(id);
             if (taiKhoan == null)
             {
                 return HttpNotFound();
@@ -133,24 +133,23 @@ namespace Delivery.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            TaiKhoan taiKhoan = db.TaiKhoans.Find(id);
-            db.TaiKhoans.Remove(taiKhoan);
-            db.SaveChanges();
+            TaiKhoan taiKhoan = database.TaiKhoans.Find(id);
+            database.TaiKhoans.Remove(taiKhoan);
+            database.SaveChanges();
             return RedirectToAction("Index");
         }
 
         public ActionResult Reset(int? id, TaiKhoan taiKhoan)
         {
-            taiKhoan = db.TaiKhoans.Find(id);
+            taiKhoan = database.TaiKhoans.Find(id);
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             else
             {
-                taiKhoan.MatKhau = taiKhoan.TenTaiKhoan + "123";
-                db.Entry(taiKhoan).State = EntityState.Modified;
-                db.SaveChanges();
+                
+                database.SaveChanges();
                 return RedirectToAction("Index");
             }
         }
@@ -159,7 +158,7 @@ namespace Delivery.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                database.Dispose();
             }
             base.Dispose(disposing);
         }
