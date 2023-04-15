@@ -1,14 +1,11 @@
 const express = require("express");
+var bodyParser = require('body-parser');
 const app = express();
 const port = 2302;
-
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json())
 var Products = require('./Products');
-var extenalip = require('externalip').getip;
 var databaseOperation = require('./databaseOperation');
-
-extenalip(function (err, ip) {
-  console.log(ip); // => 8.8.8.8
-});
 
 app.get("/alo", (req, res) => {
     databaseOperation.getOrders().then(result =>{
@@ -22,6 +19,13 @@ app.get("/alo", (req, res) => {
     })
   });
 
+  app.post("/nvgh/dangnhap", (request,response) =>{
+    console.log(request.body)
+    databaseOperation.dangnhapshiper(request.body.username,request.body.password).then(result=>{
+      response.json(result);
+    })
+  });
+
   app.listen(port, () => {
-    console.log(`Example app listening at http://${IP}:${port}`);
+    console.log(`Example app listening at http://localhost:${port}`);
   });

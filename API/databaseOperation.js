@@ -19,7 +19,23 @@ async function dangnhap(user,pass){
         console.log(error);
     }
 }
-
+async function dangnhapshiper(user,pass){
+    try {
+        console.log('Đang xử lí đăng nhập...')
+        console.log('Tài khoản: '+user+'\n Mật khẩu: '+pass)
+        let pool = await sql.connect(config);
+        let products = await pool.request()
+        .input('user', sql.VarChar, user)
+        .input('pass',sql.VarChar,pass)
+        .query("exec TaiKhoan_DangNhap_Shiper @user,@pass");
+        var taikhoan = products.recordsets[0][0];
+        console.log('Kết quả: '+taikhoan)
+        return taikhoan;
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
 async function getOrders() {
     try {
         let pool = await sql.connect(config);
@@ -75,5 +91,6 @@ module.exports = {
     getOrders: getOrders,
     getOrder : getOrder,
     addOrder : addOrder,
-    dangnhap : dangnhap
+    dangnhap : dangnhap,
+    dangnhapshiper:dangnhapshiper
 }
