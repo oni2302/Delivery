@@ -14,7 +14,7 @@ namespace Delivery.Controllers
 {
     public class AccountController : Controller
     {
-        DeliveryEntities db = new DeliveryEntities();
+        GiaoHangEntities db = new GiaoHangEntities();
 
         //Đăng nhập
         public ActionResult Login()
@@ -24,26 +24,26 @@ namespace Delivery.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(TaiKhoan taiKhoan)
+        public ActionResult Login(Account_DangNhap_Result taiKhoan)
         {
             string username = taiKhoan.TenTaiKhoan;
             string password = taiKhoan.MatKhau;
             //LOGIN: PROCESSING...
-            var check = db.TaiKhoans.SingleOrDefault(c => c.TenTaiKhoan.Equals(username) && c.MatKhau.Equals(password));
+            var check = db.Account_DangNhap(username, password).SingleOrDefault();
             if (ModelState.IsValid && username != null && password != null)
             {
                 if (check != null)
                 {
-                    var layChucNang = db.LayChucNang(check.MaNhanVien);
-                    List<LayChucNang_Result> layChucNang_List = new List<LayChucNang_Result>();
-                    foreach (LayChucNang_Result item in layChucNang)
+                    var layChucNang = db.MenuOf(check.MaNhanVien);
+                    List<MenuOf_Result> layChucNang_List = new List<MenuOf_Result>();
+                    foreach (MenuOf_Result item in layChucNang)
                     {
                         layChucNang_List.Add(item);
                     }
-                    Session.Add(CommonConstants.TEN_NGUOI_DUNG,db.NhanViens.Find(check.MaNhanVien).TenNhanVien);
-
+                    Session.Add(CommonConstants.TEN_NGUOI_DUNG, db.TaiKhoan_LayTen(check.MaNhanVien).SingleOrDefault());
                     Session.Add(CommonConstants.NGUOI_DUNG, check);
                     Session.Add(CommonConstants.CHUC_NANG, layChucNang_List);
+                    
                     return RedirectToAction("Index", "Home");
                 }
                 else
