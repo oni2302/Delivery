@@ -1,3 +1,3 @@
 class ApiHelper {
-  static String ip = "http://171.249.159.55:2302";
+  static String ip = "https://agreeable-beret-moth.cyclic.app/";
 }
