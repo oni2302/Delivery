@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Delivery.Models.getDonHang_DaNhan_Result>
+﻿@model IEnumerable<Delivery.Models.DonHang_GetListDonHang_Result>
 
 @{
     ViewBag.Title = "Index";
@@ -18,16 +18,16 @@
             <table class="table table-hover" style="background-color:#fff; border-radius:20px">
                 <tr>
                     <th>
-                        @Html.DisplayName("Mã đơn hàng")
+                        @Html.DisplayNameFor(model=>model.MaDonHang)
                     </th>
                     <th>
-                        @Html.DisplayName("Mã vận đơn")
+                        @Html.DisplayNameFor(model => model.NhanVienNhan)
                     </th>
                     <th>
-                        @Html.DisplayName("Người Gửi")
+                        @Html.DisplayNameFor(model => model.ThoiGianNhan)
                     </th>
                     <th>
-                        @Html.DisplayName("Trạng thái")
+                        @Html.DisplayNameFor(model => model.TrangThai)
                     </th>
                     <th class="text-center">
                         @Html.DisplayName("Actions")
@@ -38,23 +38,23 @@
                 {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.MaDH)
+                    @Html.DisplayFor(model => item.MaDonHang)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.MaVanDon)
+                    @Html.DisplayFor(model => item.NhanVienNhan)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.HoTenNG)
+                    @Html.DisplayFor(modelItem => item.ThoiGianNhan)
                 </td>
                 <td>
-                    @if (Convert.ToInt32(@item.MaTrangThai) == 2)
+                    @if (Convert.ToInt32(@item.TrangThai) == 2)
                     {
-                        @Html.DisplayName("Đã nhận")
+                        @Html.DisplayName("Đã nhận đơn")
                     }
                 </td>
                 <td class="text-center">
-                    @Html.ActionLink("Xem chi tiết", "Details", "DH_DaNhan", new { id = item.MaDH }, new { @class = "btn btn-outline-success mx-2" })
-                    @*@Html.ActionLink("Xóa","Delete","DH_DaNhan",new { id = item.MaDH_DaNhan }, new { @class = "btn btn-outline-success mx-2" })*@
+                    @Html.ActionLink("Xem chi tiết", "Details", "DH_DaNhan", new { id = item.MaDonHang }, new { @class = "btn btn-outline-success" })
+                    @Html.ActionLink("Phân phối","PhanPhoi","DH_DaNhan",new { id = item.MaDonHang }, new { @class = "btn btn-success my-1" })
                 </td>
             </tr>
                 }

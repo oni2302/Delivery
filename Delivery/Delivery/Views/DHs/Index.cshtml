@@ -1,5 +1,4 @@
-﻿@model IEnumerable<Delivery.Models.getDonHang_ChuaNhan_Result>
-
+﻿@model IEnumerable<Delivery.Models.DonHang_GetListDonHang_Result>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -21,47 +20,60 @@
             <table class="table table-hover">
                 <tr>
                     <th>
-                        @Html.DisplayName("Mã đơn hàng")
+                        @Html.DisplayNameFor(model=>model.MaDonHang)
                     </th>
                     <th>
-                        @Html.DisplayName("Mã vận đơn")
+                        @Html.DisplayNameFor(model => model.NguoiGui)
                     </th>
                     <th>
-                    @Html.DisplayName("Người gửi")
+                        @Html.DisplayNameFor(model => model.Tu)
                     </th>
                     <th>
-                        @Html.DisplayName("Trạng thái")
+                        @Html.DisplayName("Địa chỉ đơn hàng cần giao đến")
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NguoiNhan)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TrangThai)
                     </th>
                     <th class="text-center">
-                        @Html.DisplayName("Actions")
                     </th>
                 </tr>
 
-                @foreach (var item in ViewBag.listdhcn)
+                @foreach (var item in Model)
                 {
             <tr>
                 <td>
-                    <p>@item.MaDH</p>
+                    <p>@Html.DisplayFor(model=>item.MaDonHang)</p>
                 </td>
                 <td>
-                    <p>@item.MaVanDon</p>
+                    <p>@Html.DisplayFor(model => item.NguoiGui)</p>
                 </td>
                 <td>
-                    <p>@item.HoTenNG</p>
+                    <p>@Html.DisplayFor(model => item.Tu)</p>
                 </td>
                 <td>
-                    @if (Convert.ToInt32(@item.MaTrangThai) == 1)
-                    {
-                        <p>Chờ xử lý</p>
+                    <p>@Html.DisplayFor(model => item.DiaChiNguoiNhan)/@Html.DisplayFor(model => item.DiaChiPhuong)/@Html.DisplayFor(model => item.DiaChiQuan)/@Html.DisplayFor(model => item.DiaChiThanhPho)</p>
+                </td>
+                <td>
+                    <p>@Html.DisplayFor(model=>item.NguoiNhan)</p>
+                </td>
+                <td>
+                    @{
+                        int trangThai = Convert.ToInt32(Html.DisplayFor(model => item.TrangThai).ToString());
+                        if (trangThai == 1)
+                        {
+                            <p>Chờ xử lý</p>
+                        }
                     }
                 </td>
                 <td class="text-center">
-                    @Html.ActionLink("Xem chi tiết", "Details", new { id = @item.MaDH }, new { @class = "btn btn-outline-success mx-2" })
-                    @Html.ActionLink("Nhận đơn", "NhanDon", new { id = @item.MaDH }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Xem chi tiết", "Details", new { id = @item.MaDonHang }, new { @class = "btn btn-outline-success mx-2" })
+                    @Html.ActionLink("Nhận đơn", "NhanDon", new { id = @item.MaDonHang }, new { @class = "btn btn-success mt-2" })
                 </td>
             </tr>
                 }
-
             </table>
         </div>
     </div>

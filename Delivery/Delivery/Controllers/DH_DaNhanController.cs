@@ -13,114 +13,80 @@ namespace Delivery.Controllers
 {
     public class DH_DaNhanController : Controller
     {
-        private DeliveryEntities db = new DeliveryEntities();
+        private GiaoHangEntities db = new GiaoHangEntities();
 
-        // GET: DH_DaNhan
+        // GET: hiển thị danh sách đơn hàng đã nhận
         public ActionResult Index()
         {
-            var dH_DaNhan = db.getDonHang_DaNhan();
+            //ViewBag.donHang_DaNhan
+            var dH_DaNhan = db.DonHang_GetListDonHang(2);
             return View(dH_DaNhan.ToList());
         }
 
-        // GET: DH_DaNhan/Details/5
+        // GET: chi tiết đơn hàng đã nhận
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DonHang dH_DaNhan = db.DonHangs.Find(id);
-            if (dH_DaNhan == null)
+            DonHang_Find_detail_Result dH = db.DonHang_Find_detail(id).SingleOrDefault();
+            if (dH == null)
             {
                 return HttpNotFound();
             }
-            return View(dH_DaNhan);
+            return View(dH);
         }
 
-        //// GET: DH_DaNhan/Create
-        //public ActionResult Create()
-        //{
-        //    ViewBag.MaDH = new SelectList(db.DonHangs, "MaDH", "MaVanDon");
-        //    return View();
-        //}
+        //// : Chi tiết đơn hàng cần phân phối
+        public ActionResult PhanPhoi(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            DonHang_Find_detail_Result dH_PhanPhoi = db.DonHang_Find_detail(id).SingleOrDefault();
+            ViewBag.MaNhanVien = new SelectList(db.DonHang_PhanPhoiSelectList_KhuVuc_NhanVien(dH_PhanPhoi.DiaChiQuan),"MaNhanVien", "TenNhanVien");
+            if (dH_PhanPhoi == null)
+            {
+                return HttpNotFound();
+            }
+            return View(dH_PhanPhoi);
+        }
 
-        //// POST: DH_DaNhan/Create
-        //// To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "MaDH_DaNhan,TrangThai,MaDH")] DH_DaNhan dH_DaNhan)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.DH_DaNhan.Add(dH_DaNhan);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
+        //// POST: Xử lý phân phối đơn hàng đã nhận
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult PhanPhoi(int id,int MaNhanVien)
+        {
+            if (ModelState.IsValid)
+            {
+                var login_Session = (NhanVien)Session[Common.CommonConstants.NGUOI_DUNG];
+                db.DonHang_PhanPhoi(id, login_Session.MaNhanVien, MaNhanVien);
+            }
 
-        //    ViewBag.MaDH = new SelectList(db.DHs, "MaDH", "MaVanDon", dH_DaNhan.MaDH);
-        //    return View(dH_DaNhan);
-        //}
-
-        //// GET: DH_DaNhan/Edit/5
-        //public ActionResult Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    DH_DaNhan dH_DaNhan = db.DH_DaNhan.Find(id);
-        //    if (dH_DaNhan == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    ViewBag.MaDH = new SelectList(db.DHs, "MaDH", "MaVanDon", dH_DaNhan.MaDH);
-        //    return View(dH_DaNhan);
-        //}
-
-        //// POST: DH_DaNhan/Edit/5
-        //// To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "MaDH_DaNhan,TrangThai,MaDH")] DH_DaNhan dH_DaNhan)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(dH_DaNhan).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    ViewBag.MaDH = new SelectList(db.DHs, "MaDH", "MaVanDon", dH_DaNhan.MaDH);
-        //    return View(dH_DaNhan);
-        //}
-
-        //// GET: DH_DaNhan/Delete/5
-        //public ActionResult Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    DH_DaNhan dH_DaNhan = db.DH_DaNhan.Find(id);
-        //    if (dH_DaNhan == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(dH_DaNhan);
-        //}
-
-        //// POST: DH_DaNhan/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult DeleteConfirmed(int id)
-        //{
-        //    DonHang dH_DaNhan = db.DonHangs.Find(id);
-        //    db.DonHangs.Remove(dH_DaNhan);
-        //    db.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
-
+            return RedirectToAction("index");
+        }
+        //list phân phối
+        public ActionResult DanhSachPhanPhoiDonHang()
+        {
+            var ListDonHangPhanPhoi = db.DonHang_GetListDonHang(3);
+            return View(ListDonHangPhanPhoi.ToList());
+        }
+        // chi tiết phân phối
+        public ActionResult Details_PhanPhoi(int ? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            DonHang_Find_detail_Result dH = db.DonHang_Find_detail(id).SingleOrDefault();
+            if (dH == null)
+            {
+                return HttpNotFound();
+            }
+            return View(dH);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
