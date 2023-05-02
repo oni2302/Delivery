@@ -11,13 +11,11 @@ namespace Delivery.Models
 {
     using System;
     
-    public partial class LayChucNang_Result
+    public partial class TaiKhoan_DanhSach_Result
     {
-        public int MaChucNang { get; set; }
-        public string TenChucNang { get; set; }
-        public string BieuTuong { get; set; }
-        public string Controller { get; set; }
-        public string Action { get; set; }
-        public string Direction { get; set; }
+        public int MaNhanVien { get; set; }
+        public string TenTaiKhoan { get; set; }
+        public string TenNhanVien { get; set; }
+        public string LoaiTaiKhoan { get; set; }
     }
 }

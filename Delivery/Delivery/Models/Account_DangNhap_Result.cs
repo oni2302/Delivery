@@ -11,13 +11,17 @@ namespace Delivery.Models
 {
     using System;
     
-    public partial class NhanVien_DanhSach_Result
+    public partial class Account_DangNhap_Result
     {
         public int MaNhanVien { get; set; }
         public string TenNhanVien { get; set; }
         public Nullable<System.DateTime> NgaySinh { get; set; }
         public string Email { get; set; }
         public string SoDienThoai { get; set; }
-        public string TenKhuVuc { get; set; }
+        public Nullable<bool> TrangThai { get; set; }
+        public Nullable<int> MaKhuVuc { get; set; }
+        public string TenTaiKhoan { get; set; }
+        public string MatKhau { get; set; }
+        public Nullable<int> LoaiTaiKhoan { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -49,20 +49,20 @@
       <HintPath>packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\lib\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Web.Infrastructure.2.0.1\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -121,10 +121,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\DHsController.cs" />
-    <Compile Include="Controllers\DH_DaNhanController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\NhanVienController.cs" />
     <Compile Include="Controllers\NhanViensController.cs" />
     <Compile Include="Controllers\TaiKhoanController.cs" />
     <Compile Include="Entities\CreateNhanVien.cs" />
@@ -132,41 +129,29 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\ChucNang.cs">
+    <Compile Include="Models\Account_DangNhap_Result.cs">
       <DependentUpon>GiaoHang.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ChucVu.cs">
+    <Compile Include="Models\DonHang_Find_detail_Result.cs">
       <DependentUpon>GiaoHang.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\database_firewall_rules.cs">
-      <DependentUpon>Delivery.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Delivery.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Delivery.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Delivery.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Delivery.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Delivery.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Delivery.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DonHang.cs">
+    <Compile Include="Models\DonHang_GetChuaNhan_Result.cs">
       <DependentUpon>GiaoHang.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DonHangCanVanChuyen.cs">
+    <Compile Include="Models\DonHang_GetListDonHang_Result.cs">
       <DependentUpon>GiaoHang.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\getDonHang_ChuaNhan_Result.cs">
-      <DependentUpon>Delivery.tt</DependentUpon>
+    <Compile Include="Models\DonHang_PhanPhoiSelectList_KhuVuc_NhanVien_Result.cs">
+      <DependentUpon>GiaoHang.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\getDonHang_DaNhan_Result.cs">
-      <DependentUpon>Delivery.tt</DependentUpon>
+    <Compile Include="Models\DonHang_TimKiemTheoTenNG_Result.cs">
+      <DependentUpon>GiaoHang.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DonHang__Table_NhanDon_Result.cs">
+      <DependentUpon>GiaoHang.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetByYear_Result.cs">
+      <DependentUpon>GiaoHang.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GiaoHang.Context.cs">
       <AutoGen>True</AutoGen>
@@ -183,55 +168,37 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GiaoHang.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\KhuVuc.cs">
-      <DependentUpon>GiaoHang.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\LayChucNang_Result.cs">
-      <DependentUpon>Delivery.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\MenuOf_Result.cs">
-      <DependentUpon>GiaoHang.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\NhanDon.cs">
-      <DependentUpon>GiaoHang.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\NhanVien.cs">
       <DependentUpon>GiaoHang.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\NhanVien_ChiTiet_Result.cs">
       <DependentUpon>GiaoHang.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\NhanVien_ChuaTK_Result.cs">
+      <DependentUpon>GiaoHang.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\NhanVien_DanhSach_Result.cs">
       <DependentUpon>GiaoHang.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PhanChucNang.cs">
-      <DependentUpon>Delivery.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PhanPhoi.cs">
+    <Compile Include="Models\NhanVien_KhuVuc_Result.cs">
       <DependentUpon>GiaoHang.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PhanQuyen.cs">
-      <DependentUpon>Delivery.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Quyen.cs">
+    <Compile Include="Models\NhanVien_LoaiTK_Result.cs">
       <DependentUpon>GiaoHang.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+    <Compile Include="Models\NhanVien_TimKiem_Result.cs">
       <DependentUpon>GiaoHang.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+    <Compile Include="Models\Profile_Get_Result.cs">
       <DependentUpon>GiaoHang.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
+    <Compile Include="Models\TaiKhoan_DangNhap_Shiper_Result.cs">
       <DependentUpon>GiaoHang.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\TaiKhoan.cs">
+    <Compile Include="Models\TaiKhoan_DanhSach_Result.cs">
       <DependentUpon>GiaoHang.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\TaiKhoan_DangNhap_Result.cs">
-      <DependentUpon>GiaoHang.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TrangThaiDonHang.cs">
+    <Compile Include="Models\ThongKe_DaNhan_Result.cs">
       <DependentUpon>GiaoHang.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -261,16 +228,6 @@
     <Content Include="Images\img dashboard.png" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\logo_delivery.png" />
-    <Content Include="Models\Delivery.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Delivery.edmx</DependentUpon>
-      <LastGenOutput>Delivery.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Delivery.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Delivery.edmx</DependentUpon>
-      <LastGenOutput>Delivery.cs</LastGenOutput>
-    </Content>
     <Content Include="Models\GiaoHang.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>GiaoHang.edmx</DependentUpon>
@@ -282,13 +239,12 @@
       <LastGenOutput>GiaoHang.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\App\layout.js" />
-    <EntityDeploy Include="Models\Delivery.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Delivery.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Delivery.edmx.diagram">
-      <DependentUpon>Delivery.edmx</DependentUpon>
-    </Content>
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.esm.js" />
+    <Content Include="Scripts\bootstrap.esm.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="Models\GiaoHang.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>GiaoHang.Designer.cs</LastGenOutput>
@@ -296,17 +252,11 @@
     <Content Include="Models\GiaoHang.edmx.diagram">
       <DependentUpon>GiaoHang.edmx</DependentUpon>
     </Content>
-    <Content Include="Scripts\bootstrap.bundle.js" />
-    <Content Include="Scripts\bootstrap.bundle.min.js" />
-    <Content Include="Scripts\bootstrap.esm.js" />
-    <Content Include="Scripts\bootstrap.esm.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Content Include="Scripts\jquery-3.4.1.js" />
-    <Content Include="Scripts\jquery-3.4.1.min.js" />
-    <Content Include="Scripts\jquery-3.4.1.slim.js" />
-    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <None Include="Scripts\jquery-3.6.4.intellisense.js" />
+    <Content Include="Scripts\jquery-3.6.4.js" />
+    <Content Include="Scripts\jquery-3.6.4.min.js" />
+    <Content Include="Scripts\jquery-3.6.4.slim.js" />
+    <Content Include="Scripts\jquery-3.6.4.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -346,10 +296,8 @@
     <Content Include="Views\TaiKhoan\Edit.cshtml" />
     <Content Include="Views\NhanViens\Delete.cshtml" />
     <Content Include="Views\NhanViens\Create.cshtml" />
-    <Content Include="Views\NhanViens\Edit.cshtml" />
     <Content Include="Views\DHs\Index.cshtml" />
     <Content Include="Views\Authentication\Login.cshtml" />
-    <Content Include="Views\NhanVien\DanhSach.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -382,8 +330,8 @@
     <Content Include="Scripts\bootstrap.esm.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
-    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Scripts\jquery-3.6.4.slim.min.map" />
+    <Content Include="Scripts\jquery-3.6.4.min.map" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -419,8 +367,12 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
   </Target>
+  <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

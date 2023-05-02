@@ -18,8 +18,10 @@ namespace Delivery.Models
         public Nullable<System.DateTime> NgaySinh { get; set; }
         public string Email { get; set; }
         public string SoDienThoai { get; set; }
-        public byte[] AnhDaiDien { get; set; }
-        public Nullable<int> ChucVu { get; set; }
         public Nullable<bool> TrangThai { get; set; }
+        public Nullable<int> MaKhuVuc { get; set; }
+        public string TenTaiKhoan { get; set; }
+        public string MatKhau { get; set; }
+        public Nullable<int> LoaiTaiKhoan { get; set; }
     }
 }

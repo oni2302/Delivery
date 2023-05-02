@@ -18,5 +18,6 @@ namespace Delivery.Models
         public string BieuTuong { get; set; }
         public string Controller { get; set; }
         public string RouteName { get; set; }
+        public Nullable<int> MaLoaiTaiKhoan { get; set; }
     }
 }

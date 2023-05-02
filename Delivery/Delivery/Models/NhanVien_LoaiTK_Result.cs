@@ -10,16 +10,10 @@
 namespace Delivery.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class DonHangCanVanChuyen
+    public partial class NhanVien_LoaiTK_Result
     {
-        public int MaVanDon { get; set; }
-        public Nullable<int> MaDonHang { get; set; }
-        public Nullable<int> NhanVienVanChuyen { get; set; }
-        public Nullable<double> PhiVanChuyen { get; set; }
-    
-        public virtual PhanPhoi PhanPhoi { get; set; }
-        public virtual NhanVien NhanVien { get; set; }
+        public int MaLoaiTaiKhoan { get; set; }
+        public string LoaiTaiKhoan { get; set; }
     }
 }

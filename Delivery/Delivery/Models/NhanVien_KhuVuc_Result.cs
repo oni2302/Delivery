@@ -11,16 +11,9 @@ namespace Delivery.Models
 {
     using System;
     
-    public partial class getDonHang_ChuaNhan_Result
+    public partial class NhanVien_KhuVuc_Result
     {
-        public int MaDH { get; set; }
-        public int MaVanDon { get; set; }
-        public string HoTenNG { get; set; }
-        public string DiaChiNG { get; set; }
-        public string SdtNG { get; set; }
-        public string HoTenNN { get; set; }
-        public string DiaChiNN { get; set; }
-        public string SdtNN { get; set; }
-        public Nullable<int> MaTrangThai { get; set; }
+        public int MaKhuVuc { get; set; }
+        public string TenKhuVuc { get; set; }
     }
 }
