@@ -1,0 +1,69 @@
+﻿@model Delivery.Models.DonHang
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid" style="background-color: #f2f2f2; padding: 30px">
+<div class="container">
+    <div class="bg-white p-3 m-3 row" style="border-radius:1rem">
+        <div class="bg-white p-3 rounded">
+            <div class="d-flex justify-content-between border-bottom">
+                <h3>Thông tin đơn hàng</h3>
+                @Html.ActionLink("Quay lại", "Index", "DH_DaNhan", null, new { @class = "text-dark text-decoration-none" })
+            </div>
+            <div class="row mt-2">
+                <div class="col">
+                    <p class="fw-bold">@Html.DisplayName("Mã đơn hàng")</p>
+                    <input class="form-control" type="text" value="@Html.DisplayFor(model => model.MaDH)" aria-label="Disabled input example" disabled readonly>
+                </div>
+                <div class="col">
+                    <p class="fw-bold">@Html.DisplayName("Mã vận đơn")</p>
+                    <input class="form-control" type="text" value="@Html.DisplayFor(model => model.MaVanDon)" aria-label="Disabled input example" disabled readonly>
+                </div>
+                <div class="col">
+                    <p class="fw-bold">@Html.DisplayName("Mã trạng thái")</p>
+                    <input class="form-control" type="text" value="@Html.DisplayFor(model => model.MaTrangThai)" aria-label="Disabled input example" disabled readonly>
+                </div>
+            </div>
+            @* row 2 *@
+            <div class="d-flex justify-content-between border-bottom mt-5">
+                <h5>Người gửi</h5>
+            </div>
+            <div class="row mb-5 mt-2">
+                <div class="col">
+                    <p class="fw-bold">@Html.DisplayName("Họ tên")</p>
+                    <input class="form-control" type="text" value="@Html.DisplayFor(model => model.HoTenNG)" aria-label="Disabled input example" disabled readonly>
+                </div>
+                <div class="col">
+                    <p class="fw-bold">@Html.DisplayName("Địa chỉ")</p>
+                    <input class="form-control" type="text" value="@Html.DisplayFor(model => model.DiaChiNG)" aria-label="Disabled input example" disabled readonly>
+                </div>
+                <div class="col">
+                    <p class="fw-bold">@Html.DisplayName("Số điện thoại")</p>
+                    <input class="form-control" type="text" value="@Html.DisplayFor(model => model.SdtNG)" aria-label="Disabled input example" disabled readonly>
+                </div>
+            </div>
+            @* row 3 *@
+            <div class="d-flex justify-content-between border-bottom">
+                <h5>Người nhận</h5>
+            </div>
+            <div class="row mt-2">
+                <div class="col">
+                    <p class="fw-bold">@Html.DisplayName("Họ tên")</p>
+                    <input class="form-control" type="text" value="@Html.DisplayFor(model => model.HoTenNN)" aria-label="Disabled input example" disabled readonly>
+                </div>
+                <div class="col">
+                    <p class="fw-bold">@Html.DisplayName("Địa chỉ")</p>
+                    <input class="form-control" type="text" value="@Html.DisplayFor(model => model.DiaChiNN)" aria-label="Disabled input example" disabled readonly>
+                </div>
+                <div class="col">
+                    <p class="fw-bold">@Html.DisplayName("Số điện thoại")</p>
+                    <input class="form-control" type="text" value="@Html.DisplayFor(model => model.SdtNN)" aria-label="Disabled input example" disabled readonly>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
