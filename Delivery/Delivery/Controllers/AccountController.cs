@@ -34,15 +34,10 @@ namespace Delivery.Controllers
             {
                 if (check != null)
                 {
-                    var layChucNang = db.MenuOf(check.MaNhanVien);
-                    List<MenuOf_Result> layChucNang_List = new List<MenuOf_Result>();
-                    foreach (MenuOf_Result item in layChucNang)
-                    {
-                        layChucNang_List.Add(item);
-                    }
+                    var layChucNang = db.MenuOf(check.MaNhanVien).ToList();
                     Session.Add(CommonConstants.TEN_NGUOI_DUNG, db.TaiKhoan_LayTen(check.MaNhanVien).SingleOrDefault());
                     Session.Add(CommonConstants.NGUOI_DUNG, check);
-                    Session.Add(CommonConstants.CHUC_NANG, layChucNang_List);
+                    Session.Add(CommonConstants.CHUC_NANG, layChucNang);
                     
                     return RedirectToAction("Index", "Home");
                 }

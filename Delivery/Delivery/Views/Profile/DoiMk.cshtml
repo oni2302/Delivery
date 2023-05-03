@@ -20,7 +20,7 @@
                 <div class="form-group">
                     @Html.DisplayName("Tên tài khoản")
                     <div class="col-md-12">
-                        <input id="" name="" type="type" class="form-control" value="@info.TenTaiKhoan" readonly />
+                        <input id="" name="" type="text" class="form-control" value="@info.TenTaiKhoan" readonly />
                     </div>
                 </div>
 
@@ -32,11 +32,11 @@
                     </div>
                 </div>
 
-                
+
             </div>
 
 
-            <div class="col-6"  actions="">
+            <div class="col-6" actions="">
 
                 <div class="form-group">
                     @Html.DisplayName("Mật khẩu mới")
@@ -66,45 +66,45 @@
 
 }
 
-<Script>
-    function myFunction() {
-    var x = document.getElementById("MatKhau");
-    var y = document.getElementById("ReMatKhau");
-    var z = document.getElementById("OldMatKhau");
-        if (x.type == "password") {
-            x.type = "text";
-            y.type = "text";
-            z.type = "text";
-        }
-        else {
-            x.type = "password";
-            y.type = "password";
-            z.type = "password";
-        }
-    }
-
-    $(document).ready(function () {
-        $('form').submit(function (e) {
-            if (!Validate()) {
-                e.preventDefault(); //prevent the form from submitting
+@section scripts{
+    <Script>
+        function myFunction() {
+            var x = document.getElementById("MatKhau");
+            var y = document.getElementById("ReMatKhau");
+            var z = document.getElementById("OldMatKhau");
+            if (x.type == "password") {
+                x.type = "text";
+                y.type = "text";
+                z.type = "text";
             }
-        });
-    });
-
-    function Validate() {
-        const MatKhau = document.getElementById("MatKhau");
-        const ReMatKhau = document.getElementById("ReMatKhau");
-        if (MatKhau.value === ReMatKhau.value) {
-            alert("Đổi mật khẩu thành công!");
-            return true;
-        } else {
-            alert("Mật khẩu xác nhận không khớp với mật khẩu mới!");
-            return false;
+            else {
+                x.type = "password";
+                y.type = "password";
+                z.type = "password";
+            }
         }
-    }
-</Script>
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
 
+        $(document).ready(function () {
+            $('form').submit(function (e) {
+                if (!Validate()) {
+                    e.preventDefault(); //prevent the form from submitting
+                }
+            });
+        });
+
+        function Validate() {
+            const MatKhau = document.getElementById("MatKhau");
+            const ReMatKhau = document.getElementById("ReMatKhau");
+            if (MatKhau.value === ReMatKhau.value) {
+                alert("Đổi mật khẩu thành công!");
+                return true;
+            } else {
+                alert("Mật khẩu xác nhận không khớp với mật khẩu mới!");
+                return false;
+            }
+        }
+    </Script>
+
+    @Scripts.Render("~/bundles/jqueryval")
 }
 

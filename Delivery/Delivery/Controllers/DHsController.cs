@@ -10,7 +10,7 @@ using System.Web.Mvc;
 using Delivery.Models;
 namespace Delivery.Controllers
 {
-    public class DHsController : Controller
+    public class DHsController : BaseController
     {
         private GiaoHangEntities db = new GiaoHangEntities();
         // Hiển thị danh sách đơn hàng chưa nhận
@@ -56,7 +56,7 @@ namespace Delivery.Controllers
         {
             if (ModelState.IsValid)
             {
-            var login_Session = (NhanVien)Session[Common.CommonConstants.NGUOI_DUNG];
+            var login_Session = (Account_DangNhap_Result)Session[Common.CommonConstants.NGUOI_DUNG];
             db.DonHang_XacNhanDon(id, login_Session.MaNhanVien);
             }
             return RedirectToAction("index");

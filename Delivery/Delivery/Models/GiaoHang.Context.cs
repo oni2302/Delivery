@@ -249,7 +249,7 @@ namespace Delivery.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Profile_Get_Result>("Profile_Get", idParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> Profile_Sua(Nullable<int> maNhanVien, string tenNhanVien, Nullable<System.DateTime> ngaySinh, string email, string soDienThoai, byte[] anhDaiDien)
+        public virtual ObjectResult<Nullable<int>> Profile_Sua(Nullable<int> maNhanVien, string tenNhanVien, Nullable<System.DateTime> ngaySinh, string email, string soDienThoai)
         {
             var maNhanVienParameter = maNhanVien.HasValue ?
                 new ObjectParameter("MaNhanVien", maNhanVien) :
@@ -271,11 +271,52 @@ namespace Delivery.Models
                 new ObjectParameter("SoDienThoai", soDienThoai) :
                 new ObjectParameter("SoDienThoai", typeof(string));
     
-            var anhDaiDienParameter = anhDaiDien != null ?
-                new ObjectParameter("AnhDaiDien", anhDaiDien) :
-                new ObjectParameter("AnhDaiDien", typeof(byte[]));
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Profile_Sua", maNhanVienParameter, tenNhanVienParameter, ngaySinhParameter, emailParameter, soDienThoaiParameter);
+        }
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Profile_Sua", maNhanVienParameter, tenNhanVienParameter, ngaySinhParameter, emailParameter, soDienThoaiParameter, anhDaiDienParameter);
+        public virtual ObjectResult<sp_Shiper_Don_Hang_Can_Giao_Result> sp_Shiper_Don_Hang_Can_Giao(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Shiper_Don_Hang_Can_Giao_Result>("sp_Shiper_Don_Hang_Can_Giao", idParameter);
+        }
+    
+        public virtual ObjectResult<sp_Shiper_Thong_Tin_Don_Hang_Result> sp_Shiper_Thong_Tin_Don_Hang(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Shiper_Thong_Tin_Don_Hang_Result>("sp_Shiper_Thong_Tin_Don_Hang", idParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> sp_Xac_Nhan_Da_Giao_Hang(Nullable<int> idDonHang)
+        {
+            var idDonHangParameter = idDonHang.HasValue ?
+                new ObjectParameter("idDonHang", idDonHang) :
+                new ObjectParameter("idDonHang", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_Xac_Nhan_Da_Giao_Hang", idDonHangParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> sp_Xac_Nhan_Da_Lay_Hang(Nullable<int> idDonHang)
+        {
+            var idDonHangParameter = idDonHang.HasValue ?
+                new ObjectParameter("idDonHang", idDonHang) :
+                new ObjectParameter("idDonHang", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_Xac_Nhan_Da_Lay_Hang", idDonHangParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> sp_Xac_Nhan_Dang_Giao_Hang(Nullable<int> idDonHang)
+        {
+            var idDonHangParameter = idDonHang.HasValue ?
+                new ObjectParameter("idDonHang", idDonHang) :
+                new ObjectParameter("idDonHang", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_Xac_Nhan_Dang_Giao_Hang", idDonHangParameter);
         }
     
         public virtual int TaiKhoan_ChiTiet(Nullable<int> manv)

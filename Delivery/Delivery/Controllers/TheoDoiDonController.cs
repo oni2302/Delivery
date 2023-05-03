@@ -9,7 +9,7 @@ using Delivery.Models;
 
 namespace Delivery.Controllers
 {
-    public class TheoDoiDonController : Controller
+    public class TheoDoiDonController : BaseController
     {
         GiaoHangEntities db = new GiaoHangEntities();
         // GET: TheoDoiDon

@@ -11,7 +11,7 @@ using Delivery.Models;
 
 namespace Delivery.Controllers
 {
-    public class DH_DaNhanController : Controller
+    public class DH_DaNhanController : BaseController
     {
         private GiaoHangEntities db = new GiaoHangEntities();
 
@@ -61,7 +61,7 @@ namespace Delivery.Controllers
         {
             if (ModelState.IsValid)
             {
-                var login_Session = (NhanVien)Session[Common.CommonConstants.NGUOI_DUNG];
+                var login_Session = (Account_DangNhap_Result)Session[Common.CommonConstants.NGUOI_DUNG];
                 db.DonHang_PhanPhoi(id, login_Session.MaNhanVien, MaNhanVien);
             }
 

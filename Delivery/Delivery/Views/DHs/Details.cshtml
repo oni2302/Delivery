@@ -19,7 +19,7 @@
                     </div>
                     <div class="col">
                         <p class="fw-bold">@Html.DisplayName("Trạng thái")</p>
-                        <input class="form-control" type="text" value=" @if (Html.DisplayFor(model=>model.TrangThai).ToString() == "1"){@Html.DisplayName("Chờ xử lý")}" aria-label="Disabled input example" disabled readonly>
+                        <input class="form-control" type="text" value=" @if(Html.DisplayFor(model=>model.TrangThai).ToString() == "1"){@Html.DisplayName("Chờ xử lý")}" aria-label="Disabled input example" disabled readonly>
                     </div>
                     <div class="col">
                         <p class="fw-bold">@Html.DisplayName("Ghi chú")</p>

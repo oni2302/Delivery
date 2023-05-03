@@ -11,7 +11,7 @@ using Delivery.Models;
 
 namespace Delivery.Controllers
 {
-    public class TaiKhoanController : Controller
+    public class TaiKhoanController : BaseController
     {
         private GiaoHangEntities db = new GiaoHangEntities();
 
@@ -34,10 +34,10 @@ namespace Delivery.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "MaNhanVien,LoaiTaiKhoan,TenTaiKhoan,MatKhau")] NhanVien_ChuaTK_Result taiKhoan )
         {
-                var result = db.TaiKhoan_Them(taiKhoan.TenTaiKhoan, taiKhoan.MatKhau, taiKhoan.MaNhanVien, taiKhoan.LoaiTaiKhoan);
-                if (result != 1)
+                var result = db.TaiKhoan_Them(taiKhoan.TenTaiKhoan, taiKhoan.MatKhau, taiKhoan.MaNhanVien, taiKhoan.LoaiTaiKhoan).SingleOrDefault();
+                if (result != null)
                 {
-                    ModelState.AddModelError("CreateFailed", "Tài khoản dã tồn tại");
+                    ModelState.AddModelError("CreateFailed", result);
                 }
                 else
                 {

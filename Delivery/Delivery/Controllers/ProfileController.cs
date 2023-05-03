@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Delivery.Common;
+using Delivery.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
@@ -16,9 +18,11 @@ namespace Delivery.Controllers
             return View();
         }
 
-        public ActionResult ProfileView(int? id)
+        public ActionResult ProfileView()
         {
 
+            var nguoidung = Session[CommonConstants.NGUOI_DUNG] as Account_DangNhap_Result;
+            int id = nguoidung.MaNhanVien;
             var ListProduct = database.Profile_Get(id).SingleOrDefault();
             if (ListProduct == null)
             {
@@ -52,8 +56,10 @@ namespace Delivery.Controllers
             return Redirect("~/Profile/ProfileView/" + id);
         }
 
-        public ActionResult DoiMk(int? id)
+        public ActionResult DoiMk()
         {
+            var nguoidung = Session[CommonConstants.NGUOI_DUNG] as Account_DangNhap_Result;
+            int id = nguoidung.MaNhanVien;
             var ListProduct = database.Profile_Get(id).SingleOrDefault();
             if (ListProduct == null)
             {
