@@ -1,68 +1,89 @@
 var config = require('./databaseConfig');
 const sql = require('mssql');
 
-async function dangnhap(user,pass){
+async function dangnhapshiper(user,pass){
     try {
-        console.log(user+' '+pass)
+        console.log('Đang xử lí đăng nhập...')
+        console.log('Tài khoản: '+user+'\n Mật khẩu: '+pass)
         let pool = await sql.connect(config);
-        let products = await pool.request()
+        let result = await pool.request()
         .input('user', sql.VarChar, user)
         .input('pass',sql.VarChar,pass)
-        .query("SELECT * from TaiKhoan where TenTaiKhoan = @user and MatKhau = @pass");
-        var taikhoan = products.recordsets[0][0];
-        if(taikhoan == null){
-            return false;
-        }
-        return true;
+        .query("exec TaiKhoan_DangNhap_Shiper @user,@pass");
+        var taikhoan = result.recordsets[0][0];
+        console.log('Kết quả: '+taikhoan)
+        return taikhoan;
     }
     catch (error) {
         console.log(error);
     }
 }
 
-async function getOrders() {
+async function lay_Danh_Sach_Don_Hang_Can_Giao(id){
     try {
         let pool = await sql.connect(config);
-        let products = await pool.request().query("SELECT * from TaiKhoan");
-        return products.recordsets;
+        let result = await pool.request()
+        .input('id', sql.Int, id)
+        .query("exec sp_Shiper_Don_Hang_Can_Giao @id");
+        var donhang = result.recordsets[0];
+        return donhang;
     }
     catch (error) {
         console.log(error);
     }
 }
 
-async function getOrder(productId) {
+async function lay_Thong_Tin_Don_Hang(id){
     try {
         let pool = await sql.connect(config);
-        let product = await pool.request()
-            .input('input_parameter', sql.Int, productId)
-            .query("SELECT * from Products where ProductId = @input_parameter");
-        return product.recordsets;
-
+        let result = await pool.request()
+        .input('id', sql.Int, id)
+        .query("exec sp_Shiper_Thong_Tin_Don_Hang @id");
+        var donhang = result.recordsets[0][0];
+        return donhang;
     }
     catch (error) {
         console.log(error);
     }
 }
 
-
-async function addOrder(product) {
-
+async function xac_Nhan_Da_Lay_Don_Hang(id){
     try {
         let pool = await sql.connect(config);
-        let insertProduct = await pool.request()
-            .input('ProductId', sql.Int, product.ProductId)
-            .input('ProductName', sql.NVarChar, product.ProductName)
-            .input('ProductPrice', sql.Float, product.ProductPrice)
-            .input('ProductViewer', sql.Int, product.ProductViewer)
-            .input('Quantity', sql.Int, product.Quantity)
-            .input('ProductCategory', sql.Int, product.ProductCategory)
-            .input('Date', sql.DateTime, product.Date)
-            .execute('InsertOrders');
-        return insertProduct.recordsets;
+        let result = await pool.request()
+        .input('id', sql.Int, id)
+        .query("exec sp_Xac_Nhan_Da_Lay_Hang @id");
+        var donhang = result.recordsets[0][0];
+        return donhang;
     }
-    catch (err) {
-        console.log(err);
+    catch (error) {
+        console.log(error);
+    }
+}
+async function xac_Nhan_Dang_Giao_Hang(id){
+    try {
+        let pool = await sql.connect(config);
+        let result = await pool.request()
+        .input('id', sql.Int, id)
+        .query("exec sp_Xac_Nhan_Dang_Giao_Hang @id");
+        var donhang = result.recordsets[0][0];
+        return donhang;
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+async function xac_Nhan_Da_Giao_Hang(id){
+    try {
+        let pool = await sql.connect(config);
+        let result = await pool.request()
+        .input('id', sql.Int, id)
+        .query("exec sp_Xac_Nhan_Da_Giao_Hang @id");
+        var donhang = result.recordsets[0][0];
+        return donhang;
+    }
+    catch (error) {
+        console.log(error);
     }
 }
 
@@ -72,8 +93,10 @@ async function addOrder(product) {
 
 
 module.exports = {
-    getOrders: getOrders,
-    getOrder : getOrder,
-    addOrder : addOrder,
-    dangnhap : dangnhap
+    dangnhapshiper:dangnhapshiper,
+    lay_Danh_Sach_Don_Hang_Can_Giao:lay_Danh_Sach_Don_Hang_Can_Giao,
+    lay_Thong_Tin_Don_Hang:lay_Thong_Tin_Don_Hang,
+    xac_Nhan_Da_Lay_Don_Hang:xac_Nhan_Da_Lay_Don_Hang,
+    xac_Nhan_Da_Giao_Hang:xac_Nhan_Da_Giao_Hang,
+    xac_Nhan_Dang_Giao_Hang:xac_Nhan_Dang_Giao_Hang,
 }
