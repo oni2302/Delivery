@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container" style="background-color: #F2F2F2; padding: 50px;">
+
+    <div class="d-flex justify-content-between mb-3">
+        <h3 class="fw-bold">Đơn hàng chưa nhận</h3>
+        <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-success" type="submit">Search</button>
+        </form>
+    </div>
+    <div class="form-horizontal" style="background-color: white; padding: 30px; border-radius: 1rem">
+        @*<p>
+                @Html.ActionLink("Create New", "Create")
+            </p>*@
+        <div class="">
+            <table class="table table-hover">
+                <tr>
+                    <th>
+                        @Html.DisplayName("Mã đơn hàng")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Người gửi")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Từ")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Đến")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Người nhận")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Trạng thái")
+                    </th>
+                    <th class="text-center">
+                    </th>
+                </tr>
+
+                @foreach (var item in ViewBag.listdhcn)
+                {
+            <tr>
+                <td>
+                    <p>@item.MaDonHang</p>
+                </td>
+                <td>
+                    <p>@item.NguoiGui</p>
+                </td>
+                <td>
+                    <p>@item.Tu</p>
+                </td>
+                <td>
+                    <p>@item.Den</p>
+                </td>
+                <td>
+                    <p>@item.NguoiNhan</p>
+                </td>
+                <td>
+                    @if (Convert.ToInt32(@item.TrangThai) == 1)
+                    {
+                        <p>Chờ xử lý</p>
+                    }
+                </td>
+                <td class="text-center">
+                    @Html.ActionLink("Xem chi tiết", "Details", new { id = @item.MaDonHang }, new { @class = "btn btn-outline-success mx-2" })
+                    @Html.ActionLink("Nhận đơn", "NhanDon", new { id = @item.MaDonHang }, new { @class = "btn btn-success" })
+                </td>
+            </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>
