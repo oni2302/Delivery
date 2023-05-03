@@ -1,0 +1,102 @@
+﻿
+
+@{
+    var info = ViewBag.sua as Delivery.Models.Profile_Get_Result;
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<form action="~/Profile/ProfileView" method="post" enctype="multipart/form-data">
+    <div class="container" style="background-color: #F2F2F2; padding: 50px; margin: auto">
+        <div class="form-horizontal row" style="background-color: white; padding: 30px; border-radius: 1rem">
+            <h4>Thông tin cá nhân</h4>
+            <hr />
+            @*<div class="card border-0 shadow  my-5 w-75 row">*@
+
+
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="" class="form-label my-3">Mã nhân viên</label>
+                    <div class="col mb-3 mt-2">
+                        <input class="form-control" type="text" value="@info.MaNhanVien" aria-label=" input example" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="" class="form-label my-3">Tên nhân viên</label>
+                    <div class="col mb-3 mt-2">
+                        <input type="type" name="tennhanvien" class="form-control" value="@info.TenNhanVien" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="" class="form-label my-3">Email</label>
+                    <div class="col mb-3 mt-2">
+                        <input type="type" name="email" class="form-control" value="@info.Email" />
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="" class="form-label my-3">Role</label>
+                    <div class="col mb-3 mt-2">
+                        <input type="type" name="anhdaidien" class="form-control" value="@info.TenLoai" readonly />
+                    </div>
+                </div>
+
+
+
+
+            </div>
+
+            <div class="col-6">
+
+
+                <div class="form-group">
+                    <label for="" class="form-label my-3">Số điện thoại</label>
+                    <div class="col mb-3 mt-2">
+                        <input type="type" name="sodienthoai" class="form-control" value="@info.SoDienThoai" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="" class="form-label my-3">Ngày sinh</label>
+                    <div class="col mb-3 mt-2">
+                        <input type="date" name="ngaysinh" class="form-control" value="@(info.NgaySinh?.ToString("yyyy-MM-dd"))" />
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="form-group">
+                    <label for="" class="form-label my-3">Khu vực hoạt động</label>
+                    <div class="col mb-3 mt-2">
+                        <input type="type" name="khuvuc" class="form-control" value="@info.TenKhuVuc" readonly />
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label for="" class="form-label my-3">Tên tài khoản</label>
+                    <div class="col mb-3 mt-2">
+                        <input class="form-control" type="text" value="@info.TenTaiKhoan" aria-label="Disabled input example" readonly />
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    @Html.ActionLink("Đổi Mật khẩu", "DoiMk", "Profile", new { id = info.MaNhanVien }, new { @class = "btn btn-success", @style = "border-radius: 1.5rem; width: 150px; margin-top: 15px;" })
+                    <button type="submit" name="id" value="@info.MaNhanVien" class="btn btn-success " style="border-radius: 1.5rem; width: 100px; margin-top: 15px;">Save</button>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+</form>
+
