@@ -20,7 +20,7 @@
                 <input type="text" class="form-control" value="@ViewBag.KeywordTenNV" name="TenNVString" />
             </div>
             <div class="col">
-                <label for="" class="form-label">Chức vụ</label>
+                <label for="" class="form-label">Loại tài khoản</label>
                 <input type="text" class="form-control" value="@ViewBag.KeywordCV" name="CVString" />
             </div>
         </div>
@@ -41,13 +41,10 @@
                     @Html.ActionLink("Tên Tài Khoản", "Index", new { sortOrder = ViewBag.NameSortParm, searchString = ViewBag.KeywordTK, TenNVString = ViewBag.KeywordTenNV, CVString = ViewBag.KeywordCV }, new { @class = "text-dark text-decoration-none" })
                 </th>
                 <th>
-                    @Html.DisplayName("Mật khẩu")
-                </th>
-                <th>
                     @Html.ActionLink("Họ tên", "Index", new { sortOrder = ViewBag.NameSortParm, searchString = ViewBag.KeywordTK, TenNVString = ViewBag.KeywordTenNV, CVString = ViewBag.KeywordCV }, new { @class = "text-dark text-decoration-none" })
                 </th>
                 <th>
-                    @Html.ActionLink("Chức vụ", "Index", new { sortOrder = ViewBag.NameSortParm, searchString = ViewBag.KeywordTK, TenNVString = ViewBag.KeywordTenNV, CVString = ViewBag.KeywordCV }, new { @class = "text-dark text-decoration-none" })
+                    @Html.ActionLink("Loại tài khoản", "Index", new { sortOrder = ViewBag.NameSortParm, searchString = ViewBag.KeywordTK, TenNVString = ViewBag.KeywordTenNV, CVString = ViewBag.KeywordCV }, new { @class = "text-dark text-decoration-none" })
                 </th>
                 <th>
                     @Html.DisplayName("Actions")
@@ -61,20 +58,14 @@
                         @Html.DisplayFor(model => item.TenTaiKhoan)
                     </td>
                     <td>
-                        @Html.DisplayFor(model => item.MatKhau)
+                        @Html.DisplayFor(model => item.TenNhanVien)
                     </td>
                     <td>
-                        
+                        @Html.DisplayFor(model => item.LoaiTaiKhoan)
                     </td>
                     <td>
-                        
-                    </td>
-                    <td>
-                        <a style="text-decoration: none; color:black; margin-right:10px;" href="@Url.Action("Reset", "TaiKhoan", new { id = item.MaNhanVien } )">
+                        <a style="text-decoration: none; color:black; margin-left: 15px;" href="@Url.Action("Reset", "TaiKhoan",new { id = item.MaNhanVien })">
                             <i class="fas fa-sync-alt"></i>
-                        </a>
-                        <a style="text-decoration: none; color: black;" href="@Url.Action("Delete", "TaiKhoan",new { id = item.MaNhanVien })">
-                            <i class="fa-solid fa-trash-can"></i>
                         </a>
                     </td>
                 </tr>

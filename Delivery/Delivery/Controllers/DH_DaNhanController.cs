@@ -13,12 +13,13 @@ namespace Delivery.Controllers
 {
     public class DH_DaNhanController : Controller
     {
-        private DeliveryEntities db = new DeliveryEntities();
+        private GiaoHangEntities db = new GiaoHangEntities();
 
         // GET: DH_DaNhan
         public ActionResult Index()
         {
-            var dH_DaNhan = db.getDonHang_DaNhan();
+            //ViewBag.donHang_DaNhan
+            var dH_DaNhan = db.DonHang_GetChuaNhan();
             return View(dH_DaNhan.ToList());
         }
 
@@ -29,12 +30,12 @@ namespace Delivery.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DonHang dH_DaNhan = db.DonHangs.Find(id);
-            if (dH_DaNhan == null)
+            DonHang_Find_detail_Result dH = db.DonHang_Find_detail(id).Single();
+            if (dH == null)
             {
                 return HttpNotFound();
             }
-            return View(dH_DaNhan);
+            return View(dH);
         }
 
         //// GET: DH_DaNhan/Create

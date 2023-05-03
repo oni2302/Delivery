@@ -1,21 +1,30 @@
-﻿@model Delivery.Models.NhanVien
+﻿@model IEnumerable<Delivery.Models.NhanVien_DanhSach_Result>
+
 
 @{
     ViewBag.Title = "Delete";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container" style="background-color: #F2F2F2; padding: 50px; margin: auto">
-    <div class="form-horizontal" style="background-color: white; padding: 30px; border-radius: 1rem; width: 50%;">
+<div class="container" style="background-color: #F2F2F2; padding: 50px;">
+    <div class="form-horizontal" style="background-color: white; padding: 30px; border-radius: 1rem; width: 40%; margin-left: 30%;">
         <h4 style="text-align:center;">Xác nhận xóa nhân viên?</h4>
         <hr />
         <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayName("Mã nhân viên")
+            </dt>
+
+            <dd>
+                @ViewBag.XoaNhanVien.MaNhanVien
+            </dd>
+
             <dt>
                 @Html.DisplayName("Họ tên")
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.TenNhanVien)
+                @ViewBag.XoaNhanVien.TenNhanVien
             </dd>
 
             <dt>
@@ -23,7 +32,7 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.NgaySinh)
+                @ViewBag.XoaNhanVien.NgaySinh
             </dd>
 
             <dt>
@@ -31,7 +40,7 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.Email)
+                @ViewBag.XoaNhanVien.Email
             </dd>
 
             <dt>
@@ -39,17 +48,16 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.SoDienThoai)
+                @ViewBag.XoaNhanVien.SoDienThoai
             </dd>
         </dl>
 
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
-
             <div class="form-actions no-color" style="display:flex; justify-content: center;">
                 <input type="submit" value="Xóa" class="btn btn-success" style="border-radius: 1.5rem;  width: 100px; margin-right:10px;" />
-                @Html.ActionLink("Hủy", "Index", "NhanVien", new { @class = "btn btn-outline-success", @style = "border-radius: 1.5rem;  width: 100px;" })
+                @Html.ActionLink("Hủy", "Index", "NhanViens", new { @class = "btn btn-outline-success", @style = "border-radius: 1.5rem;  width: 100px;" })
             </div>
         }
     </div>

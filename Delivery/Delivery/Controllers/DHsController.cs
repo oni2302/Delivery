@@ -8,19 +8,16 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Delivery.Models;
-
 namespace Delivery.Controllers
 {
     public class DHsController : Controller
     {
-        private DeliveryEntities db = new DeliveryEntities();
-
+        private GiaoHangEntities db = new GiaoHangEntities();
         // GET: DHs
         public ActionResult Index()
         {
-            var listdhcn = db.getDonHang_ChuaNhan().ToList();
+            var listdhcn = db.DonHang_GetChuaNhan().ToList();
             ViewBag.listdhcn = listdhcn;
-           
             return View();
         }
 
@@ -31,7 +28,7 @@ namespace Delivery.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DonHang dH = db.DonHangs.Find(id);
+            DonHang_Find_detail_Result dH = db.DonHang_Find_detail(id).Single();
             if (dH == null)
             {
                 return HttpNotFound();
@@ -68,7 +65,7 @@ namespace Delivery.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DonHang dH = db.DonHangs.Find(id);
+            DonHang_Find_detail_Result dH = db.DonHang_Find_detail(id).Single();
             if (dH == null)
             {
                 return HttpNotFound();
@@ -76,13 +73,14 @@ namespace Delivery.Controllers
             return View(dH);
         }
 
-        [HttpPost]
-        public ActionResult NhanDon(int id)
-        {
-            db.XacNhan_DonHang_ChuaNhan(id);
-            db.SaveChanges();
-            return RedirectToAction("index");
-        }
+        //[HttpPost]
+        //public ActionResult NhanDon(int id)
+        //{
+        //    TaiKhoan_DangNhap_Result login_Session = (TaiKhoan_DangNhap_Result)Session[CommonConstants.USER_SESSION];
+        //    db.DonHang_XacNhanDon(id, login_Session.MaNhanVien);
+        //    db.savechanges();
+        //    return redirecttoaction("index");
+        //}
 
         //// GET: DHs/Edit/5
         //public ActionResult Edit(int? id)

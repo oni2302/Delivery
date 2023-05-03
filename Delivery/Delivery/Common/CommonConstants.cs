@@ -9,11 +9,15 @@ namespace Delivery.Common
     {
         public static string CHUC_NANG = "FUNCTIONS";
         public static string NGUOI_DUNG = "USER_ID";
-        public static string TEN_NGUOI_DUNG = "USER_NAME";
-        public static string MENU = "MENU";
+        public static string TEN_NGUOI_DUNG = "USER_NAME"; 
+        //public static string
+
+
 
         //Store Procedure
         public static string GET_USER_INFO = "KiemTraTaiKhoan";
+
+
 
         //user-option-dropdown-menu
         public static string OPTION_1 = "Profile";

@@ -1,10 +1,9 @@
 ﻿@using Delivery.Common;
 @using Delivery.Models;
 @{
-    var session = (List<MenuOf_Result>)Session[CommonConstants.MENU];
-    var session_user = (TaiKhoan_DangNhap_Result)Session[CommonConstants.NGUOI_DUNG];
+    var session = (List<MenuOf_Result>)Session[CommonConstants.CHUC_NANG];
+    var session_user = Session[CommonConstants.TEN_NGUOI_DUNG];
     string controller = ViewContext.RouteData.Values["controller"].ToString();
-
 }
 <!DOCTYPE html>
 <html>
@@ -14,6 +13,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/bootstrap")
+    @Scripts.Render("~/Scripts/jquery-3.4.1.js")
     @Scripts.Render("~/bundles/modernizr")
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/fbda8849fb.js" crossorigin="anonymous"></script>
@@ -28,7 +28,7 @@
                 <div class="nav-content d-flex justify-content-end align-items-center">
                     <div class="user-option-wrap">
                         <div class="user-option-name">
-                            <span>@if (session_user != null) { Write(session_user.TenNhanVien); } else { Write("Chưa có tên"); }</span>
+                            <span>@if (session_user != null) { Write(session_user); } else { Write("Chưa có tên"); }</span>
                         </div>
                         <div class="user-option-img">
                             <img src="~/Images/logo.png" alt="Alternate Text" />
@@ -44,7 +44,7 @@
                             <li><a href="@Url.Action("Edit","NhanViens")">@CommonConstants.OPTION_1</a></li>
                             <li><a href="#">@CommonConstants.OPTION_2</a></li>
                             <li><a href="#">@CommonConstants.OPTION_3</a></li>
-                            <li class="cross-line"><a href="@Url.Action("Logout","Authentication")">@CommonConstants.OPTION_LOGOUT</a></li>
+                            <li class="cross-line"><a href="@Url.Action("Login","Account")">@CommonConstants.OPTION_LOGOUT</a></li>
                         </ul>
                     </div>
                 </div>
@@ -62,7 +62,6 @@
                         <div class="delivery"><p> delivery</p></div>
                     </div>
 
-
                 </div>
                 <div class="main-menu holder">
                     <div class="main-menu-holder">
@@ -77,15 +76,17 @@
                         foreach (var chucNang in session)
                         {
                             <li class="main-menu-item-wrap @if (chucNang.Controller == controller) { Write("active"); } ">
-                                <a class="main-menu-item  " href="@Url.Action($"{chucNang.RouteName}", $"{chucNang.Controller}")">
-                                        @Html.Raw(chucNang.BieuTuong)
+                                <a class="main-menu-item  " href="@Url.Action( $"{chucNang.Controller}")">
+                                    <svg width="22" height="22" viewBox="0 0 33 31" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        @Html.Raw(chucNang.BieuTuong);
+                                    </svg>
                                     <span>@chucNang.TenChucNang</span>
                                 </a>
                             </li>
 
                         }
                     }
-
                 </ul>
             </div>
         </div>
@@ -112,3 +113,5 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
+
+

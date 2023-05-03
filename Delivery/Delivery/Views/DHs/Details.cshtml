@@ -1,4 +1,4 @@
-﻿@model Delivery.Models.DonHang
+﻿@model Delivery.Models.DonHang_Find_detail_Result
 
 @{
     ViewBag.Title = "Details";
@@ -15,15 +15,15 @@
                 <div class="row mt-2">
                     <div class="col">
                         <p class="fw-bold">@Html.DisplayName("Mã đơn hàng")</p>
-                        <input class="form-control" type="text" value="@Html.DisplayFor(model => model.MaDH)" aria-label="Disabled input example" disabled readonly>
+                        <input class="form-control" type="text" value="@Html.DisplayFor(model => model.MaDonHang)" aria-label="Disabled input example" disabled readonly>
                     </div>
                     <div class="col">
-                        <p class="fw-bold">@Html.DisplayName("Mã vận đơn")</p>
-                        <input class="form-control" type="text" value="@Html.DisplayFor(model => model.MaVanDon)" aria-label="Disabled input example" disabled readonly>
+                        <p class="fw-bold">@Html.DisplayName("Trạng thái")</p>
+                        <input class="form-control" type="text" value=" @if (Html.DisplayFor(model=>model.TrangThai).ToString() == "1"){@Html.DisplayName("Chờ xử lý")}" aria-label="Disabled input example" disabled readonly>
                     </div>
                     <div class="col">
-                        <p class="fw-bold">@Html.DisplayName("Mã trạng thái")</p>
-                        <input class="form-control" type="text" value="@Html.DisplayFor(model => model.MaTrangThai)" aria-label="Disabled input example" disabled readonly>
+                        <p class="fw-bold">@Html.DisplayName("Ghi chú")</p>
+                        <input class="form-control" type="text" value="@Html.DisplayFor(model => model.GhiChu)" aria-label="Disabled input example" disabled readonly>
                     </div>
                 </div>
                 @* row 2 *@
@@ -33,15 +33,15 @@
                 <div class="row mb-5 mt-2">
                     <div class="col">
                         <p class="fw-bold">@Html.DisplayName("Họ tên")</p>
-                        <input class="form-control" type="text" value="@Html.DisplayFor(model => model.HoTenNG)" aria-label="Disabled input example" disabled readonly>
+                        <input class="form-control" type="text" value="@Html.DisplayFor(model => model.NguoiGui)" aria-label="Disabled input example" disabled readonly>
                     </div>
                     <div class="col">
                         <p class="fw-bold">@Html.DisplayName("Địa chỉ")</p>
-                        <input class="form-control" type="text" value="@Html.DisplayFor(model => model.DiaChiNG)" aria-label="Disabled input example" disabled readonly>
+                        <input class="form-control" type="text" value="@Html.DisplayFor(model => model.Tu)" aria-label="Disabled input example" disabled readonly>
                     </div>
                     <div class="col">
                         <p class="fw-bold">@Html.DisplayName("Số điện thoại")</p>
-                        <input class="form-control" type="text" value="@Html.DisplayFor(model => model.SdtNG)" aria-label="Disabled input example" disabled readonly>
+                        <input class="form-control" type="text" value="@Html.DisplayFor(model => model.SdtNguoiGui)" aria-label="Disabled input example" disabled readonly>
                     </div>
                 </div>
                 @* row 3 *@
@@ -51,15 +51,15 @@
                 <div class="row mt-2">
                     <div class="col">
                         <p class="fw-bold">@Html.DisplayName("Họ tên")</p>
-                        <input class="form-control" type="text" value="@Html.DisplayFor(model => model.HoTenNN)" aria-label="Disabled input example" disabled readonly>
+                        <input class="form-control" type="text" value="@Html.DisplayFor(model => model.NguoiNhan)" aria-label="Disabled input example" disabled readonly>
                     </div>
                     <div class="col">
                         <p class="fw-bold">@Html.DisplayName("Địa chỉ")</p>
-                        <input class="form-control" type="text" value="@Html.DisplayFor(model => model.DiaChiNN)" aria-label="Disabled input example" disabled readonly>
+                        <input class="form-control" type="text" value="@Html.DisplayFor(model => model.Den)" aria-label="Disabled input example" disabled readonly>
                     </div>
                     <div class="col">
                         <p class="fw-bold">@Html.DisplayName("Số điện thoại")</p>
-                        <input class="form-control" type="text" value="@Html.DisplayFor(model => model.SdtNN)" aria-label="Disabled input example" disabled readonly>
+                        <input class="form-control" type="text" value="@Html.DisplayFor(model => model.Sdt)" aria-label="Disabled input example" disabled readonly>
                     </div>
                 </div>
             </div>
