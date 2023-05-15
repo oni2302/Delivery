@@ -206,6 +206,9 @@
     <Compile Include="Models\TaiKhoan_DanhSach_Result.cs">
       <DependentUpon>GiaoHang.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TaiKhoan_TimKiem_Result.cs">
+      <DependentUpon>GiaoHang.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ThongKe_DaNhan_Result.cs">
       <DependentUpon>GiaoHang.tt</DependentUpon>
     </Compile>
@@ -313,6 +316,7 @@
     <Content Include="Views\DH_DaNhan\PhanPhoi.cshtml" />
     <Content Include="Views\TheoDoiDon\Details.cshtml" />
     <Content Include="Views\TheoDoiDon\Index.cshtml" />
+    <Content Include="Views\NhanViens\SearchTenNV.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

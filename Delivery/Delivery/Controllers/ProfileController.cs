@@ -35,26 +35,26 @@ namespace Delivery.Controllers
         }
 
 
-        [HttpPost]
-        public ActionResult ProfileView(HttpPostedFileBase anhdaidien, DateTime ngaysinh)
-        {
-            var id = int.Parse(Request.Form["id"]);
-            var name = Request.Form["tennhanvien"];
-            var email = Request.Form["email"];
-            string sdt = (string)Request.Form["sodienthoai"];
-            byte[] buffer = null;
-            if (anhdaidien != null)
-            {
-                MemoryStream memoryStream = new MemoryStream();
-                anhdaidien.InputStream.CopyTo(memoryStream);
-                buffer = memoryStream.ToArray();
-            }
+        //[HttpPost]
+        //public ActionResult ProfileView(HttpPostedFileBase anhdaidien, DateTime ngaysinh)
+        //{
+        //    var id = int.Parse(Request.Form["id"]);
+        //    var name = Request.Form["tennhanvien"];
+        //    var email = Request.Form["email"];
+        //    string sdt = (string)Request.Form["sodienthoai"];
+        //    byte[] buffer = null;
+        //    if (anhdaidien != null)
+        //    {
+        //        MemoryStream memoryStream = new MemoryStream();
+        //        anhdaidien.InputStream.CopyTo(memoryStream);
+        //        buffer = memoryStream.ToArray();
+        //    }
 
 
-            var result = database.Profile_Sua(id, name, ngaysinh, email, sdt);
+        //    var result = database.Profile_Sua(id, name, ngaysinh, email, sdt);
 
-            return Redirect("~/Profile/ProfileView/" + id);
-        }
+        //    return Redirect("~/Profile/ProfileView/" + id);
+        //}
 
         public ActionResult DoiMk()
         {

@@ -104,19 +104,6 @@ namespace Delivery.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DonHang_TimKiemTheoTenNG_Result>("DonHang_TimKiemTheoTenNG", tenNguoiGuiParameter);
         }
     
-        public virtual int DonHang_XacNhanDon(Nullable<int> maDonHang, Nullable<int> maNhanVien)
-        {
-            var maDonHangParameter = maDonHang.HasValue ?
-                new ObjectParameter("MaDonHang", maDonHang) :
-                new ObjectParameter("MaDonHang", typeof(int));
-    
-            var maNhanVienParameter = maNhanVien.HasValue ?
-                new ObjectParameter("MaNhanVien", maNhanVien) :
-                new ObjectParameter("MaNhanVien", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DonHang_XacNhanDon", maDonHangParameter, maNhanVienParameter);
-        }
-    
         public virtual ObjectResult<GetByYear_Result> GetByYear(Nullable<int> year)
         {
             var yearParameter = year.HasValue ?
@@ -133,15 +120,6 @@ namespace Delivery.Models
                 new ObjectParameter("MaNhanVien", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MenuOf_Result>("MenuOf", maNhanVienParameter);
-        }
-    
-        public virtual ObjectResult<NhanVien_ChiTiet_Result> NhanVien_ChiTiet(Nullable<int> maNhanVien)
-        {
-            var maNhanVienParameter = maNhanVien.HasValue ?
-                new ObjectParameter("MaNhanVien", maNhanVien) :
-                new ObjectParameter("MaNhanVien", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<NhanVien_ChiTiet_Result>("NhanVien_ChiTiet", maNhanVienParameter);
         }
     
         public virtual ObjectResult<NhanVien_ChuaTK_Result> NhanVien_ChuaTK()
@@ -162,31 +140,6 @@ namespace Delivery.Models
         public virtual ObjectResult<NhanVien_LoaiTK_Result> NhanVien_LoaiTK()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<NhanVien_LoaiTK_Result>("NhanVien_LoaiTK");
-        }
-    
-        public virtual ObjectResult<Nullable<int>> NhanVien_Sua(Nullable<int> maNhanVien, string tenNhanVien, Nullable<System.DateTime> ngaySinh, string email, string soDienThoai)
-        {
-            var maNhanVienParameter = maNhanVien.HasValue ?
-                new ObjectParameter("MaNhanVien", maNhanVien) :
-                new ObjectParameter("MaNhanVien", typeof(int));
-    
-            var tenNhanVienParameter = tenNhanVien != null ?
-                new ObjectParameter("TenNhanVien", tenNhanVien) :
-                new ObjectParameter("TenNhanVien", typeof(string));
-    
-            var ngaySinhParameter = ngaySinh.HasValue ?
-                new ObjectParameter("NgaySinh", ngaySinh) :
-                new ObjectParameter("NgaySinh", typeof(System.DateTime));
-    
-            var emailParameter = email != null ?
-                new ObjectParameter("Email", email) :
-                new ObjectParameter("Email", typeof(string));
-    
-            var soDienThoaiParameter = soDienThoai != null ?
-                new ObjectParameter("SoDienThoai", soDienThoai) :
-                new ObjectParameter("SoDienThoai", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("NhanVien_Sua", maNhanVienParameter, tenNhanVienParameter, ngaySinhParameter, emailParameter, soDienThoaiParameter);
         }
     
         public virtual ObjectResult<Nullable<int>> NhanVien_ThemNhanVien(string tenNhanVien, Nullable<System.DateTime> ngaySinh, string email, string sdt, Nullable<int> maKhuVuc)
@@ -214,23 +167,6 @@ namespace Delivery.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("NhanVien_ThemNhanVien", tenNhanVienParameter, ngaySinhParameter, emailParameter, sdtParameter, maKhuVucParameter);
         }
     
-        public virtual ObjectResult<NhanVien_TimKiem_Result> NhanVien_TimKiem(Nullable<int> maNhanVien, string hoTen, Nullable<int> maKhuVuc)
-        {
-            var maNhanVienParameter = maNhanVien.HasValue ?
-                new ObjectParameter("MaNhanVien", maNhanVien) :
-                new ObjectParameter("MaNhanVien", typeof(int));
-    
-            var hoTenParameter = hoTen != null ?
-                new ObjectParameter("HoTen", hoTen) :
-                new ObjectParameter("HoTen", typeof(string));
-    
-            var maKhuVucParameter = maKhuVuc.HasValue ?
-                new ObjectParameter("MaKhuVuc", maKhuVuc) :
-                new ObjectParameter("MaKhuVuc", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<NhanVien_TimKiem_Result>("NhanVien_TimKiem", maNhanVienParameter, hoTenParameter, maKhuVucParameter);
-        }
-    
         public virtual ObjectResult<Nullable<int>> NhanVien_Xoa(Nullable<int> maNhanVien)
         {
             var maNhanVienParameter = maNhanVien.HasValue ?
@@ -249,7 +185,7 @@ namespace Delivery.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Profile_Get_Result>("Profile_Get", idParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> Profile_Sua(Nullable<int> maNhanVien, string tenNhanVien, Nullable<System.DateTime> ngaySinh, string email, string soDienThoai)
+        public virtual ObjectResult<Nullable<int>> Profile_Sua(Nullable<int> maNhanVien, string tenNhanVien, Nullable<System.DateTime> ngaySinh, string email, string soDienThoai, byte[] imgData, string imgExt)
         {
             var maNhanVienParameter = maNhanVien.HasValue ?
                 new ObjectParameter("MaNhanVien", maNhanVien) :
@@ -271,7 +207,15 @@ namespace Delivery.Models
                 new ObjectParameter("SoDienThoai", soDienThoai) :
                 new ObjectParameter("SoDienThoai", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Profile_Sua", maNhanVienParameter, tenNhanVienParameter, ngaySinhParameter, emailParameter, soDienThoaiParameter);
+            var imgDataParameter = imgData != null ?
+                new ObjectParameter("ImgData", imgData) :
+                new ObjectParameter("ImgData", typeof(byte[]));
+    
+            var imgExtParameter = imgExt != null ?
+                new ObjectParameter("ImgExt", imgExt) :
+                new ObjectParameter("ImgExt", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Profile_Sua", maNhanVienParameter, tenNhanVienParameter, ngaySinhParameter, emailParameter, soDienThoaiParameter, imgDataParameter, imgExtParameter);
         }
     
         public virtual ObjectResult<sp_Shiper_Don_Hang_Can_Giao_Result> sp_Shiper_Don_Hang_Can_Giao(Nullable<int> id)
@@ -428,6 +372,112 @@ namespace Delivery.Models
         public virtual ObjectResult<Nullable<int>> ThongKe_LayThang()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("ThongKe_LayThang");
+        }
+    
+        public virtual ObjectResult<string> TaiKhoan_Add(string username, string password, Nullable<int> maNV, Nullable<int> lTK)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("Username", username) :
+                new ObjectParameter("Username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            var maNVParameter = maNV.HasValue ?
+                new ObjectParameter("MaNV", maNV) :
+                new ObjectParameter("MaNV", typeof(int));
+    
+            var lTKParameter = lTK.HasValue ?
+                new ObjectParameter("LTK", lTK) :
+                new ObjectParameter("LTK", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("TaiKhoan_Add", usernameParameter, passwordParameter, maNVParameter, lTKParameter);
+        }
+    
+        public virtual int DonHang_XacNhanDon(Nullable<int> maDonHang, Nullable<int> maNhanVien)
+        {
+            var maDonHangParameter = maDonHang.HasValue ?
+                new ObjectParameter("MaDonHang", maDonHang) :
+                new ObjectParameter("MaDonHang", typeof(int));
+    
+            var maNhanVienParameter = maNhanVien.HasValue ?
+                new ObjectParameter("MaNhanVien", maNhanVien) :
+                new ObjectParameter("MaNhanVien", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DonHang_XacNhanDon", maDonHangParameter, maNhanVienParameter);
+        }
+    
+        public virtual ObjectResult<NhanVien_TimKiem_Result> NhanVien_TimKiem(Nullable<int> manv, string tennv, string khuvuc)
+        {
+            var manvParameter = manv.HasValue ?
+                new ObjectParameter("manv", manv) :
+                new ObjectParameter("manv", typeof(int));
+    
+            var tennvParameter = tennv != null ?
+                new ObjectParameter("tennv", tennv) :
+                new ObjectParameter("tennv", typeof(string));
+    
+            var khuvucParameter = khuvuc != null ?
+                new ObjectParameter("khuvuc", khuvuc) :
+                new ObjectParameter("khuvuc", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<NhanVien_TimKiem_Result>("NhanVien_TimKiem", manvParameter, tennvParameter, khuvucParameter);
+        }
+    
+        public virtual ObjectResult<NhanVien_ChiTiet_Result> NhanVien_ChiTiet(Nullable<int> maNhanVien)
+        {
+            var maNhanVienParameter = maNhanVien.HasValue ?
+                new ObjectParameter("MaNhanVien", maNhanVien) :
+                new ObjectParameter("MaNhanVien", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<NhanVien_ChiTiet_Result>("NhanVien_ChiTiet", maNhanVienParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> NhanVien_Sua(Nullable<int> maNhanVien, string tenNhanVien, Nullable<System.DateTime> ngaySinh, string email, string soDienThoai, Nullable<int> maKhuVuc)
+        {
+            var maNhanVienParameter = maNhanVien.HasValue ?
+                new ObjectParameter("MaNhanVien", maNhanVien) :
+                new ObjectParameter("MaNhanVien", typeof(int));
+    
+            var tenNhanVienParameter = tenNhanVien != null ?
+                new ObjectParameter("TenNhanVien", tenNhanVien) :
+                new ObjectParameter("TenNhanVien", typeof(string));
+    
+            var ngaySinhParameter = ngaySinh.HasValue ?
+                new ObjectParameter("NgaySinh", ngaySinh) :
+                new ObjectParameter("NgaySinh", typeof(System.DateTime));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            var soDienThoaiParameter = soDienThoai != null ?
+                new ObjectParameter("SoDienThoai", soDienThoai) :
+                new ObjectParameter("SoDienThoai", typeof(string));
+    
+            var maKhuVucParameter = maKhuVuc.HasValue ?
+                new ObjectParameter("MaKhuVuc", maKhuVuc) :
+                new ObjectParameter("MaKhuVuc", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("NhanVien_Sua", maNhanVienParameter, tenNhanVienParameter, ngaySinhParameter, emailParameter, soDienThoaiParameter, maKhuVucParameter);
+        }
+    
+        public virtual ObjectResult<TaiKhoan_TimKiem_Result> TaiKhoan_TimKiem(string tentk, string hoten, string loaitk)
+        {
+            var tentkParameter = tentk != null ?
+                new ObjectParameter("tentk", tentk) :
+                new ObjectParameter("tentk", typeof(string));
+    
+            var hotenParameter = hoten != null ?
+                new ObjectParameter("hoten", hoten) :
+                new ObjectParameter("hoten", typeof(string));
+    
+            var loaitkParameter = loaitk != null ?
+                new ObjectParameter("loaitk", loaitk) :
+                new ObjectParameter("loaitk", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TaiKhoan_TimKiem_Result>("TaiKhoan_TimKiem", tentkParameter, hotenParameter, loaitkParameter);
         }
     }
 }

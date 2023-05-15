@@ -15,6 +15,9 @@ namespace Delivery.Models
     {
         public int MaNhanVien { get; set; }
         public string TenNhanVien { get; set; }
+        public Nullable<System.DateTime> NgaySinh { get; set; }
+        public string Email { get; set; }
+        public string SoDienThoai { get; set; }
         public string TenKhuVuc { get; set; }
     }
 }

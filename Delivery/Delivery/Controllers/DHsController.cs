@@ -52,6 +52,7 @@ namespace Delivery.Controllers
 
         // : Xử lý chi tiết nhận đơn hàng
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult NhanDon(int id)
         {
             if (ModelState.IsValid)
