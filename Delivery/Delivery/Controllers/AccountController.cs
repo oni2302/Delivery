@@ -36,6 +36,7 @@ namespace Delivery.Controllers
                 {
                     var layChucNang = db.MenuOf(check.MaNhanVien).ToList();
                     Session.Add(CommonConstants.TEN_NGUOI_DUNG, db.TaiKhoan_LayTen(check.MaNhanVien).SingleOrDefault());
+                    Session.Add(CommonConstants.Hinh_anh, db.Profile_Get(check.MaNhanVien).SingleOrDefault());
                     Session.Add(CommonConstants.NGUOI_DUNG, check);
                     Session.Add(CommonConstants.CHUC_NANG, layChucNang);
                     

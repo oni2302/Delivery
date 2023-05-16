@@ -4,6 +4,7 @@
     var session = (List<MenuOf_Result>)Session[CommonConstants.CHUC_NANG];
     var session_user = Session[CommonConstants.TEN_NGUOI_DUNG];
     string controller = ViewContext.RouteData.Values["controller"].ToString();
+    var Hinh_anh = Session[CommonConstants.Hinh_anh] as Profile_Get_Result;
 }
 <!DOCTYPE html>
 <html>
@@ -30,7 +31,14 @@
                             <span>@if (session_user != null) { Write(session_user); } else { Write("Chưa có tên"); }</span>
                         </div>
                         <div class="user-option-img">
-                            <img src="~/Images/logo.png" alt="Alternate Text" />
+                            @if (Hinh_anh != null)
+                            {
+                                <img style="border-radius:50%;" src="data:image/@Hinh_anh.ImageExtension;base64,@Convert.ToBase64String(Hinh_anh.ImageData)" alt="Alternate Text">
+                            }
+                            else
+                            {
+                                <img style="border-radius:50%;" src="~/Images/logo.png" alt="Alternate Text" />
+                            }
                         </div>
                         <div class="user-option-dropdown-btn">
                             <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 19 11" fill="none">

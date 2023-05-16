@@ -12,6 +12,7 @@ namespace Delivery.Common
         public static string TEN_NGUOI_DUNG = "USER_NAME";
         public static string USER_SESSION = "USER_SESSION";
         public static string MENU = "MENU";
+        public static string Hinh_anh = "Hinh_anh";
 
         //Store Procedure
         public static string GET_USER_INFO = "KiemTraTaiKhoan";

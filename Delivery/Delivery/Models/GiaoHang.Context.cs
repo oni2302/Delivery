@@ -176,48 +176,6 @@ namespace Delivery.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("NhanVien_Xoa", maNhanVienParameter);
         }
     
-        public virtual ObjectResult<Profile_Get_Result> Profile_Get(Nullable<int> id)
-        {
-            var idParameter = id.HasValue ?
-                new ObjectParameter("Id", id) :
-                new ObjectParameter("Id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Profile_Get_Result>("Profile_Get", idParameter);
-        }
-    
-        public virtual ObjectResult<Nullable<int>> Profile_Sua(Nullable<int> maNhanVien, string tenNhanVien, Nullable<System.DateTime> ngaySinh, string email, string soDienThoai, byte[] imgData, string imgExt)
-        {
-            var maNhanVienParameter = maNhanVien.HasValue ?
-                new ObjectParameter("MaNhanVien", maNhanVien) :
-                new ObjectParameter("MaNhanVien", typeof(int));
-    
-            var tenNhanVienParameter = tenNhanVien != null ?
-                new ObjectParameter("TenNhanVien", tenNhanVien) :
-                new ObjectParameter("TenNhanVien", typeof(string));
-    
-            var ngaySinhParameter = ngaySinh.HasValue ?
-                new ObjectParameter("NgaySinh", ngaySinh) :
-                new ObjectParameter("NgaySinh", typeof(System.DateTime));
-    
-            var emailParameter = email != null ?
-                new ObjectParameter("Email", email) :
-                new ObjectParameter("Email", typeof(string));
-    
-            var soDienThoaiParameter = soDienThoai != null ?
-                new ObjectParameter("SoDienThoai", soDienThoai) :
-                new ObjectParameter("SoDienThoai", typeof(string));
-    
-            var imgDataParameter = imgData != null ?
-                new ObjectParameter("ImgData", imgData) :
-                new ObjectParameter("ImgData", typeof(byte[]));
-    
-            var imgExtParameter = imgExt != null ?
-                new ObjectParameter("ImgExt", imgExt) :
-                new ObjectParameter("ImgExt", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Profile_Sua", maNhanVienParameter, tenNhanVienParameter, ngaySinhParameter, emailParameter, soDienThoaiParameter, imgDataParameter, imgExtParameter);
-        }
-    
         public virtual ObjectResult<sp_Shiper_Don_Hang_Can_Giao_Result> sp_Shiper_Don_Hang_Can_Giao(Nullable<int> id)
         {
             var idParameter = id.HasValue ?
@@ -478,6 +436,48 @@ namespace Delivery.Models
                 new ObjectParameter("MaKhuVuc", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("NhanVien_Sua", maNhanVienParameter, tenNhanVienParameter, ngaySinhParameter, emailParameter, soDienThoaiParameter, maKhuVucParameter);
+        }
+    
+        public virtual ObjectResult<Profile_Get_Result> Profile_Get(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Profile_Get_Result>("Profile_Get", idParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> Profile_Sua(Nullable<int> maNhanVien, string tenNhanVien, Nullable<System.DateTime> ngaySinh, string email, string soDienThoai, byte[] imgData, string imgExt)
+        {
+            var maNhanVienParameter = maNhanVien.HasValue ?
+                new ObjectParameter("MaNhanVien", maNhanVien) :
+                new ObjectParameter("MaNhanVien", typeof(int));
+    
+            var tenNhanVienParameter = tenNhanVien != null ?
+                new ObjectParameter("TenNhanVien", tenNhanVien) :
+                new ObjectParameter("TenNhanVien", typeof(string));
+    
+            var ngaySinhParameter = ngaySinh.HasValue ?
+                new ObjectParameter("NgaySinh", ngaySinh) :
+                new ObjectParameter("NgaySinh", typeof(System.DateTime));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            var soDienThoaiParameter = soDienThoai != null ?
+                new ObjectParameter("SoDienThoai", soDienThoai) :
+                new ObjectParameter("SoDienThoai", typeof(string));
+    
+            var imgDataParameter = imgData != null ?
+                new ObjectParameter("ImgData", imgData) :
+                new ObjectParameter("ImgData", typeof(byte[]));
+    
+            var imgExtParameter = imgExt != null ?
+                new ObjectParameter("ImgExt", imgExt) :
+                new ObjectParameter("ImgExt", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Profile_Sua", maNhanVienParameter, tenNhanVienParameter, ngaySinhParameter, emailParameter, soDienThoaiParameter, imgDataParameter, imgExtParameter);
         }
     }
 }

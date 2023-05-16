@@ -5,6 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+}
+
 
 @using (Html.BeginForm("DoiMk", "Profile", FormMethod.Post))
 {
@@ -27,32 +32,28 @@
                 <div class="form-group">
                     @Html.DisplayName("Mật khẩu mới")
                     <div class="col-md-12">
-                        <input id="MatKhau" name="MatKhau" type="password" class="form-control" value="" />
-
+                        <input id="MatKhau" name="MatKhau" type="password" class="form-control" value="" required/>
                     </div>
+
+                    @Html.ValidationMessage("MatKhau", "", new { @class = "text-danger" })
                 </div>
-
-
             </div>
 
-
             <div class="col-6" actions="">
-
                 <div class="form-group">
                     @Html.DisplayName("Mật khẩu")
                     <div class="col-md-12">
                         <input id="OldMatKhau" name="" type="password" class="form-control" value="@ViewBag.sua.MatKhau" readonly />
                     </div>
                 </div>
-
                 <div class="form-group">
                     @Html.DisplayName("Nhập lại mật khẩu mới")
                     <div class="col-md-12">
                         <input id="ReMatKhau" name="ReMatKhau" type="password" class="form-control" value="" />
-                        <input type="checkbox" class="me-2" onclick="myFunction()">Show Password
-                    </div>
-                </div>
 
+                    </div>
+                    <input type="checkbox" class="me-2" onclick="myFunction()">Show Password
+                </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-12 text-end mt-3">
                         <button type="submit" name="id" value="@ViewBag.sua.MaNhanVien" class="btn text-white " style="background: linear-gradient(90deg, #54BF5A 0.7%, #2D9147 71.82%); border-radius: 1.5rem; width: 100px; margin-top: 15px;">Save</button>
@@ -96,7 +97,7 @@
             const MatKhau = document.getElementById("MatKhau");
             const ReMatKhau = document.getElementById("ReMatKhau");
             if (MatKhau.value === ReMatKhau.value) {
-                alert("Đổi mật khẩu thành công!");
+
                 return true;
             } else {
                 alert("Mật khẩu xác nhận không khớp với mật khẩu mới!");

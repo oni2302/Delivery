@@ -23,6 +23,8 @@ namespace Delivery.Models
         public string TenTaiKhoan { get; set; }
         public string MatKhau { get; set; }
         public Nullable<int> LoaiTaiKhoan { get; set; }
+        public byte[] ImageData { get; set; }
+        public string ImageExtension { get; set; }
         public string TenLoai { get; set; }
         public string TenKhuVuc { get; set; }
     }
