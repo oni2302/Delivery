@@ -26,7 +26,6 @@ namespace Delivery.Controllers
             var ListProduct = database.Profile_Get(id).SingleOrDefault();
             if (ListProduct == null)
             {
-
                 return HttpNotFound();
             }
             ViewBag.sua = ListProduct;

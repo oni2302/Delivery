@@ -20,6 +20,7 @@ namespace Delivery.Models
         public string SoDienThoai { get; set; }
         public string TenTaiKhoan { get; set; }
         public string MatKhau { get; set; }
+        public string TenLoai { get; set; }
         public string TenKhuVuc { get; set; }
     }
 }

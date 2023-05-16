@@ -317,6 +317,7 @@
     <Content Include="Views\TheoDoiDon\Details.cshtml" />
     <Content Include="Views\TheoDoiDon\Index.cshtml" />
     <Content Include="Views\NhanViens\SearchTenNV.cshtml" />
+    <Content Include="Views\TaiKhoan\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

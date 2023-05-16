@@ -425,6 +425,23 @@ namespace Delivery.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<NhanVien_TimKiem_Result>("NhanVien_TimKiem", manvParameter, tennvParameter, khuvucParameter);
         }
     
+        public virtual ObjectResult<TaiKhoan_TimKiem_Result> TaiKhoan_TimKiem(string tentk, string hoten, string loaitk)
+        {
+            var tentkParameter = tentk != null ?
+                new ObjectParameter("tentk", tentk) :
+                new ObjectParameter("tentk", typeof(string));
+    
+            var hotenParameter = hoten != null ?
+                new ObjectParameter("hoten", hoten) :
+                new ObjectParameter("hoten", typeof(string));
+    
+            var loaitkParameter = loaitk != null ?
+                new ObjectParameter("loaitk", loaitk) :
+                new ObjectParameter("loaitk", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TaiKhoan_TimKiem_Result>("TaiKhoan_TimKiem", tentkParameter, hotenParameter, loaitkParameter);
+        }
+    
         public virtual ObjectResult<NhanVien_ChiTiet_Result> NhanVien_ChiTiet(Nullable<int> maNhanVien)
         {
             var maNhanVienParameter = maNhanVien.HasValue ?
@@ -461,23 +478,6 @@ namespace Delivery.Models
                 new ObjectParameter("MaKhuVuc", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("NhanVien_Sua", maNhanVienParameter, tenNhanVienParameter, ngaySinhParameter, emailParameter, soDienThoaiParameter, maKhuVucParameter);
-        }
-    
-        public virtual ObjectResult<TaiKhoan_TimKiem_Result> TaiKhoan_TimKiem(string tentk, string hoten, string loaitk)
-        {
-            var tentkParameter = tentk != null ?
-                new ObjectParameter("tentk", tentk) :
-                new ObjectParameter("tentk", typeof(string));
-    
-            var hotenParameter = hoten != null ?
-                new ObjectParameter("hoten", hoten) :
-                new ObjectParameter("hoten", typeof(string));
-    
-            var loaitkParameter = loaitk != null ?
-                new ObjectParameter("loaitk", loaitk) :
-                new ObjectParameter("loaitk", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TaiKhoan_TimKiem_Result>("TaiKhoan_TimKiem", tentkParameter, hotenParameter, loaitkParameter);
         }
     }
 }
