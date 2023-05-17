@@ -29,18 +29,20 @@ namespace Delivery.Controllers
             string username = taiKhoan.TenTaiKhoan;
             string password = taiKhoan.MatKhau;
             //LOGIN: PROCESSING...
-            var check = db.Account_DangNhap(username, password).SingleOrDefault();
             if (ModelState.IsValid && username != null && password != null)
             {
-                if (check != null)
+                var hashPass = db.Account_Password(username).FirstOrDefault();
+                if (PasswordOption.Validation(password, hashPass))
                 {
+                    var check = db.Account_Session(username).Single();
                     var layChucNang = db.MenuOf(check.MaNhanVien).ToList();
                     Session.Add(CommonConstants.TEN_NGUOI_DUNG, db.TaiKhoan_LayTen(check.MaNhanVien).SingleOrDefault());
                     Session.Add(CommonConstants.Hinh_anh, db.Profile_Get(check.MaNhanVien).SingleOrDefault());
                     Session.Add(CommonConstants.NGUOI_DUNG, check);
                     Session.Add(CommonConstants.CHUC_NANG, layChucNang);
-                    
+
                     return RedirectToAction("Index", "Home");
+
                 }
                 else
                 {

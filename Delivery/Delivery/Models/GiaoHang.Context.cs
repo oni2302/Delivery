@@ -28,19 +28,6 @@ namespace Delivery.Models
         }
     
     
-        public virtual ObjectResult<Account_DangNhap_Result> Account_DangNhap(string tenTaiKhoan, string matKhau)
-        {
-            var tenTaiKhoanParameter = tenTaiKhoan != null ?
-                new ObjectParameter("TenTaiKhoan", tenTaiKhoan) :
-                new ObjectParameter("TenTaiKhoan", typeof(string));
-    
-            var matKhauParameter = matKhau != null ?
-                new ObjectParameter("MatKhau", matKhau) :
-                new ObjectParameter("MatKhau", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Account_DangNhap_Result>("Account_DangNhap", tenTaiKhoanParameter, matKhauParameter);
-        }
-    
         public virtual ObjectResult<DonHang__Table_NhanDon_Result> DonHang__Table_NhanDon()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DonHang__Table_NhanDon_Result>("DonHang__Table_NhanDon");
@@ -478,6 +465,24 @@ namespace Delivery.Models
                 new ObjectParameter("ImgExt", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Profile_Sua", maNhanVienParameter, tenNhanVienParameter, ngaySinhParameter, emailParameter, soDienThoaiParameter, imgDataParameter, imgExtParameter);
+        }
+    
+        public virtual ObjectResult<string> Account_Password(string username)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("Account_Password", usernameParameter);
+        }
+    
+        public virtual ObjectResult<Account_Session_Result> Account_Session(string tenTaiKhoan)
+        {
+            var tenTaiKhoanParameter = tenTaiKhoan != null ?
+                new ObjectParameter("TenTaiKhoan", tenTaiKhoan) :
+                new ObjectParameter("TenTaiKhoan", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Account_Session_Result>("Account_Session", tenTaiKhoanParameter);
         }
     }
 }

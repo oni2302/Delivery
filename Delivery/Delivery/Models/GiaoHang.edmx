@@ -5,9 +5,11 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="GiaoHangModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <Function Name="Account_DangNhap" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="Account_Password" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Account_Session" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="TenTaiKhoan" Type="varchar" Mode="In" />
-          <Parameter Name="MatKhau" Type="varchar" Mode="In" />
         </Function>
         <Function Name="DonHang__Table_NhanDon" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="DonHang_Find_detail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -142,10 +144,6 @@
     <edmx:ConceptualModels>
       <Schema Namespace="GiaoHangModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="GiaoHangEntities" annotation:LazyLoadingEnabled="true" >
-          <FunctionImport Name="Account_DangNhap" ReturnType="Collection(GiaoHangModel.Account_DangNhap_Result)">
-            <Parameter Name="TenTaiKhoan" Mode="In" Type="String" />
-            <Parameter Name="MatKhau" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="DonHang__Table_NhanDon" ReturnType="Collection(GiaoHangModel.DonHang__Table_NhanDon_Result)" />
           <FunctionImport Name="DonHang_Find_detail" ReturnType="Collection(GiaoHangModel.DonHang_Find_detail_Result)">
           <Parameter Name="MaDonHang" Mode="In" Type="Int32" />
@@ -265,7 +263,7 @@
             <Parameter Name="MaKhuVuc" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Profile_Get" ReturnType="Collection(GiaoHangModel.Profile_Get_Result)">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
+          <Parameter Name="Id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Profile_Sua" ReturnType="Collection(Int32)">
             <Parameter Name="MaNhanVien" Mode="In" Type="Int32" />
@@ -275,6 +273,12 @@
             <Parameter Name="SoDienThoai" Mode="In" Type="String" />
             <Parameter Name="ImgData" Mode="In" Type="Binary" />
             <Parameter Name="ImgExt" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Account_Password" ReturnType="Collection(String)">
+          <Parameter Name="username" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Account_Session" ReturnType="Collection(GiaoHangModel.Account_Session_Result)">
+            <Parameter Name="TenTaiKhoan" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Account_DangNhap_Result">
@@ -548,28 +552,26 @@
           <Property Type="String" Name="TenLoai" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="TenKhuVuc" Nullable="true" MaxLength="100" />
         </ComplexType>
+        <ComplexType Name="Account_Session_Result">
+          <Property Type="Int32" Name="MaNhanVien" Nullable="false" />
+          <Property Type="String" Name="TenNhanVien" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="NgaySinh" Nullable="true" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="SoDienThoai" Nullable="true" MaxLength="11" />
+          <Property Type="Boolean" Name="TrangThai" Nullable="true" />
+          <Property Type="Int32" Name="MaKhuVuc" Nullable="true" />
+          <Property Type="String" Name="TenTaiKhoan" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="MatKhau" Nullable="true" MaxLength="4000" />
+          <Property Type="Int32" Name="LoaiTaiKhoan" Nullable="true" />
+          <Property Type="Binary" Name="ImageData" Nullable="true" />
+          <Property Type="String" Name="ImageExtension" Nullable="true" MaxLength="10" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="GiaoHangModelStoreContainer" CdmEntityContainer="GiaoHangEntities" >
-          <FunctionImportMapping FunctionImportName="Account_DangNhap" FunctionName="GiaoHangModel.Store.Account_DangNhap">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="GiaoHangModel.Account_DangNhap_Result">
-                <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
-                <ScalarProperty Name="TenNhanVien" ColumnName="TenNhanVien" />
-                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="SoDienThoai" ColumnName="SoDienThoai" />
-                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-                <ScalarProperty Name="MaKhuVuc" ColumnName="MaKhuVuc" />
-                <ScalarProperty Name="TenTaiKhoan" ColumnName="TenTaiKhoan" />
-                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
-                <ScalarProperty Name="LoaiTaiKhoan" ColumnName="LoaiTaiKhoan" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="DonHang__Table_NhanDon" FunctionName="GiaoHangModel.Store.DonHang__Table_NhanDon">
             <ResultMapping>
               <ComplexTypeMapping TypeName="GiaoHangModel.DonHang__Table_NhanDon_Result">
@@ -930,6 +932,25 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Profile_Sua" FunctionName="GiaoHangModel.Store.Profile_Sua" />
+          <FunctionImportMapping FunctionImportName="Account_Password" FunctionName="GiaoHangModel.Store.Account_Password" />
+          <FunctionImportMapping FunctionImportName="Account_Session" FunctionName="GiaoHangModel.Store.Account_Session">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GiaoHangModel.Account_Session_Result">
+                <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
+                <ScalarProperty Name="TenNhanVien" ColumnName="TenNhanVien" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="SoDienThoai" ColumnName="SoDienThoai" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="MaKhuVuc" ColumnName="MaKhuVuc" />
+                <ScalarProperty Name="TenTaiKhoan" ColumnName="TenTaiKhoan" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+                <ScalarProperty Name="LoaiTaiKhoan" ColumnName="LoaiTaiKhoan" />
+                <ScalarProperty Name="ImageData" ColumnName="ImageData" />
+                <ScalarProperty Name="ImageExtension" ColumnName="ImageExtension" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -24,6 +24,7 @@ namespace Delivery
                       "~/Scripts/bootstrap.js"));
             bundles.Add(new Bundle("~/Content/bootstrap").Include(
                     "~/Content/bootstrap.css"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/site.css",
                       "~/Content/App/*.css"));

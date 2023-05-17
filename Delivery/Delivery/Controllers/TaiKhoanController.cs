@@ -50,7 +50,7 @@ namespace Delivery.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "MaNhanVien,LoaiTaiKhoan,TenTaiKhoan,MatKhau")] NhanVien_ChuaTK_Result taiKhoan )
         {
-                var result = db.TaiKhoan_Add(taiKhoan.TenTaiKhoan, taiKhoan.MatKhau, taiKhoan.MaNhanVien, taiKhoan.LoaiTaiKhoan).SingleOrDefault();
+                var result = db.TaiKhoan_Add(taiKhoan.TenTaiKhoan, PasswordOption.Encrypt(taiKhoan.MatKhau), taiKhoan.MaNhanVien, taiKhoan.LoaiTaiKhoan).SingleOrDefault();
                 if (result != "Thêm thành công")
                 {
                     ModelState.AddModelError("CreateFailed", result);
