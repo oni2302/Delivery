@@ -12,7 +12,6 @@ namespace Delivery
             string salt = BCrypt.Net.BCrypt.GenerateSalt();
             string hash = BCrypt.Net.BCrypt.HashPassword(origin, salt);
             
-
             return hash;
         }
 
@@ -21,5 +20,7 @@ namespace Delivery
             bool result = BCrypt.Net.BCrypt.Verify(password, hashPassword);
             return result;
         }
+
+        
     }
 }

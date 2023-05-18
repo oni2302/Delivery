@@ -198,6 +198,9 @@
     <Compile Include="Models\NhanVien_TimKiem_Result.cs">
       <DependentUpon>GiaoHang.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\NhanVien_Xoa_ChiTiet_Result.cs">
+      <DependentUpon>GiaoHang.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Profile_Get_Result.cs">
       <DependentUpon>GiaoHang.tt</DependentUpon>
     </Compile>

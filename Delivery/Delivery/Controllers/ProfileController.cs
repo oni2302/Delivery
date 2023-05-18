@@ -25,7 +25,7 @@ namespace Delivery.Controllers
         public ActionResult ProfileView()
         {
 
-            var nguoidung = Session[CommonConstants.NGUOI_DUNG] as Account_DangNhap_Result;
+            var nguoidung = Session[CommonConstants.NGUOI_DUNG] as Account_Session_Result;
 
             int id = nguoidung.MaNhanVien;
             var ListProduct = database.Profile_Get(id).SingleOrDefault();
@@ -129,14 +129,14 @@ namespace Delivery.Controllers
             }
 
             // Nếu có lỗi, gán giá trị lại vào ViewBag.sua và hiển thị lại View
-            var nguoidung = Session[CommonConstants.NGUOI_DUNG] as Account_DangNhap_Result;
+            var nguoidung = Session[CommonConstants.NGUOI_DUNG] as Account_Session_Result;
             ViewBag.sua = database.Profile_Get(nguoidung.MaNhanVien).SingleOrDefault();
             return View();
         }
 
         public ActionResult DoiMk()
         {
-            var nguoidung = Session[CommonConstants.NGUOI_DUNG] as Account_DangNhap_Result;
+            var nguoidung = Session[CommonConstants.NGUOI_DUNG] as Account_Session_Result;
             int id = nguoidung.MaNhanVien;
             var ListProduct = database.Profile_Get(id).SingleOrDefault();
             if (ListProduct == null)
@@ -151,35 +151,42 @@ namespace Delivery.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DoiMk(int id, string MatKhau)
+        public ActionResult DoiMk(int id, string MatKhau,string OldMatKhau)
         {
-
-            if (string.IsNullOrEmpty(MatKhau))
+            var hashPass = database.Profile_Password(id).FirstOrDefault();
+            if (PasswordOption.Validation(OldMatKhau, hashPass))
             {
-                ModelState.AddModelError("MatKhau", "Vui lòng nhập mật khẩu mới.");
+                if (string.IsNullOrEmpty(MatKhau))
+                {
+                    ModelState.AddModelError("MatKhau", "Vui lòng nhập mật khẩu mới.");
+                }
+                else
+                {
+                    // Kiểm tra mật khẩu có đủ điều kiện
+                    string pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
+                    Regex regex = new Regex(pattern);
+                    if (!regex.IsMatch(MatKhau))
+                    {
+                        ModelState.AddModelError("MatKhau", "Mật khẩu phải chứa ít nhất một chữ hoa, một chữ thường, một ký tự đặc biệt và một số. Độ dài tối thiểu là 8 ký tự.");
+                    }
+                }
+
+                if (ModelState.IsValid)
+                {
+                    var result = database.TaiKhoan_DoiMK(id,PasswordOption.Encrypt(MatKhau)).Single();
+                    if (result != null)
+                    {
+                        TempData["SuccessMessage"] = "Đổi mật khẩu thành công";
+                    }
+                    return Redirect("~/Profile/ProfileView/" + id);
+                }
             }
             else
             {
-                // Kiểm tra mật khẩu có đủ điều kiện
-                string pattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
-                Regex regex = new Regex(pattern);
-                if (!regex.IsMatch(MatKhau))
-                {
-                    ModelState.AddModelError("MatKhau", "Mật khẩu phải chứa ít nhất một chữ hoa, một chữ thường, một ký tự đặc biệt và một số. Độ dài tối thiểu là 8 ký tự.");
-                }
+                ModelState.AddModelError("OldMatKhau", "Vui lòng kiểm tra lại mật khẩu.");
             }
 
-            if (ModelState.IsValid)
-            {
-                var result = database.TaiKhoan_DoiMK(id, MatKhau).Single();
-                if (result != null)
-                {
-                    TempData["SuccessMessage"] = "Đổi mật khẩu thành công";
-                }
-                return Redirect("~/Profile/ProfileView/" + id);
-            }
-
-            var nguoidung = Session[CommonConstants.NGUOI_DUNG] as Account_DangNhap_Result;
+            var nguoidung = Session[CommonConstants.NGUOI_DUNG] as Account_Session_Result;
             ViewBag.sua = database.Profile_Get(nguoidung.MaNhanVien).SingleOrDefault();
             return View();
         }

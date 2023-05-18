@@ -14,7 +14,7 @@ namespace Delivery.Models
 
 using System;
     
-public partial class NhanVien_DanhSach_Result
+public partial class NhanVien_Xoa_ChiTiet_Result
 {
 
     public int MaNhanVien { get; set; }

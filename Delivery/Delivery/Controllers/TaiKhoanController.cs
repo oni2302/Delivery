@@ -96,20 +96,20 @@ namespace Delivery.Controllers
         }
 
         //POST: NhanViens/Details/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Details(DateTime ngaysinh)
-        {
-            int id = int.Parse(Request.Form["id"]);
-            var hoten = Request.Form["hoten"];
-            var email = Request.Form["email"];
-            string sdt = (string)Request.Form["sdt"];
-            int khuvuc = int.Parse(Request.Form["khuvuc"]);
-            //ViewBag.MaKhuVuc = new SelectList(db.NhanVien_KhuVuc(), "MaKhuVuc", "TenKhuVuc");
-            db.NhanVien_Sua(id, hoten, ngaysinh, email, sdt, khuvuc).SingleOrDefault();
-            db.SaveChanges();
-            return RedirectToAction("/Details/" + id);
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Details(DateTime ngaysinh, int MaKhuVuc)
+        //{
+        //    int id = int.Parse(Request.Form["id"]);
+        //    var hoten = Request.Form["hoten"];
+        //    var email = Request.Form["email"];
+        //    string sdt = (string)Request.Form["sdt"];
+        //    //int khuvuc = int.Parse(Request.Form["khuvuc"]);
+        //    //ViewBag.MaKhuVuc = new SelectList(db.NhanVien_KhuVuc(), "MaKhuVuc", "TenKhuVuc");
+        //    db.NhanVien_Sua(id, hoten, ngaysinh, email, sdt, MaKhuVuc);
+        //    db.SaveChanges();
+        //    return RedirectToAction("/Details/" + id);
+        //}
 
         protected override void Dispose(bool disposing)
         {

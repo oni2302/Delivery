@@ -137,6 +137,12 @@
     <FunctionImport Name="Account_Session" ReturnType="Collection(GiaoHangModel.Account_Session_Result)">
       <Parameter Name="TenTaiKhoan" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="Profile_Password" ReturnType="Collection(String)">
+      <Parameter Name="manv" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="NhanVien_Xoa_ChiTiet" ReturnType="Collection(GiaoHangModel.NhanVien_Xoa_ChiTiet_Result)">
+      <Parameter Name="MaNhanVien" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="Account_DangNhap_Result">
     <Property Type="Int32" Name="MaNhanVien" Nullable="false" />
@@ -422,5 +428,13 @@
     <Property Type="Int32" Name="LoaiTaiKhoan" Nullable="true" />
     <Property Type="Binary" Name="ImageData" Nullable="true" />
     <Property Type="String" Name="ImageExtension" Nullable="true" MaxLength="10" />
+  </ComplexType>
+  <ComplexType Name="NhanVien_Xoa_ChiTiet_Result">
+    <Property Type="Int32" Name="MaNhanVien" Nullable="false" />
+    <Property Type="String" Name="TenNhanVien" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="NgaySinh" Nullable="true" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="SoDienThoai" Nullable="true" MaxLength="11" />
+    <Property Type="String" Name="TenKhuVuc" Nullable="true" MaxLength="100" />
   </ComplexType>
 </Schema>

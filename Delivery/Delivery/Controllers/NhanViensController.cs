@@ -71,7 +71,7 @@ namespace Delivery.Controllers
             }
             else
             {
-                var nhanVien = db.NhanVien_ChiTiet(id).Single();
+                var nhanVien = db.NhanVien_Xoa_ChiTiet(id).Single();
                 ViewBag.XoaNhanVien = nhanVien;
                 return View();
             }
