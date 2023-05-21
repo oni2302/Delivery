@@ -14,7 +14,7 @@ namespace Delivery.Models
 
 using System;
     
-public partial class NhanVien_DanhSach_Result
+public partial class Account_Session_Result
 {
 
     public int MaNhanVien { get; set; }
@@ -27,7 +27,19 @@ public partial class NhanVien_DanhSach_Result
 
     public string SoDienThoai { get; set; }
 
-    public string TenKhuVuc { get; set; }
+    public Nullable<bool> TrangThai { get; set; }
+
+    public Nullable<int> MaKhuVuc { get; set; }
+
+    public string TenTaiKhoan { get; set; }
+
+    public string MatKhau { get; set; }
+
+    public Nullable<int> LoaiTaiKhoan { get; set; }
+
+    public byte[] ImageData { get; set; }
+
+    public string ImageExtension { get; set; }
 
 }
 

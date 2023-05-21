@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Delivery.Models.NhanVien_DanhSach_Result>
+﻿@model IEnumerable<Delivery.Models.NhanVien_Xoa_ChiTiet_Result >
 
 
 @{
@@ -32,7 +32,7 @@
             </dt>
 
             <dd>
-                @ViewBag.XoaNhanVien.NgaySinh
+                @ViewBag.XoaNhanVien.NgaySinh.ToString("yyyy-MM-dd")
             </dd>
 
             <dt>
@@ -55,10 +55,10 @@
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
-            <div class="form-actions no-color" style="display:flex; justify-content: center;">
-                <input type="submit" value="Xóa" class="btn btn-success" style="border-radius: 1.5rem;  width: 100px; margin-right:10px;" />
+             <div class="form-actions no-color" style="display:flex; justify-content: center;">
                 @Html.ActionLink("Hủy", "Index", "NhanViens", new { @class = "btn btn-outline-success", @style = "border-radius: 1.5rem;  width: 100px;" })
-            </div>
+                <input type="submit" value="Xóa" class="btn btn-success" style="border-radius: 1.5rem;  width: 100px; margin-left:10px;" />
+             </div>
         }
     </div>
 </div>

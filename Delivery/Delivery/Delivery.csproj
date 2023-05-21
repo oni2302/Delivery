@@ -48,6 +48,9 @@
     <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
       <HintPath>packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="BCrypt.Net, Version=0.1.4141.31969, Culture=neutral, PublicKeyToken=f3bc8f8c31beeb49, processorArchitecture=MSIL">
+      <HintPath>packages\BCrypt.Net.0.1.0\lib\net35\BCrypt.Net.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -126,12 +129,16 @@
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\TaiKhoanController.cs" />
     <Compile Include="Controllers\TheoDoiDonController.cs" />
+    <Compile Include="Entities\AccountLogin.cs" />
     <Compile Include="Entities\CreateNhanVien.cs" />
     <Compile Include="Entities\PasswordOption.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Account_DangNhap_Result.cs">
+      <DependentUpon>GiaoHang.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Account_Session_Result.cs">
       <DependentUpon>GiaoHang.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DonHang_Find_detail_Result.cs">
@@ -191,6 +198,9 @@
     <Compile Include="Models\NhanVien_TimKiem_Result.cs">
       <DependentUpon>GiaoHang.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\NhanVien_Xoa_ChiTiet_Result.cs">
+      <DependentUpon>GiaoHang.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Profile_Get_Result.cs">
       <DependentUpon>GiaoHang.tt</DependentUpon>
     </Compile>
@@ -204,6 +214,9 @@
       <DependentUpon>GiaoHang.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TaiKhoan_DanhSach_Result.cs">
+      <DependentUpon>GiaoHang.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TaiKhoan_TimKiem_Result.cs">
       <DependentUpon>GiaoHang.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ThongKe_DaNhan_Result.cs">
@@ -313,6 +326,8 @@
     <Content Include="Views\DH_DaNhan\PhanPhoi.cshtml" />
     <Content Include="Views\TheoDoiDon\Details.cshtml" />
     <Content Include="Views\TheoDoiDon\Index.cshtml" />
+    <Content Include="Views\NhanViens\SearchTenNV.cshtml" />
+    <Content Include="Views\TaiKhoan\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,8 +1,9 @@
-﻿@model IEnumerable<Delivery.Models.NhanVien_DanhSach_Result>
+﻿@model IEnumerable<Delivery.Models.NhanVien_TimKiem_Result>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 
 @using (Html.BeginForm())
@@ -15,19 +16,19 @@
                 <div class="col mb-3">
                     @Html.DisplayName("Mã nhân viên")
                     <div class="col mt-2">
-                        <input type="text" class="form-control" value="" name="" placeholder="" />
+                        <input type="number" class="form-control" value="" name="MaNV" placeholder="" />
                     </div>
                 </div>
                 <div class="col mb-3">
                     @Html.DisplayName("Họ tên")
                     <div class="col mt-2">
-                        <input type="Text" class="form-control" value="" name="" placeholder="">
+                        <input type="Text" class="form-control" value="" name="tenNV" placeholder="">
                     </div>
                 </div>
                 <div class="col mb-3">
                     @Html.DisplayName("Khu vực hoạt động")
                     <div class="col mt-2">
-                        <input type="Text" class="form-control" value="" name="" placeholder="">
+                        <input type="Text" class="form-control" value="" name="khuvuc" placeholder="">
                     </div>
                 </div>
             </div>
@@ -40,6 +41,7 @@
                 </div>
             </div>
         </div>
+
         <div class="form-horizontal" style="background-color: white; padding: 30px; border-radius: 1rem; margin-top: 20px;">
             <table class="table table-hover">
                 <tr>

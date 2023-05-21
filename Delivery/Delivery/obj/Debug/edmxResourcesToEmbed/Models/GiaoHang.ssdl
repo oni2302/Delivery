@@ -1,8 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="GiaoHangModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <Function Name="Account_DangNhap" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+  <Function Name="Account_Password" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="username" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Account_Session" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="TenTaiKhoan" Type="varchar" Mode="In" />
-    <Parameter Name="MatKhau" Type="varchar" Mode="In" />
   </Function>
   <Function Name="DonHang__Table_NhanDon" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="DonHang_Find_detail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -46,6 +48,7 @@
     <Parameter Name="NgaySinh" Type="date" Mode="In" />
     <Parameter Name="Email" Type="varchar" Mode="In" />
     <Parameter Name="SoDienThoai" Type="char" Mode="In" />
+    <Parameter Name="MaKhuVuc" Type="int" Mode="In" />
   </Function>
   <Function Name="NhanVien_ThemNhanVien" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="TenNhanVien" Type="nvarchar" Mode="In" />
@@ -55,15 +58,21 @@
     <Parameter Name="MaKhuVuc" Type="int" Mode="In" />
   </Function>
   <Function Name="NhanVien_TimKiem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="MaNhanVien" Type="int" Mode="In" />
-    <Parameter Name="HoTen" Type="nvarchar" Mode="In" />
-    <Parameter Name="MaKhuVuc" Type="int" Mode="In" />
+    <Parameter Name="manv" Type="int" Mode="In" />
+    <Parameter Name="tennv" Type="nvarchar" Mode="In" />
+    <Parameter Name="khuvuc" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="NhanVien_Xoa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="MaNhanVien" Type="int" Mode="In" />
   </Function>
+  <Function Name="NhanVien_Xoa_ChiTiet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MaNhanVien" Type="int" Mode="In" />
+  </Function>
   <Function Name="Profile_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Profile_Password" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="manv" Type="int" Mode="In" />
   </Function>
   <Function Name="Profile_Sua" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="MaNhanVien" Type="int" Mode="In" />
@@ -71,6 +80,8 @@
     <Parameter Name="NgaySinh" Type="date" Mode="In" />
     <Parameter Name="Email" Type="varchar" Mode="In" />
     <Parameter Name="SoDienThoai" Type="char" Mode="In" />
+    <Parameter Name="ImgData" Type="varbinary(max)" Mode="In" />
+    <Parameter Name="ImgExt" Type="varchar" Mode="In" />
   </Function>
   <Function Name="sp_Shiper_Don_Hang_Can_Giao" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id" Type="int" Mode="In" />
@@ -87,8 +98,11 @@
   <Function Name="sp_Xac_Nhan_Dang_Giao_Hang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="idDonHang" Type="int" Mode="In" />
   </Function>
-  <Function Name="TaiKhoan_ChiTiet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="manv" Type="int" Mode="In" />
+  <Function Name="TaiKhoan_Add" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Username" Type="varchar" Mode="In" />
+    <Parameter Name="Password" Type="varchar" Mode="In" />
+    <Parameter Name="MaNV" Type="int" Mode="In" />
+    <Parameter Name="LTK" Type="int" Mode="In" />
   </Function>
   <Function Name="TaiKhoan_DangNhap_Shiper" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="TenTaiKhoan" Type="varchar" Mode="In" />
@@ -108,11 +122,10 @@
   <Function Name="TaiKhoan_ResetPass" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="manv" Type="int" Mode="In" />
   </Function>
-  <Function Name="TaiKhoan_Them" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="Username" Type="varchar" Mode="In" />
-    <Parameter Name="Password" Type="varchar" Mode="In" />
-    <Parameter Name="MaNV" Type="int" Mode="In" />
-    <Parameter Name="LTK" Type="int" Mode="In" />
+  <Function Name="TaiKhoan_TimKiem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="tentk" Type="nvarchar" Mode="In" />
+    <Parameter Name="hoten" Type="nvarchar" Mode="In" />
+    <Parameter Name="loaitk" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="ThongKe_DaNhan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="year" Type="int" Mode="In" />

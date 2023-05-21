@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
+using System.Web.Helpers;
 
 namespace Delivery
 {
@@ -8,12 +9,18 @@ namespace Delivery
     {
         public static string Encrypt(string origin)
         {
-            return origin;
+            string salt = BCrypt.Net.BCrypt.GenerateSalt();
+            string hash = BCrypt.Net.BCrypt.HashPassword(origin, salt);
+            
+            return hash;
         }
 
-        public static string Decrypt(string encrypt)
+        public static bool Validation(string password, string hashPassword)
         {
-            return encrypt;
+            bool result = BCrypt.Net.BCrypt.Verify(password, hashPassword);
+            return result;
         }
+
+        
     }
 }

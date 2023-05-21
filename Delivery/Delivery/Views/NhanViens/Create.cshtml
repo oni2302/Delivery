@@ -33,18 +33,18 @@
                 </div>
                 <div class="col-4">
                     @Html.DisplayName("Khu vực hoạt động")
-                    @* <input type="text" class="form-control" name="MaKhuVuc" required placeholder="" />*@
-
                     @Html.DropDownList("MaKhuVuc", null, new { @class = "form-select" })
                 </div>
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 @Html.ActionLink("Hủy", "Index", "NhanViens", new { @class = "btn btn-outline-success", @style = "border-radius: 1.5rem;  width: 100px;" })
-                <input type="submit" value="Thêm" class="btn btn-success" style="border-radius: 1.5rem; width: 100px;" />
+                <input type="submit" value="Thêm"  class="btn btn-success" style="border-radius: 1.5rem; width: 100px;" />
             </div>
         </div>
     </div>
 }
+
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

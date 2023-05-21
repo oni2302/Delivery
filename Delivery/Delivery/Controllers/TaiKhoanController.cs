@@ -16,9 +16,25 @@ namespace Delivery.Controllers
         private GiaoHangEntities db = new GiaoHangEntities();
 
         // GET: TaiKhoan
-        public ActionResult Index()
+        public ActionResult Index(string tenTK, string hoten, string loaiTK)
         {
-            return View(db.TaiKhoan_DanhSach().ToList());
+            if (!String.IsNullOrEmpty(tenTK))
+            {
+                var listTKSearch = db.TaiKhoan_TimKiem(tenTK,null, null);
+                return View(listTKSearch.ToList());
+            }
+            else if (!String.IsNullOrEmpty(hoten))
+            {
+                var listTKSearch = db.TaiKhoan_TimKiem(null, hoten, null);
+                return View(listTKSearch.ToList());
+            }
+            else if (!String.IsNullOrEmpty(loaiTK))
+            {
+                var listTKSearch = db.TaiKhoan_TimKiem(null, null, loaiTK);
+                return View(listTKSearch.ToList());
+            }
+            var ListTK = db.TaiKhoan_TimKiem(null, null, null);
+            return View(ListTK.ToList());
         }
 
         // GET: TaiKhoan/Create
@@ -34,8 +50,8 @@ namespace Delivery.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "MaNhanVien,LoaiTaiKhoan,TenTaiKhoan,MatKhau")] NhanVien_ChuaTK_Result taiKhoan )
         {
-                var result = db.TaiKhoan_Them(taiKhoan.TenTaiKhoan, taiKhoan.MatKhau, taiKhoan.MaNhanVien, taiKhoan.LoaiTaiKhoan).SingleOrDefault();
-                if (result != null)
+                var result = db.TaiKhoan_Add(taiKhoan.TenTaiKhoan, PasswordOption.Encrypt(taiKhoan.MatKhau), taiKhoan.MaNhanVien, taiKhoan.LoaiTaiKhoan).SingleOrDefault();
+                if (result != "Thêm thành công")
                 {
                     ModelState.AddModelError("CreateFailed", result);
                 }
@@ -61,6 +77,39 @@ namespace Delivery.Controllers
                 return RedirectToAction("Index");
             }
         }
+
+        // GET: NhanViens/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound(); 
+            }
+            else
+            {
+                var nhanVien = db.NhanVien_ChiTiet(id).SingleOrDefault();
+                ViewBag.ChiTietNhanVien = nhanVien;
+                ViewBag.MaKhuVuc = new SelectList(db.NhanVien_KhuVuc(), "MaKhuVuc", "TenKhuVuc");
+
+                return View();
+            }
+        }
+
+        //POST: NhanViens/Details/5
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Details(DateTime ngaysinh, int MaKhuVuc)
+        //{
+        //    int id = int.Parse(Request.Form["id"]);
+        //    var hoten = Request.Form["hoten"];
+        //    var email = Request.Form["email"];
+        //    string sdt = (string)Request.Form["sdt"];
+        //    //int khuvuc = int.Parse(Request.Form["khuvuc"]);
+        //    //ViewBag.MaKhuVuc = new SelectList(db.NhanVien_KhuVuc(), "MaKhuVuc", "TenKhuVuc");
+        //    db.NhanVien_Sua(id, hoten, ngaysinh, email, sdt, MaKhuVuc);
+        //    db.SaveChanges();
+        //    return RedirectToAction("/Details/" + id);
+        //}
 
         protected override void Dispose(bool disposing)
         {

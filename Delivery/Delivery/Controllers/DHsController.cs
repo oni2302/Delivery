@@ -52,11 +52,12 @@ namespace Delivery.Controllers
 
         // : Xử lý chi tiết nhận đơn hàng
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult NhanDon(int id)
         {
             if (ModelState.IsValid)
             {
-            var login_Session = (Account_DangNhap_Result)Session[Common.CommonConstants.NGUOI_DUNG];
+            var login_Session = (Account_Session_Result)Session[Common.CommonConstants.NGUOI_DUNG];
             db.DonHang_XacNhanDon(id, login_Session.MaNhanVien);
             }
             return RedirectToAction("index");

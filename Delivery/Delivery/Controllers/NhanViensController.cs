@@ -16,10 +16,29 @@ namespace Delivery.Controllers
     {
         private GiaoHangEntities db = new GiaoHangEntities();
         // GET: NhanViens
-        public ActionResult Index()
+        public ActionResult Index(string MaNV, string tenNV, string khuvuc)
         {
-            return View(db.NhanVien_DanhSach().ToList());
+            if (!String.IsNullOrEmpty(MaNV))
+            {
+                int maNV = Convert.ToInt32(MaNV);
+                var listNVSearch = db.NhanVien_TimKiem(maNV, null, null);
+                return View(listNVSearch.ToList());
+            }
+            else if (!String.IsNullOrEmpty(tenNV))
+            {
+                var listNVSearch = db.NhanVien_TimKiem(null, tenNV, null);
+                return View(listNVSearch.ToList());
+            }
+            else if (!String.IsNullOrEmpty(khuvuc))
+            {
+                var listNVSearch = db.NhanVien_TimKiem(null, null, khuvuc);
+                return View(listNVSearch.ToList());
+            }
+
+            var ListNV = db.NhanVien_TimKiem(null,null,null);
+            return View(ListNV.ToList());
         }
+
 
         //GET: NhanViens/Create
         public ActionResult Create()
@@ -46,13 +65,13 @@ namespace Delivery.Controllers
         // GET: NhanViens/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            if (id == 1)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
             else
             {
-                var nhanVien = db.NhanVien_ChiTiet(id).Single();
+                var nhanVien = db.NhanVien_Xoa_ChiTiet(id).Single();
                 ViewBag.XoaNhanVien = nhanVien;
                 return View();
             }

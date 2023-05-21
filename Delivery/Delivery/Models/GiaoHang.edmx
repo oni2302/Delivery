@@ -4,10 +4,12 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="GiaoHangModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <Function Name="Account_DangNhap" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Schema Namespace="GiaoHangModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="Account_Password" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Account_Session" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="TenTaiKhoan" Type="varchar" Mode="In" />
-          <Parameter Name="MatKhau" Type="varchar" Mode="In" />
         </Function>
         <Function Name="DonHang__Table_NhanDon" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="DonHang_Find_detail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -51,6 +53,7 @@
           <Parameter Name="NgaySinh" Type="date" Mode="In" />
           <Parameter Name="Email" Type="varchar" Mode="In" />
           <Parameter Name="SoDienThoai" Type="char" Mode="In" />
+          <Parameter Name="MaKhuVuc" Type="int" Mode="In" />
         </Function>
         <Function Name="NhanVien_ThemNhanVien" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="TenNhanVien" Type="nvarchar" Mode="In" />
@@ -60,15 +63,21 @@
           <Parameter Name="MaKhuVuc" Type="int" Mode="In" />
         </Function>
         <Function Name="NhanVien_TimKiem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="MaNhanVien" Type="int" Mode="In" />
-          <Parameter Name="HoTen" Type="nvarchar" Mode="In" />
-          <Parameter Name="MaKhuVuc" Type="int" Mode="In" />
+          <Parameter Name="manv" Type="int" Mode="In" />
+          <Parameter Name="tennv" Type="nvarchar" Mode="In" />
+          <Parameter Name="khuvuc" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="NhanVien_Xoa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MaNhanVien" Type="int" Mode="In" />
         </Function>
+        <Function Name="NhanVien_Xoa_ChiTiet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MaNhanVien" Type="int" Mode="In" />
+        </Function>
         <Function Name="Profile_Get" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Profile_Password" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="manv" Type="int" Mode="In" />
         </Function>
         <Function Name="Profile_Sua" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MaNhanVien" Type="int" Mode="In" />
@@ -76,6 +85,8 @@
           <Parameter Name="NgaySinh" Type="date" Mode="In" />
           <Parameter Name="Email" Type="varchar" Mode="In" />
           <Parameter Name="SoDienThoai" Type="char" Mode="In" />
+          <Parameter Name="ImgData" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="ImgExt" Type="varchar" Mode="In" />
         </Function>
         <Function Name="sp_Shiper_Don_Hang_Can_Giao" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
@@ -92,8 +103,11 @@
         <Function Name="sp_Xac_Nhan_Dang_Giao_Hang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idDonHang" Type="int" Mode="In" />
         </Function>
-        <Function Name="TaiKhoan_ChiTiet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="manv" Type="int" Mode="In" />
+        <Function Name="TaiKhoan_Add" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Username" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+          <Parameter Name="MaNV" Type="int" Mode="In" />
+          <Parameter Name="LTK" Type="int" Mode="In" />
         </Function>
         <Function Name="TaiKhoan_DangNhap_Shiper" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="TenTaiKhoan" Type="varchar" Mode="In" />
@@ -113,11 +127,10 @@
         <Function Name="TaiKhoan_ResetPass" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="manv" Type="int" Mode="In" />
         </Function>
-        <Function Name="TaiKhoan_Them" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Username" Type="varchar" Mode="In" />
-          <Parameter Name="Password" Type="varchar" Mode="In" />
-          <Parameter Name="MaNV" Type="int" Mode="In" />
-          <Parameter Name="LTK" Type="int" Mode="In" />
+        <Function Name="TaiKhoan_TimKiem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tentk" Type="nvarchar" Mode="In" />
+          <Parameter Name="hoten" Type="nvarchar" Mode="In" />
+          <Parameter Name="loaitk" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="ThongKe_DaNhan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="year" Type="int" Mode="In" />
@@ -126,23 +139,18 @@
         <Function Name="ThongKe_LayNam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="ThongKe_LayThang" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="GiaoHangModelStoreContainer" />
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GiaoHangModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="GiaoHangEntities" annotation:LazyLoadingEnabled="true" >
-          <FunctionImport Name="Account_DangNhap" ReturnType="Collection(GiaoHangModel.Account_DangNhap_Result)">
-            <Parameter Name="TenTaiKhoan" Mode="In" Type="String" />
-            <Parameter Name="MatKhau" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="DonHang__Table_NhanDon" ReturnType="Collection(GiaoHangModel.DonHang__Table_NhanDon_Result)" />
           <FunctionImport Name="DonHang_Find_detail" ReturnType="Collection(GiaoHangModel.DonHang_Find_detail_Result)">
-            <Parameter Name="MaDonHang" Mode="In" Type="Int32" />
+          <Parameter Name="MaDonHang" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="DonHang_GetChuaNhan" ReturnType="Collection(GiaoHangModel.DonHang_GetChuaNhan_Result)" />
           <FunctionImport Name="DonHang_GetListDonHang" ReturnType="Collection(GiaoHangModel.DonHang_GetListDonHang_Result)">
-            <Parameter Name="MaTrangThai" Mode="In" Type="Int32" />
+          <Parameter Name="MaTrangThai" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="DonHang_PhanPhoi">
             <Parameter Name="MaDonHang" Mode="In" Type="Int32" />
@@ -150,35 +158,21 @@
             <Parameter Name="NhanVienGiao" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="DonHang_PhanPhoiSelectList_KhuVuc_NhanVien" ReturnType="Collection(GiaoHangModel.DonHang_PhanPhoiSelectList_KhuVuc_NhanVien_Result)">
-            <Parameter Name="DiaChiQuan" Mode="In" Type="String" />
+          <Parameter Name="DiaChiQuan" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="DonHang_TimKiemTheoTenNG" ReturnType="Collection(GiaoHangModel.DonHang_TimKiemTheoTenNG_Result)">
-            <Parameter Name="TenNguoiGui" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="DonHang_XacNhanDon">
-            <Parameter Name="MaDonHang" Mode="In" Type="Int32" />
-            <Parameter Name="MaNhanVien" Mode="In" Type="Int32" />
+          <Parameter Name="TenNguoiGui" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetByYear" ReturnType="Collection(GiaoHangModel.GetByYear_Result)">
-            <Parameter Name="year" Mode="In" Type="Int32" />
+          <Parameter Name="year" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="MenuOf" ReturnType="Collection(GiaoHangModel.MenuOf_Result)">
-            <Parameter Name="MaNhanVien" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="NhanVien_ChiTiet" ReturnType="Collection(GiaoHangModel.NhanVien_ChiTiet_Result)">
-            <Parameter Name="MaNhanVien" Mode="In" Type="Int32" />
+          <Parameter Name="MaNhanVien" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="NhanVien_ChuaTK" ReturnType="Collection(GiaoHangModel.NhanVien_ChuaTK_Result)" />
           <FunctionImport Name="NhanVien_DanhSach" ReturnType="Collection(GiaoHangModel.NhanVien_DanhSach_Result)" />
           <FunctionImport Name="NhanVien_KhuVuc" ReturnType="Collection(GiaoHangModel.NhanVien_KhuVuc_Result)" />
           <FunctionImport Name="NhanVien_LoaiTK" ReturnType="Collection(GiaoHangModel.NhanVien_LoaiTK_Result)" />
-          <FunctionImport Name="NhanVien_Sua" ReturnType="Collection(Int32)">
-            <Parameter Name="MaNhanVien" Mode="In" Type="Int32" />
-            <Parameter Name="TenNhanVien" Mode="In" Type="String" />
-            <Parameter Name="NgaySinh" Mode="In" Type="DateTime" />
-            <Parameter Name="Email" Mode="In" Type="String" />
-            <Parameter Name="SoDienThoai" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="NhanVien_ThemNhanVien" ReturnType="Collection(Int32)">
             <Parameter Name="TenNhanVien" Mode="In" Type="String" />
             <Parameter Name="NgaySinh" Mode="In" Type="DateTime" />
@@ -186,41 +180,26 @@
             <Parameter Name="Sdt" Mode="In" Type="String" />
             <Parameter Name="MaKhuVuc" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="NhanVien_TimKiem" ReturnType="Collection(GiaoHangModel.NhanVien_TimKiem_Result)">
-            <Parameter Name="MaNhanVien" Mode="In" Type="Int32" />
-            <Parameter Name="HoTen" Mode="In" Type="String" />
-            <Parameter Name="MaKhuVuc" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="NhanVien_Xoa" ReturnType="Collection(Int32)">
-            <Parameter Name="MaNhanVien" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="Profile_Get" ReturnType="Collection(GiaoHangModel.Profile_Get_Result)">
-            <Parameter Name="Id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="Profile_Sua" ReturnType="Collection(Int32)">
-            <Parameter Name="MaNhanVien" Mode="In" Type="Int32" />
-            <Parameter Name="TenNhanVien" Mode="In" Type="String" />
-            <Parameter Name="NgaySinh" Mode="In" Type="DateTime" />
-            <Parameter Name="Email" Mode="In" Type="String" />
-            <Parameter Name="SoDienThoai" Mode="In" Type="String" />
+          <Parameter Name="MaNhanVien" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Shiper_Don_Hang_Can_Giao" ReturnType="Collection(GiaoHangModel.sp_Shiper_Don_Hang_Can_Giao_Result)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Shiper_Thong_Tin_Don_Hang" ReturnType="Collection(GiaoHangModel.sp_Shiper_Thong_Tin_Don_Hang_Result)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Xac_Nhan_Da_Giao_Hang" ReturnType="Collection(Int32)">
-            <Parameter Name="idDonHang" Mode="In" Type="Int32" />
+          <Parameter Name="idDonHang" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Xac_Nhan_Da_Lay_Hang" ReturnType="Collection(Int32)">
-            <Parameter Name="idDonHang" Mode="In" Type="Int32" />
+          <Parameter Name="idDonHang" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Xac_Nhan_Dang_Giao_Hang" ReturnType="Collection(Int32)">
-            <Parameter Name="idDonHang" Mode="In" Type="Int32" />
+          <Parameter Name="idDonHang" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="TaiKhoan_ChiTiet">
-            <Parameter Name="manv" Mode="In" Type="Int32" />
+          <Parameter Name="manv" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="TaiKhoan_DangNhap_Shiper" ReturnType="Collection(GiaoHangModel.TaiKhoan_DangNhap_Shiper_Result)">
             <Parameter Name="TenTaiKhoan" Mode="In" Type="String" />
@@ -232,13 +211,13 @@
             <Parameter Name="MatKhau" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="TaiKhoan_LayTen" ReturnType="Collection(String)">
-            <Parameter Name="manv" Mode="In" Type="Int32" />
+          <Parameter Name="manv" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="TaiKhoan_Profile">
-            <Parameter Name="MaNhanVien" Mode="In" Type="Int32" />
+          <Parameter Name="MaNhanVien" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="TaiKhoan_ResetPass">
-            <Parameter Name="manv" Mode="In" Type="Int32" />
+          <Parameter Name="manv" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="TaiKhoan_Them" ReturnType="Collection(String)">
             <Parameter Name="Username" Mode="In" Type="String" />
@@ -252,6 +231,61 @@
           </FunctionImport>
           <FunctionImport Name="ThongKe_LayNam" ReturnType="Collection(Int32)" />
           <FunctionImport Name="ThongKe_LayThang" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="TaiKhoan_Add" ReturnType="Collection(String)">
+            <Parameter Name="Username" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="MaNV" Mode="In" Type="Int32" />
+            <Parameter Name="LTK" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DonHang_XacNhanDon">
+            <Parameter Name="MaDonHang" Mode="In" Type="Int32" />
+            <Parameter Name="MaNhanVien" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="NhanVien_TimKiem" ReturnType="Collection(GiaoHangModel.NhanVien_TimKiem_Result)">
+            <Parameter Name="manv" Mode="In" Type="Int32" />
+            <Parameter Name="tennv" Mode="In" Type="String" />
+            <Parameter Name="khuvuc" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="TaiKhoan_TimKiem" ReturnType="Collection(GiaoHangModel.TaiKhoan_TimKiem_Result)">
+            <Parameter Name="tentk" Mode="In" Type="String" />
+            <Parameter Name="hoten" Mode="In" Type="String" />
+            <Parameter Name="loaitk" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="NhanVien_ChiTiet" ReturnType="Collection(GiaoHangModel.NhanVien_ChiTiet_Result)">
+          <Parameter Name="MaNhanVien" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="NhanVien_Sua" ReturnType="Collection(Int32)">
+            <Parameter Name="MaNhanVien" Mode="In" Type="Int32" />
+            <Parameter Name="TenNhanVien" Mode="In" Type="String" />
+            <Parameter Name="NgaySinh" Mode="In" Type="DateTime" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="SoDienThoai" Mode="In" Type="String" />
+            <Parameter Name="MaKhuVuc" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Profile_Get" ReturnType="Collection(GiaoHangModel.Profile_Get_Result)">
+          <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Profile_Sua" ReturnType="Collection(Int32)">
+            <Parameter Name="MaNhanVien" Mode="In" Type="Int32" />
+            <Parameter Name="TenNhanVien" Mode="In" Type="String" />
+            <Parameter Name="NgaySinh" Mode="In" Type="DateTime" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="SoDienThoai" Mode="In" Type="String" />
+            <Parameter Name="ImgData" Mode="In" Type="Binary" />
+            <Parameter Name="ImgExt" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Account_Password" ReturnType="Collection(String)">
+          <Parameter Name="username" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Account_Session" ReturnType="Collection(GiaoHangModel.Account_Session_Result)">
+          <Parameter Name="TenTaiKhoan" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Profile_Password" ReturnType="Collection(String)">
+          <Parameter Name="manv" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="NhanVien_Xoa_ChiTiet" ReturnType="Collection(GiaoHangModel.NhanVien_Xoa_ChiTiet_Result)">
+          <Parameter Name="MaNhanVien" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Account_DangNhap_Result">
           <Property Type="Int32" Name="MaNhanVien" Nullable="false" />
@@ -398,18 +432,6 @@
           <Property Type="String" Name="RouteName" Nullable="true" MaxLength="200" />
           <Property Type="Int32" Name="MaLoaiTaiKhoan" Nullable="true" />
         </ComplexType>
-        <ComplexType Name="NhanVien_ChiTiet_Result">
-          <Property Type="Int32" Name="MaNhanVien" Nullable="false" />
-          <Property Type="String" Name="TenNhanVien" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="NgaySinh" Nullable="true" />
-          <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="SoDienThoai" Nullable="true" MaxLength="11" />
-          <Property Type="Boolean" Name="TrangThai" Nullable="true" />
-          <Property Type="Int32" Name="MaKhuVuc" Nullable="true" />
-          <Property Type="String" Name="TenTaiKhoan" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="MatKhau" Nullable="true" MaxLength="4000" />
-          <Property Type="Int32" Name="LoaiTaiKhoan" Nullable="true" />
-        </ComplexType>
         <ComplexType Name="NhanVien_ChuaTK_Result">
           <Property Type="Int32" Name="MaNhanVien" Nullable="false" />
           <Property Type="String" Name="TenNhanVien" Nullable="true" MaxLength="50" />
@@ -437,25 +459,6 @@
         <ComplexType Name="NhanVien_LoaiTK_Result">
           <Property Type="Int32" Name="MaLoaiTaiKhoan" Nullable="false" />
           <Property Type="String" Name="LoaiTaiKhoan" Nullable="true" MaxLength="50" />
-        </ComplexType>
-        <ComplexType Name="NhanVien_TimKiem_Result">
-          <Property Type="Int32" Name="MaNhanVien" Nullable="false" />
-          <Property Type="String" Name="TenNhanVien" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="TenKhuVuc" Nullable="true" MaxLength="100" />
-        </ComplexType>
-        <ComplexType Name="Profile_Get_Result">
-          <Property Type="Int32" Name="MaNhanVien" Nullable="false" />
-          <Property Type="String" Name="TenNhanVien" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="NgaySinh" Nullable="true" />
-          <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="SoDienThoai" Nullable="true" MaxLength="11" />
-          <Property Type="Boolean" Name="TrangThai" Nullable="true" />
-          <Property Type="Int32" Name="MaKhuVuc" Nullable="true" />
-          <Property Type="String" Name="TenTaiKhoan" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="MatKhau" Nullable="true" MaxLength="4000" />
-          <Property Type="Int32" Name="LoaiTaiKhoan" Nullable="true" />
-          <Property Type="String" Name="TenLoai" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="TenKhuVuc" Nullable="true" MaxLength="100" />
         </ComplexType>
         <ComplexType Name="sp_Shiper_Don_Hang_Can_Giao_Result">
           <Property Type="Int32" Name="MaDonHang" Nullable="false" />
@@ -514,28 +517,75 @@
           <Property Type="Int32" Name="Nam" Nullable="true" />
           <Property Type="Int32" Name="SL" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="NhanVien_TimKiem_Result">
+          <Property Type="Int32" Name="MaNhanVien" Nullable="false" />
+          <Property Type="String" Name="TenNhanVien" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="NgaySinh" Nullable="true" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="SoDienThoai" Nullable="true" MaxLength="11" />
+          <Property Type="String" Name="TenKhuVuc" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="TaiKhoan_TimKiem_Result">
+          <Property Type="Int32" Name="MaNhanVien" Nullable="false" />
+          <Property Type="String" Name="TenTaiKhoan" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TenNhanVien" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LoaiTaiKhoan" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="NhanVien_ChiTiet_Result">
+          <Property Type="Int32" Name="MaNhanVien" Nullable="false" />
+          <Property Type="String" Name="TenNhanVien" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="NgaySinh" Nullable="true" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="SoDienThoai" Nullable="true" MaxLength="11" />
+          <Property Type="String" Name="TenTaiKhoan" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="MatKhau" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="TenLoai" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TenKhuVuc" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="Profile_Get_Result">
+          <Property Type="Int32" Name="MaNhanVien" Nullable="false" />
+          <Property Type="String" Name="TenNhanVien" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="NgaySinh" Nullable="true" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="SoDienThoai" Nullable="true" MaxLength="11" />
+          <Property Type="Boolean" Name="TrangThai" Nullable="true" />
+          <Property Type="Int32" Name="MaKhuVuc" Nullable="true" />
+          <Property Type="String" Name="TenTaiKhoan" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="MatKhau" Nullable="true" MaxLength="4000" />
+          <Property Type="Int32" Name="LoaiTaiKhoan" Nullable="true" />
+          <Property Type="Binary" Name="ImageData" Nullable="true" />
+          <Property Type="String" Name="ImageExtension" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="TenLoai" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TenKhuVuc" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="Account_Session_Result">
+          <Property Type="Int32" Name="MaNhanVien" Nullable="false" />
+          <Property Type="String" Name="TenNhanVien" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="NgaySinh" Nullable="true" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="SoDienThoai" Nullable="true" MaxLength="11" />
+          <Property Type="Boolean" Name="TrangThai" Nullable="true" />
+          <Property Type="Int32" Name="MaKhuVuc" Nullable="true" />
+          <Property Type="String" Name="TenTaiKhoan" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="MatKhau" Nullable="true" MaxLength="4000" />
+          <Property Type="Int32" Name="LoaiTaiKhoan" Nullable="true" />
+          <Property Type="Binary" Name="ImageData" Nullable="true" />
+          <Property Type="String" Name="ImageExtension" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="NhanVien_Xoa_ChiTiet_Result">
+          <Property Type="Int32" Name="MaNhanVien" Nullable="false" />
+          <Property Type="String" Name="TenNhanVien" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="NgaySinh" Nullable="true" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="SoDienThoai" Nullable="true" MaxLength="11" />
+          <Property Type="String" Name="TenKhuVuc" Nullable="true" MaxLength="100" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="GiaoHangModelStoreContainer" CdmEntityContainer="GiaoHangEntities" >
-          <FunctionImportMapping FunctionImportName="Account_DangNhap" FunctionName="GiaoHangModel.Store.Account_DangNhap">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="GiaoHangModel.Account_DangNhap_Result">
-                <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
-                <ScalarProperty Name="TenNhanVien" ColumnName="TenNhanVien" />
-                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="SoDienThoai" ColumnName="SoDienThoai" />
-                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-                <ScalarProperty Name="MaKhuVuc" ColumnName="MaKhuVuc" />
-                <ScalarProperty Name="TenTaiKhoan" ColumnName="TenTaiKhoan" />
-                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
-                <ScalarProperty Name="LoaiTaiKhoan" ColumnName="LoaiTaiKhoan" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="DonHang__Table_NhanDon" FunctionName="GiaoHangModel.Store.DonHang__Table_NhanDon">
             <ResultMapping>
               <ComplexTypeMapping TypeName="GiaoHangModel.DonHang__Table_NhanDon_Result">
@@ -680,7 +730,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="DonHang_XacNhanDon" FunctionName="GiaoHangModel.Store.DonHang_XacNhanDon" />
           <FunctionImportMapping FunctionImportName="GetByYear" FunctionName="GiaoHangModel.Store.GetByYear">
             <ResultMapping>
               <ComplexTypeMapping TypeName="GiaoHangModel.GetByYear_Result">
@@ -700,22 +749,6 @@
                 <ScalarProperty Name="Controller" ColumnName="Controller" />
                 <ScalarProperty Name="RouteName" ColumnName="RouteName" />
                 <ScalarProperty Name="MaLoaiTaiKhoan" ColumnName="MaLoaiTaiKhoan" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="NhanVien_ChiTiet" FunctionName="GiaoHangModel.Store.NhanVien_ChiTiet">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="GiaoHangModel.NhanVien_ChiTiet_Result">
-                <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
-                <ScalarProperty Name="TenNhanVien" ColumnName="TenNhanVien" />
-                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="SoDienThoai" ColumnName="SoDienThoai" />
-                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-                <ScalarProperty Name="MaKhuVuc" ColumnName="MaKhuVuc" />
-                <ScalarProperty Name="TenTaiKhoan" ColumnName="TenTaiKhoan" />
-                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
-                <ScalarProperty Name="LoaiTaiKhoan" ColumnName="LoaiTaiKhoan" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -763,37 +796,8 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="NhanVien_Sua" FunctionName="GiaoHangModel.Store.NhanVien_Sua" />
           <FunctionImportMapping FunctionImportName="NhanVien_ThemNhanVien" FunctionName="GiaoHangModel.Store.NhanVien_ThemNhanVien" />
-          <FunctionImportMapping FunctionImportName="NhanVien_TimKiem" FunctionName="GiaoHangModel.Store.NhanVien_TimKiem">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="GiaoHangModel.NhanVien_TimKiem_Result">
-                <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
-                <ScalarProperty Name="TenNhanVien" ColumnName="TenNhanVien" />
-                <ScalarProperty Name="TenKhuVuc" ColumnName="TenKhuVuc" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="NhanVien_Xoa" FunctionName="GiaoHangModel.Store.NhanVien_Xoa" />
-          <FunctionImportMapping FunctionImportName="Profile_Get" FunctionName="GiaoHangModel.Store.Profile_Get">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="GiaoHangModel.Profile_Get_Result">
-                <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
-                <ScalarProperty Name="TenNhanVien" ColumnName="TenNhanVien" />
-                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="SoDienThoai" ColumnName="SoDienThoai" />
-                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-                <ScalarProperty Name="MaKhuVuc" ColumnName="MaKhuVuc" />
-                <ScalarProperty Name="TenTaiKhoan" ColumnName="TenTaiKhoan" />
-                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
-                <ScalarProperty Name="LoaiTaiKhoan" ColumnName="LoaiTaiKhoan" />
-                <ScalarProperty Name="TenLoai" ColumnName="TenLoai" />
-                <ScalarProperty Name="TenKhuVuc" ColumnName="TenKhuVuc" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Profile_Sua" FunctionName="GiaoHangModel.Store.Profile_Sua" />
           <FunctionImportMapping FunctionImportName="sp_Shiper_Don_Hang_Can_Giao" FunctionName="GiaoHangModel.Store.sp_Shiper_Don_Hang_Can_Giao">
             <ResultMapping>
               <ComplexTypeMapping TypeName="GiaoHangModel.sp_Shiper_Don_Hang_Can_Giao_Result">
@@ -837,7 +841,6 @@
           <FunctionImportMapping FunctionImportName="sp_Xac_Nhan_Da_Giao_Hang" FunctionName="GiaoHangModel.Store.sp_Xac_Nhan_Da_Giao_Hang" />
           <FunctionImportMapping FunctionImportName="sp_Xac_Nhan_Da_Lay_Hang" FunctionName="GiaoHangModel.Store.sp_Xac_Nhan_Da_Lay_Hang" />
           <FunctionImportMapping FunctionImportName="sp_Xac_Nhan_Dang_Giao_Hang" FunctionName="GiaoHangModel.Store.sp_Xac_Nhan_Dang_Giao_Hang" />
-          <FunctionImportMapping FunctionImportName="TaiKhoan_ChiTiet" FunctionName="GiaoHangModel.Store.TaiKhoan_ChiTiet" />
           <FunctionImportMapping FunctionImportName="TaiKhoan_DangNhap_Shiper" FunctionName="GiaoHangModel.Store.TaiKhoan_DangNhap_Shiper">
             <ResultMapping>
               <ComplexTypeMapping TypeName="GiaoHangModel.TaiKhoan_DangNhap_Shiper_Result">
@@ -869,7 +872,6 @@
           <FunctionImportMapping FunctionImportName="TaiKhoan_LayTen" FunctionName="GiaoHangModel.Store.TaiKhoan_LayTen" />
           <FunctionImportMapping FunctionImportName="TaiKhoan_Profile" FunctionName="GiaoHangModel.Store.TaiKhoan_Profile" />
           <FunctionImportMapping FunctionImportName="TaiKhoan_ResetPass" FunctionName="GiaoHangModel.Store.TaiKhoan_ResetPass" />
-          <FunctionImportMapping FunctionImportName="TaiKhoan_Them" FunctionName="GiaoHangModel.Store.TaiKhoan_Them" />
           <FunctionImportMapping FunctionImportName="ThongKe_DaNhan" FunctionName="GiaoHangModel.Store.ThongKe_DaNhan">
             <ResultMapping>
               <ComplexTypeMapping TypeName="GiaoHangModel.ThongKe_DaNhan_Result">
@@ -882,6 +884,99 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ThongKe_LayNam" FunctionName="GiaoHangModel.Store.ThongKe_LayNam" />
           <FunctionImportMapping FunctionImportName="ThongKe_LayThang" FunctionName="GiaoHangModel.Store.ThongKe_LayThang" />
+          <FunctionImportMapping FunctionImportName="TaiKhoan_Add" FunctionName="GiaoHangModel.Store.TaiKhoan_Add" />
+          <FunctionImportMapping FunctionImportName="DonHang_XacNhanDon" FunctionName="GiaoHangModel.Store.DonHang_XacNhanDon" />
+          <FunctionImportMapping FunctionImportName="NhanVien_TimKiem" FunctionName="GiaoHangModel.Store.NhanVien_TimKiem">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GiaoHangModel.NhanVien_TimKiem_Result">
+                <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
+                <ScalarProperty Name="TenNhanVien" ColumnName="TenNhanVien" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="SoDienThoai" ColumnName="SoDienThoai" />
+                <ScalarProperty Name="TenKhuVuc" ColumnName="TenKhuVuc" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="TaiKhoan_TimKiem" FunctionName="GiaoHangModel.Store.TaiKhoan_TimKiem">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GiaoHangModel.TaiKhoan_TimKiem_Result">
+                <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
+                <ScalarProperty Name="TenTaiKhoan" ColumnName="TenTaiKhoan" />
+                <ScalarProperty Name="TenNhanVien" ColumnName="TenNhanVien" />
+                <ScalarProperty Name="LoaiTaiKhoan" ColumnName="LoaiTaiKhoan" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="NhanVien_ChiTiet" FunctionName="GiaoHangModel.Store.NhanVien_ChiTiet">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GiaoHangModel.NhanVien_ChiTiet_Result">
+                <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
+                <ScalarProperty Name="TenNhanVien" ColumnName="TenNhanVien" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="SoDienThoai" ColumnName="SoDienThoai" />
+                <ScalarProperty Name="TenTaiKhoan" ColumnName="TenTaiKhoan" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+                <ScalarProperty Name="TenLoai" ColumnName="TenLoai" />
+                <ScalarProperty Name="TenKhuVuc" ColumnName="TenKhuVuc" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="NhanVien_Sua" FunctionName="GiaoHangModel.Store.NhanVien_Sua" />
+          <FunctionImportMapping FunctionImportName="Profile_Get" FunctionName="GiaoHangModel.Store.Profile_Get">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GiaoHangModel.Profile_Get_Result">
+                <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
+                <ScalarProperty Name="TenNhanVien" ColumnName="TenNhanVien" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="SoDienThoai" ColumnName="SoDienThoai" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="MaKhuVuc" ColumnName="MaKhuVuc" />
+                <ScalarProperty Name="TenTaiKhoan" ColumnName="TenTaiKhoan" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+                <ScalarProperty Name="LoaiTaiKhoan" ColumnName="LoaiTaiKhoan" />
+                <ScalarProperty Name="ImageData" ColumnName="ImageData" />
+                <ScalarProperty Name="ImageExtension" ColumnName="ImageExtension" />
+                <ScalarProperty Name="TenLoai" ColumnName="TenLoai" />
+                <ScalarProperty Name="TenKhuVuc" ColumnName="TenKhuVuc" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Profile_Sua" FunctionName="GiaoHangModel.Store.Profile_Sua" />
+          <FunctionImportMapping FunctionImportName="Account_Password" FunctionName="GiaoHangModel.Store.Account_Password" />
+          <FunctionImportMapping FunctionImportName="Account_Session" FunctionName="GiaoHangModel.Store.Account_Session">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GiaoHangModel.Account_Session_Result">
+                <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
+                <ScalarProperty Name="TenNhanVien" ColumnName="TenNhanVien" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="SoDienThoai" ColumnName="SoDienThoai" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="MaKhuVuc" ColumnName="MaKhuVuc" />
+                <ScalarProperty Name="TenTaiKhoan" ColumnName="TenTaiKhoan" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+                <ScalarProperty Name="LoaiTaiKhoan" ColumnName="LoaiTaiKhoan" />
+                <ScalarProperty Name="ImageData" ColumnName="ImageData" />
+                <ScalarProperty Name="ImageExtension" ColumnName="ImageExtension" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Profile_Password" FunctionName="GiaoHangModel.Store.Profile_Password" />
+          <FunctionImportMapping FunctionImportName="NhanVien_Xoa_ChiTiet" FunctionName="GiaoHangModel.Store.NhanVien_Xoa_ChiTiet">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GiaoHangModel.NhanVien_Xoa_ChiTiet_Result">
+                <ScalarProperty Name="MaNhanVien" ColumnName="MaNhanVien" />
+                <ScalarProperty Name="TenNhanVien" ColumnName="TenNhanVien" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="SoDienThoai" ColumnName="SoDienThoai" />
+                <ScalarProperty Name="TenKhuVuc" ColumnName="TenKhuVuc" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

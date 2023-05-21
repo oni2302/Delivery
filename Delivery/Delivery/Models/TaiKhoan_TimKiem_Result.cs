@@ -14,20 +14,16 @@ namespace Delivery.Models
 
 using System;
     
-public partial class NhanVien_DanhSach_Result
+public partial class TaiKhoan_TimKiem_Result
 {
 
     public int MaNhanVien { get; set; }
 
+    public string TenTaiKhoan { get; set; }
+
     public string TenNhanVien { get; set; }
 
-    public Nullable<System.DateTime> NgaySinh { get; set; }
-
-    public string Email { get; set; }
-
-    public string SoDienThoai { get; set; }
-
-    public string TenKhuVuc { get; set; }
+    public string LoaiTaiKhoan { get; set; }
 
 }
 
