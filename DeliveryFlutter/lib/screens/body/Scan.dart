@@ -302,7 +302,7 @@ class _ScanState extends State<Scan> {
     controller.scannedDataStream.listen((scanData) async {
       if (describeEnum(scanData.format) == 'qrcode') {
         try {
-          await controller?.pauseCamera();
+          await controller.pauseCamera();
           DonHang dh =
               await _layChiTietDonHang(int.parse(scanData.code.toString()));
           setState(() {
