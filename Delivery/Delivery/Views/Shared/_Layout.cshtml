@@ -69,8 +69,6 @@
                         <div class="ghk2p"><p>ghk2p</p></div>
                         <div class="delivery"><p> delivery</p></div>
                     </div>
-
-
                 </div>
                 <div class="main-menu holder">
                     <div class="main-menu-holder">
@@ -85,9 +83,9 @@
                         foreach (var chucNang in session)
                         {
                             <li class="main-menu-item-wrap @if (chucNang.Controller == controller) { Write("active"); } ">
-                                <a class="main-menu-item  " href="@Url.Action(chucNang.RouteName,chucNang.Controller)">
+                                <a class="main-menu-item" href="@Url.Action(chucNang.RouteName,chucNang.Controller)">
                                     @Html.Raw(chucNang.BieuTuong)
-                                    <span>@chucNang.TenChucNang</span>
+                                    <span class="pt-1">@chucNang.TenChucNang</span>
                                 </a>
                             </li>
                         }

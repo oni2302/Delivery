@@ -18,7 +18,7 @@ class Login extends StatelessWidget {
 
   Future<String?> _authUser(LoginData data) async {
     final response = await http.post(
-      Uri.parse('${ApiHelper.ip}/nvgh/dangnhap'),
+      Uri.parse('${ApiHelper.ip}/nvgh/dangnhap/'),
       headers: <String, String>{
         'Content-Type': 'application/json',
       },
@@ -37,7 +37,7 @@ class Login extends StatelessWidget {
         return null;
       }
       if (jsonDecode(response.body)['Result'] == 1) {
-        return 'Tên tài khoản không tồn tại';
+        return 'Tên tài khoản hoặc mật khẩu không đúng ';
       }
       return 'Mật khẩu không đúng';
     } else {

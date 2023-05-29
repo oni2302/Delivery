@@ -16,8 +16,7 @@ namespace Delivery.Controllers
         // Hiển thị danh sách đơn hàng chưa nhận
         public ActionResult Index()
         {
-            var list_DonHang = db.DonHang_GetListDonHang(1);
-            return View(list_DonHang.ToList());
+            return View(db.DonHang_GetListDonHang(1).ToList());
         }
 
         // : Hiển thị chi tiết đơn hàng chưa nhận

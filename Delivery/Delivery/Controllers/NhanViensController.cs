@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.SqlClient;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -16,7 +17,7 @@ namespace Delivery.Controllers
     {
         private GiaoHangEntities db = new GiaoHangEntities();
         // GET: NhanViens
-        public ActionResult Index(string MaNV, string tenNV, string khuvuc)
+        public ActionResult Index(string sortOrder, string MaNV, string tenNV, string khuvuc)
         {
             if (!String.IsNullOrEmpty(MaNV))
             {
@@ -38,7 +39,6 @@ namespace Delivery.Controllers
             var ListNV = db.NhanVien_TimKiem(null,null,null);
             return View(ListNV.ToList());
         }
-
 
         //GET: NhanViens/Create
         public ActionResult Create()

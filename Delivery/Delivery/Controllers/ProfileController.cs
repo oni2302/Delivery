@@ -151,7 +151,7 @@ namespace Delivery.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DoiMk(int id, string MatKhau,string OldMatKhau)
+        public ActionResult DoiMk(int id, string MatKhau, string OldMatKhau)
         {
             var hashPass = database.Profile_Password(id).FirstOrDefault();
             if (PasswordOption.Validation(OldMatKhau, hashPass))
@@ -173,7 +173,7 @@ namespace Delivery.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    var result = database.TaiKhoan_DoiMK(id,PasswordOption.Encrypt(MatKhau)).Single();
+                    var result = database.TaiKhoan_DoiMK(id, PasswordOption.Encrypt(MatKhau)).Single();
                     if (result != null)
                     {
                         TempData["SuccessMessage"] = "Đổi mật khẩu thành công";

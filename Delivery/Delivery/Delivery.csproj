@@ -67,6 +67,12 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -129,6 +135,7 @@
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\TaiKhoanController.cs" />
     <Compile Include="Controllers\TheoDoiDonController.cs" />
+    <Compile Include="Controllers\ThongKeController.cs" />
     <Compile Include="Entities\AccountLogin.cs" />
     <Compile Include="Entities\CreateNhanVien.cs" />
     <Compile Include="Entities\PasswordOption.cs" />
@@ -219,6 +226,12 @@
     <Compile Include="Models\TaiKhoan_TimKiem_Result.cs">
       <DependentUpon>GiaoHang.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ThongKeDonDaGiao_Result.cs">
+      <DependentUpon>GiaoHang.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ThongKe_DaNhan1_Result.cs">
+      <DependentUpon>GiaoHang.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ThongKe_DaNhan_Result.cs">
       <DependentUpon>GiaoHang.tt</DependentUpon>
     </Compile>
@@ -243,9 +256,11 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\background_login.jpg" />
     <Content Include="Images\img dashboard.png" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\logo_delivery.png" />
@@ -273,11 +288,13 @@
     <Content Include="Models\GiaoHang.edmx.diagram">
       <DependentUpon>GiaoHang.edmx</DependentUpon>
     </Content>
-    <None Include="Scripts\jquery-3.6.4.intellisense.js" />
-    <Content Include="Scripts\jquery-3.6.4.js" />
-    <Content Include="Scripts\jquery-3.6.4.min.js" />
-    <Content Include="Scripts\jquery-3.6.4.slim.js" />
-    <Content Include="Scripts\jquery-3.6.4.slim.min.js" />
+    <None Include="Scripts\jquery-3.7.0.intellisense.js" />
+    <Content Include="Scripts\jquery-3.7.0.js" />
+    <Content Include="Scripts\jquery-3.7.0.min.js" />
+    <Content Include="Scripts\jquery-3.7.0.slim.js" />
+    <Content Include="Scripts\jquery-3.7.0.slim.min.js" />
+    <Content Include="Scripts\jquery-3.7.0.slim.min.map" />
+    <Content Include="Scripts\jquery-3.7.0.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -326,8 +343,9 @@
     <Content Include="Views\DH_DaNhan\PhanPhoi.cshtml" />
     <Content Include="Views\TheoDoiDon\Details.cshtml" />
     <Content Include="Views\TheoDoiDon\Index.cshtml" />
-    <Content Include="Views\NhanViens\SearchTenNV.cshtml" />
     <Content Include="Views\TaiKhoan\Details.cshtml" />
+    <Content Include="Views\ThongKe\ThongKe.cshtml" />
+    <Content Include="Views\ThongKe\ThongKeDonDaGiao.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -359,8 +377,6 @@
     <Content Include="Scripts\bootstrap.esm.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
-    <Content Include="Scripts\jquery-3.6.4.slim.min.map" />
-    <Content Include="Scripts\jquery-3.6.4.min.map" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

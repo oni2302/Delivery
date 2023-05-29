@@ -61,7 +61,7 @@ namespace Delivery.Controllers
         {
             if (ModelState.IsValid)
             {
-                var login_Session = (Account_DangNhap_Result)Session[Common.CommonConstants.NGUOI_DUNG];
+                var login_Session = (Account_Session_Result)Session[Common.CommonConstants.NGUOI_DUNG];
                 db.DonHang_PhanPhoi(id, login_Session.MaNhanVien, MaNhanVien);
             }
 

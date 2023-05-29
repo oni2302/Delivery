@@ -467,50 +467,6 @@ public partial class GiaoHangEntities : DbContext
     }
 
 
-    public virtual ObjectResult<NhanVien_TimKiem_Result> NhanVien_TimKiem(Nullable<int> manv, string tennv, string khuvuc)
-    {
-
-        var manvParameter = manv.HasValue ?
-            new ObjectParameter("manv", manv) :
-            new ObjectParameter("manv", typeof(int));
-
-
-        var tennvParameter = tennv != null ?
-            new ObjectParameter("tennv", tennv) :
-            new ObjectParameter("tennv", typeof(string));
-
-
-        var khuvucParameter = khuvuc != null ?
-            new ObjectParameter("khuvuc", khuvuc) :
-            new ObjectParameter("khuvuc", typeof(string));
-
-
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<NhanVien_TimKiem_Result>("NhanVien_TimKiem", manvParameter, tennvParameter, khuvucParameter);
-    }
-
-
-    public virtual ObjectResult<TaiKhoan_TimKiem_Result> TaiKhoan_TimKiem(string tentk, string hoten, string loaitk)
-    {
-
-        var tentkParameter = tentk != null ?
-            new ObjectParameter("tentk", tentk) :
-            new ObjectParameter("tentk", typeof(string));
-
-
-        var hotenParameter = hoten != null ?
-            new ObjectParameter("hoten", hoten) :
-            new ObjectParameter("hoten", typeof(string));
-
-
-        var loaitkParameter = loaitk != null ?
-            new ObjectParameter("loaitk", loaitk) :
-            new ObjectParameter("loaitk", typeof(string));
-
-
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TaiKhoan_TimKiem_Result>("TaiKhoan_TimKiem", tentkParameter, hotenParameter, loaitkParameter);
-    }
-
-
     public virtual ObjectResult<NhanVien_ChiTiet_Result> NhanVien_ChiTiet(Nullable<int> maNhanVien)
     {
 
@@ -659,6 +615,129 @@ public partial class GiaoHangEntities : DbContext
 
 
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<NhanVien_Xoa_ChiTiet_Result>("NhanVien_Xoa_ChiTiet", maNhanVienParameter);
+    }
+
+
+    public virtual ObjectResult<Nullable<int>> TaiKhoan_Reset(Nullable<int> manv, string pass)
+    {
+
+        var manvParameter = manv.HasValue ?
+            new ObjectParameter("manv", manv) :
+            new ObjectParameter("manv", typeof(int));
+
+
+        var passParameter = pass != null ?
+            new ObjectParameter("pass", pass) :
+            new ObjectParameter("pass", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("TaiKhoan_Reset", manvParameter, passParameter);
+    }
+
+
+    public virtual ObjectResult<ThongKe_DaNhan1_Result> ThongKe_DaNhan1(Nullable<int> year, Nullable<int> month)
+    {
+
+        var yearParameter = year.HasValue ?
+            new ObjectParameter("year", year) :
+            new ObjectParameter("year", typeof(int));
+
+
+        var monthParameter = month.HasValue ?
+            new ObjectParameter("month", month) :
+            new ObjectParameter("month", typeof(int));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ThongKe_DaNhan1_Result>("ThongKe_DaNhan1", yearParameter, monthParameter);
+    }
+
+
+    public virtual ObjectResult<Nullable<int>> ThongKe_LayNam1()
+    {
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("ThongKe_LayNam1");
+    }
+
+
+    public virtual ObjectResult<Nullable<int>> ThongKe_LayThang1()
+    {
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("ThongKe_LayThang1");
+    }
+
+
+    public virtual ObjectResult<NhanVien_TimKiem_Result> NhanVien_TimKiem(Nullable<int> manv, string tennv, string khuvuc)
+    {
+
+        var manvParameter = manv.HasValue ?
+            new ObjectParameter("manv", manv) :
+            new ObjectParameter("manv", typeof(int));
+
+
+        var tennvParameter = tennv != null ?
+            new ObjectParameter("tennv", tennv) :
+            new ObjectParameter("tennv", typeof(string));
+
+
+        var khuvucParameter = khuvuc != null ?
+            new ObjectParameter("khuvuc", khuvuc) :
+            new ObjectParameter("khuvuc", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<NhanVien_TimKiem_Result>("NhanVien_TimKiem", manvParameter, tennvParameter, khuvucParameter);
+    }
+
+
+    public virtual ObjectResult<TaiKhoan_TimKiem_Result> TaiKhoan_TimKiem(string tentk, string hoten, string loaitk)
+    {
+
+        var tentkParameter = tentk != null ?
+            new ObjectParameter("tentk", tentk) :
+            new ObjectParameter("tentk", typeof(string));
+
+
+        var hotenParameter = hoten != null ?
+            new ObjectParameter("hoten", hoten) :
+            new ObjectParameter("hoten", typeof(string));
+
+
+        var loaitkParameter = loaitk != null ?
+            new ObjectParameter("loaitk", loaitk) :
+            new ObjectParameter("loaitk", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TaiKhoan_TimKiem_Result>("TaiKhoan_TimKiem", tentkParameter, hotenParameter, loaitkParameter);
+    }
+
+
+    public virtual ObjectResult<ThongKeDonDaGiao_Result> ThongKeDonDaGiao(Nullable<int> year, Nullable<int> month)
+    {
+
+        var yearParameter = year.HasValue ?
+            new ObjectParameter("year", year) :
+            new ObjectParameter("year", typeof(int));
+
+
+        var monthParameter = month.HasValue ?
+            new ObjectParameter("month", month) :
+            new ObjectParameter("month", typeof(int));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ThongKeDonDaGiao_Result>("ThongKeDonDaGiao", yearParameter, monthParameter);
+    }
+
+
+    public virtual ObjectResult<Nullable<int>> ThongKeDonDaGiao_LayNam()
+    {
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("ThongKeDonDaGiao_LayNam");
+    }
+
+
+    public virtual ObjectResult<Nullable<int>> ThongKeDonDaGiao_LayThang()
+    {
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("ThongKeDonDaGiao_LayThang");
     }
 
 }

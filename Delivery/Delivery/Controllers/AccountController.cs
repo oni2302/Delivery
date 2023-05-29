@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using Delivery.Models;
+using Delivery.Entities;
 
 namespace Delivery.Controllers
 {
@@ -24,7 +25,7 @@ namespace Delivery.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(Account_DangNhap_Result taiKhoan)
+        public ActionResult Login(AccountLogin taiKhoan)
         {
             string username = taiKhoan.TenTaiKhoan;
             string password = taiKhoan.MatKhau;

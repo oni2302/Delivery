@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<Delivery.Models.TaiKhoan_TimKiem_Result>
+@*@model IEnumerable<Delivery.Models.View_DanhSachTK>*@
 
 @{
     ViewBag.Title = "Index";
@@ -8,11 +9,10 @@
 
 @using (Html.BeginForm())
 {
-
     <div class="container" style="background-color: #F2F2F2; padding: 50px 50px 20px 50px; ">
         <div class="form-horizontal" style="background-color: white; padding: 30px; border-radius: 1rem">
             <h4>Người dùng hệ thống</h4>
-            <hr />
+            <hr/>
             <div class="d-flex justify-content-around">
                 <div class="col mb-3">
                     <label for="" class="form-label">Tên tài khoản </label>
@@ -37,8 +37,9 @@
             </div>
         </div>
     </div>
+
 }
-  <div class="container" style="background-color: #F2F2F2; padding-left:50px; padding-right:50px;">
+  <div class="container" style="background-color: #F2F2F2; padding: 0 50px 50px 50px;">
     <div class="form-horizontal" style="background-color: white; padding: 30px; border-radius: 1rem;">
         <table class="table table-hover">
             <tr>
@@ -80,11 +81,9 @@
                     </td>
                 </tr>
             }
-
         </table>
     </div>
 </div>
-
 
     <div class="modal fade" id="reset" tabindex="-1" style="display: none;">
         <div class="modal-dialog modal-dialog-centered">
@@ -176,15 +175,15 @@
     <script>
         $(document).ready(function () {
 
-            //$(".btn_res").click(function () {
-            //    $("#notice").fadeIn(2000, function () {
-            //        $("#notice").fadeOut(2000)
-            //    });
-            //});
+            if ($("#notice").is(':visible')) {
+                $("#notice").css({ "position": "fixed", "bottom": "5%", "right": "2%" })
 
-            $(".btn_res").click(function () {
-                alert("Successfully Reset")
-            });
+                $("#notice").fadeIn(2500, function () {
+                    $("#notice").fadeOut(5000)
+                });
+            }
+
+
 
         });
 

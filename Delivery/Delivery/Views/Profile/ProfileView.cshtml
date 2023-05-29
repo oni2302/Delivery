@@ -15,7 +15,6 @@
 @if (!string.IsNullOrEmpty(successMessage))
 {
     <div id="notice" class="alert alert-success text-light" style="background: linear-gradient(90deg, #54BF5A 0.7%, #2D9147 71.82%);">@successMessage</div>
-
 }
 
 @*@if (TempData["SuccessMessage"] != null && TempData["SuccessMessage"].ToString() == "success")
@@ -118,8 +117,10 @@
     $(document).ready(function () {
 
         if ($("#notice").is(':visible')) {
-            $("#notice").fadeIn(2000, function () {
-                $("#notice").fadeOut(2000)
+            $("#notice").css({ "position": "fixed", "bottom": "5%", "right": "2%" })
+
+            $("#notice").fadeIn(2500, function () {
+                $("#notice").fadeOut(5000)
             });
         }
     });

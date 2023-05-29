@@ -98,16 +98,6 @@
       <Parameter Name="MaDonHang" Mode="In" Type="Int32" />
       <Parameter Name="MaNhanVien" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="NhanVien_TimKiem" ReturnType="Collection(GiaoHangModel.NhanVien_TimKiem_Result)">
-      <Parameter Name="manv" Mode="In" Type="Int32" />
-      <Parameter Name="tennv" Mode="In" Type="String" />
-      <Parameter Name="khuvuc" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="TaiKhoan_TimKiem" ReturnType="Collection(GiaoHangModel.TaiKhoan_TimKiem_Result)">
-      <Parameter Name="tentk" Mode="In" Type="String" />
-      <Parameter Name="hoten" Mode="In" Type="String" />
-      <Parameter Name="loaitk" Mode="In" Type="String" />
-    </FunctionImport>
     <FunctionImport Name="NhanVien_ChiTiet" ReturnType="Collection(GiaoHangModel.NhanVien_ChiTiet_Result)">
       <Parameter Name="MaNhanVien" Mode="In" Type="Int32" />
     </FunctionImport>
@@ -143,6 +133,32 @@
     <FunctionImport Name="NhanVien_Xoa_ChiTiet" ReturnType="Collection(GiaoHangModel.NhanVien_Xoa_ChiTiet_Result)">
       <Parameter Name="MaNhanVien" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="TaiKhoan_Reset" ReturnType="Collection(Int32)">
+      <Parameter Name="manv" Mode="In" Type="Int32" />
+      <Parameter Name="pass" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ThongKe_DaNhan1" ReturnType="Collection(GiaoHangModel.ThongKe_DaNhan1_Result)">
+      <Parameter Name="year" Mode="In" Type="Int32" />
+      <Parameter Name="month" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ThongKe_LayNam1" ReturnType="Collection(Int32)" />
+    <FunctionImport Name="ThongKe_LayThang1" ReturnType="Collection(Int32)" />
+    <FunctionImport Name="NhanVien_TimKiem" ReturnType="Collection(GiaoHangModel.NhanVien_TimKiem_Result)">
+      <Parameter Name="manv" Mode="In" Type="Int32" />
+      <Parameter Name="tennv" Mode="In" Type="String" />
+      <Parameter Name="khuvuc" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="TaiKhoan_TimKiem" ReturnType="Collection(GiaoHangModel.TaiKhoan_TimKiem_Result)">
+      <Parameter Name="tentk" Mode="In" Type="String" />
+      <Parameter Name="hoten" Mode="In" Type="String" />
+      <Parameter Name="loaitk" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ThongKeDonDaGiao" ReturnType="Collection(GiaoHangModel.ThongKeDonDaGiao_Result)">
+      <Parameter Name="year" Mode="In" Type="Int32" />
+      <Parameter Name="month" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ThongKeDonDaGiao_LayNam" ReturnType="Collection(Int32)" />
+    <FunctionImport Name="ThongKeDonDaGiao_LayThang" ReturnType="Collection(Int32)" />
   </EntityContainer>
   <ComplexType Name="Account_DangNhap_Result">
     <Property Type="Int32" Name="MaNhanVien" Nullable="false" />
@@ -374,20 +390,6 @@
     <Property Type="Int32" Name="Nam" Nullable="true" />
     <Property Type="Int32" Name="SL" Nullable="true" />
   </ComplexType>
-  <ComplexType Name="NhanVien_TimKiem_Result">
-    <Property Type="Int32" Name="MaNhanVien" Nullable="false" />
-    <Property Type="String" Name="TenNhanVien" Nullable="true" MaxLength="50" />
-    <Property Type="DateTime" Name="NgaySinh" Nullable="true" />
-    <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="SoDienThoai" Nullable="true" MaxLength="11" />
-    <Property Type="String" Name="TenKhuVuc" Nullable="true" MaxLength="100" />
-  </ComplexType>
-  <ComplexType Name="TaiKhoan_TimKiem_Result">
-    <Property Type="Int32" Name="MaNhanVien" Nullable="false" />
-    <Property Type="String" Name="TenTaiKhoan" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="TenNhanVien" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="LoaiTaiKhoan" Nullable="true" MaxLength="50" />
-  </ComplexType>
   <ComplexType Name="NhanVien_ChiTiet_Result">
     <Property Type="Int32" Name="MaNhanVien" Nullable="false" />
     <Property Type="String" Name="TenNhanVien" Nullable="true" MaxLength="50" />
@@ -436,5 +438,31 @@
     <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
     <Property Type="String" Name="SoDienThoai" Nullable="true" MaxLength="11" />
     <Property Type="String" Name="TenKhuVuc" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="ThongKe_DaNhan1_Result">
+    <Property Type="Int32" Name="Ngay" Nullable="true" />
+    <Property Type="Int32" Name="Thang" Nullable="true" />
+    <Property Type="Int32" Name="Nam" Nullable="true" />
+    <Property Type="Int32" Name="SL" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="NhanVien_TimKiem_Result">
+    <Property Type="Int32" Name="MaNhanVien" Nullable="false" />
+    <Property Type="String" Name="TenNhanVien" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="NgaySinh" Nullable="true" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="SoDienThoai" Nullable="true" MaxLength="11" />
+    <Property Type="String" Name="TenKhuVuc" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="TaiKhoan_TimKiem_Result">
+    <Property Type="Int32" Name="MaNhanVien" Nullable="false" />
+    <Property Type="String" Name="TenTaiKhoan" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="TenNhanVien" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="LoaiTaiKhoan" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="ThongKeDonDaGiao_Result">
+    <Property Type="Int32" Name="Ngay" Nullable="true" />
+    <Property Type="Int32" Name="Thang" Nullable="true" />
+    <Property Type="Int32" Name="Nam" Nullable="true" />
+    <Property Type="Int32" Name="SL" Nullable="true" />
   </ComplexType>
 </Schema>

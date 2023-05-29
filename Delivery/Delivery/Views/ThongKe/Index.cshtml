@@ -1,32 +1,51 @@
-﻿@{
-
-    ViewBag.Title = "ThongKe";
+﻿
+@{
+    ViewBag.Title = "Báo cáo thống kê";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="row">
-    <div>
-        @Html.DropDownList("Year", null, "Select", new { @class = "form-select p-2", @id = "sly" })
+<div class="container" style="padding: 30px 50px; border-radius: 1rem">
+    <h4 class="mb-3">Thống kê</h4>
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="card mb-4">
+                <div class="card-header d-flex justify-content-between">
+                    <h6 class="mt-2">Thống kê số lượng đơn hàng đã nhận</h6>
+                    <a class="mt-2 text-decoration-none text-success" href="@Url.Action("ThongKe", "ThongKe")">Chi tiết ></a>
+                </div>
+                <div class="card-body">
+                    <div id="barChart" class="container w-100 mt-4 align-items-center" style="height: 250px;">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                    <p style="margin-left: 38%;">Thời gian (ngày)</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="card mb-4">
+                <div class="card-header d-flex justify-content-between">
+                    <h6 class="mt-2">Thống kê số lượng đơn hàng đã giao</h6>
+                    <a class="mt-2 text-decoration-none text-success" href="@Url.Action("ThongKeDonDaGiao", "ThongKe")">Chi tiết ></a>
+                </div>
+                <div class="card-body">
+                    <div id="Chart_DaGiao" class="container w-100 mt-4 align-items-center" style="height: 250px;">
+                        <canvas id="Chart_DG"></canvas>
+                    </div>
+                    <p style="margin-left: 38%;">Thời gian (ngày)</p>
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-        @Html.DropDownList("Month", null, "Select", new { @class = "form-select p-2", @id = "slm" })
-    </div>
-</div>
-
-
-
-<div id="barChart" class="container w-75 mt-4" style="height: 450px;">
-    <canvas id="myChart"></canvas>
 </div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 
-
     //Lấy năm hiện tại để hiển thị chart - mặc định trang chart không bị trống lúc đầu khi load dữ liệu
     var Year = new Date();
     var Month = new Date();
-    GetCurrentYear(Year.getFullYear(), Month.getMonth());
+    GetCurrentYear(Year.getFullYear(), Month.getMonth() + 1);
 
     //Xét sk onchange để lấy dữ liệu theo giá trị year
     $('#sly').on('change', function () {
@@ -46,13 +65,11 @@
         });
     }
 
-
     function CreateChart(lstdata) {
 
         //Xóa chart cũ tạo chart mới mỗi khi load lại
         $("canvas#myChart").remove();
         $('#barChart').html('<canvas id="myChart"></canvas>');
-
 
         var label = [];
         var dtsource = [];
@@ -70,8 +87,9 @@
             labels: label,
             datasets: [
                 {
-                    label: 'Số lượng đơn đã giao',
-                    backgroundColor: '#0b9663',
+                    label: 'Số lượng đơn đã nhận',
+                    backgroundColor: 'rgb(67,172,82,0.5)',
+                    borderColor: 'rgb(34,133,66)',
                     borderWidth: 1,
                     data: dtsource
                 }
@@ -85,6 +103,9 @@
     }
 
 </script>
+
+
+
 
 
 

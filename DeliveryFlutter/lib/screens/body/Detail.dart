@@ -2,6 +2,11 @@ import 'package:delivery/Entities/DonHang.dart';
 import 'package:flutter/material.dart';
 import 'package:vertical_stepper/vertical_stepper.dart';
 import 'package:vertical_stepper/vertical_stepper.dart' as step;
+import 'package:delivery/Entities/ApiHelper.dart';
+
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
 
 class Detail extends StatefulWidget {
   static DonHang? donHang;
@@ -10,6 +15,65 @@ class Detail extends StatefulWidget {
   @override
   State<Detail> createState() => _DetailState();
 }
+
+// Xác nhận lấy hàng
+  Future<int> _xacNhanDaLayHang(id) async {
+    final response = await http.post(
+      Uri.parse('${ApiHelper.ip}/nvgh/xacnhanlayhang/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode(<String, int>{
+        'id': id,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      dynamic result = jsonDecode(response.body);
+      return result["Result"];
+    } else {
+      throw Exception('Server không phản hồi T_T');
+    }
+  }
+
+  // Xác nhận đang giao hàng
+  Future<int> _xacNhanDangGiaoHang(id) async {
+    final response = await http.post(
+      Uri.parse('${ApiHelper.ip}/nvgh/xacnhandanggiaohang/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode(<String, int>{
+        'id': id,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      dynamic result = jsonDecode(response.body);
+      return result["Result"];
+    } else {
+      throw Exception('Server không phản hồi T_T');
+    }
+  }
+
+  // Xác nhận đã giao hàng
+  Future<int> _xacNhanDaGiaoHang(id) async {
+    final response = await http.post(
+      Uri.parse('${ApiHelper.ip}/nvgh/xacnhandagiaohang/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode(<String, int>{
+        'id': id,
+      }),
+    );
+    if (response.statusCode == 200) {
+      dynamic result = jsonDecode(response.body);
+      return result["Result"];
+    } else {
+      throw Exception('Server không phản hồi T_T');
+    }
+  }
 
 class _DetailState extends State<Detail> with TickerProviderStateMixin {
   List<step.Step> steps = [
@@ -54,6 +118,165 @@ class _DetailState extends State<Detail> with TickerProviderStateMixin {
           child: Text("12:30:40 02/05/2023"),
         )),
   ];
+
+  // Hàm xử lý sự kiện khi nhấn nút Xác nhận lấy hàng
+    void _handleXacNhanLayHang() async {
+      final id = Detail.donHang?.maDonHang; // Lấy id của đơn hàng từ biến static
+      if (id != null) {
+        if (Detail.donHang!.maTrangThai == 4) {
+          try {
+            int result = await _xacNhanDaLayHang(id);
+            if (result != -1) {
+              Detail.donHang!.tenTrangThai = 'Đã lấy hàng';
+              Detail.donHang!.maTrangThai = 5;
+              setState(() {});
+            } else {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text('Lỗi'),
+                    content: Text('Lấy hàng không thành công.'),
+                    actions: [
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text('Đóng'),
+                      ),
+                    ],
+                  );
+                },
+              );
+            }
+          } catch (error) {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text('Lỗi'),
+                  content: Text('Đã xảy ra lỗi trong quá trình xác nhận lấy hàng.'),
+                  actions: [
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Text('Đóng'),
+                    ),
+                  ],
+                );
+              },
+            );
+          }
+        }
+      }
+    }
+
+    // Hàm xử lý sự kiện khi nhấn nút Xác nhận đang giao hàng
+    void _handleXacNhanDangGiaoHang() async{
+      final id = Detail.donHang?.maDonHang; // Lấy id của đơn hàng từ biến static
+      if (id != null) {
+        if (Detail.donHang!.maTrangThai == 5) {
+          try {
+            int result = await _xacNhanDangGiaoHang(id);
+            if (result != -1) {
+              Detail.donHang!.tenTrangThai = 'Đang giao hàng';
+              Detail.donHang!.maTrangThai = 6;
+              setState(() {});
+            } else {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text('Lỗi'),
+                    content: Text('Xác nhận Đang giao hàng không thành công.'),
+                    actions: [
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text('Đóng'),
+                      ),
+                    ],
+                  );
+                },
+              );
+            }
+          } catch (error) {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text('Lỗi'),
+                  content: Text('Đã xảy ra lỗi trong quá trình xác nhận Đang giao hàng.'),
+                  actions: [
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Text('Đóng'),
+                    ),
+                  ],
+                );
+              },
+            );
+          }
+        }
+      }
+    }
+
+    // Hàm xử lý sự kiện khi nhấn nút Xác nhận đã giao hàng
+    void _handleXacNhanDaGiaoHang() async{
+      final id = Detail.donHang?.maDonHang; // Lấy id của đơn hàng từ biến static
+      if (id != null) {
+      if (Detail.donHang!.maTrangThai == 6) {
+          try {
+            int result = await _xacNhanDaGiaoHang(id);
+            if (result != -1) {
+              Detail.donHang!.tenTrangThai = 'Đã giao hàng';
+              Detail.donHang!.maTrangThai = 7;
+              setState(() {});
+            } else {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text('Lỗi'),
+                    content: Text('Xác nhận Đã giao hàng không thành công.'),
+                    actions: [
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text('Đóng'),
+                      ),
+                    ],
+                  );
+                },
+              );
+            }
+          } catch (error) {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text('Lỗi'),
+                  content: Text('Đã xảy ra lỗi trong quá trình xác nhận Đã giao hàng.'),
+                  actions: [
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Text('Đóng'),
+                    ),
+                  ],
+                );
+              },
+            );
+          }
+        }
+      }
+    }
 
   @override
   Widget build(BuildContext context) {
@@ -158,6 +381,23 @@ class _DetailState extends State<Detail> with TickerProviderStateMixin {
                   ],
                 ),
               ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: _handleXacNhanLayHang,
+                  child: Text('Đã lấy hàng'),
+                ),
+                ElevatedButton(
+                  onPressed: _handleXacNhanDangGiaoHang,
+                  child: Text('Đang giao hàng'),
+                ),
+                ElevatedButton(
+                  onPressed: _handleXacNhanDaGiaoHang,
+                  child: Text('Đã giao hàng'),
+                ),
+              ],
             ),
             const Padding(
               padding: EdgeInsets.only(
