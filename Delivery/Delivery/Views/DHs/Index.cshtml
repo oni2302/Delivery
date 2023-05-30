@@ -47,10 +47,10 @@
                         @Html.DisplayName("Địa chỉ người gửi")
                     </th>
                     <th>
-                        @Html.DisplayName("Địa chỉ người nhận")
+                        @Html.DisplayName("Người nhận")
                     </th>
                     <th>
-                        @Html.DisplayName("Người nhận")
+                        @Html.DisplayName("Địa chỉ người nhận")
                     </th>
                     <th>
                         @Html.DisplayName("Trạng thái")
@@ -73,10 +73,10 @@
                             <p>@Html.DisplayFor(model => item.Tu)</p>
                         </td>
                         <td>
-                            <p>@Html.DisplayFor(model => item.DiaChiNguoiNhan), @Html.DisplayFor(model => item.DiaChiPhuong), @Html.DisplayFor(model => item.DiaChiQuan), @Html.DisplayFor(model => item.DiaChiThanhPho)</p>
+                            <p>@Html.DisplayFor(model => item.NguoiNhan)</p>
                         </td>
                         <td>
-                            <p>@Html.DisplayFor(model => item.NguoiNhan)</p>
+                            <p>@Html.DisplayFor(model => item.DiaChiNguoiNhan), @Html.DisplayFor(model => item.DiaChiPhuong), @Html.DisplayFor(model => item.DiaChiQuan), @Html.DisplayFor(model => item.DiaChiThanhPho)</p>
                         </td>
                         <td>
                             @{
@@ -91,7 +91,7 @@
                             @Html.ActionLink("Chi tiết", "Details", new { id = @item.MaDonHang }, new { @class = "btn btn-outline-success" })
                             @Html.ActionLink("Nhận đơn", "NhanDon", new { id = @item.MaDonHang }, new { @class = "btn btn-success" })
                         </td>
-                       
+
                     </tr>
                 }
             </table>
