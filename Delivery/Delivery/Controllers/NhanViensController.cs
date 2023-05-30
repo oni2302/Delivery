@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 using Delivery.Common;
 using Delivery.Models;
+using PagedList;
 
 namespace Delivery.Controllers
 {
@@ -36,9 +37,10 @@ namespace Delivery.Controllers
                 return View(listNVSearch.ToList());
             }
 
-            var ListNV = db.NhanVien_TimKiem(null,null,null);
+            var ListNV = db.NhanVien_TimKiem(null, null, null);
             return View(ListNV.ToList());
         }
+
 
         //GET: NhanViens/Create
         public ActionResult Create()
@@ -55,8 +57,16 @@ namespace Delivery.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.NhanVien_ThemNhanVien(nhanVien.TenNhanVien, nhanVien.NgaySinh, nhanVien.Email, nhanVien.SoDienThoai, nhanVien.MaKhuVuc);
-                return RedirectToAction("Index");
+                var test = db.NhanVien_Add(nhanVien.TenNhanVien, nhanVien.NgaySinh, nhanVien.Email, nhanVien.SoDienThoai, nhanVien.MaKhuVuc).SingleOrDefault();
+                if (test != "Hợp lệ")
+                {
+                    ModelState.AddModelError("CreateFailed", test);
+                }
+                else
+                {
+                    TempData["SuccessMessage"] = "Thêm thành công";
+                    return RedirectToAction("Index");
+                }
             }
             ViewBag.MaKhuVuc = new SelectList(db.NhanVien_KhuVuc(), "MaKhuVuc", "TenKhuVuc", nhanVien.MaKhuVuc);
             return View(nhanVien);
@@ -82,8 +92,11 @@ namespace Delivery.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
-            db.NhanVien_Xoa(id);
-            db.SaveChanges();
+            var result = db.NhanVien_Xoa(id).SingleOrDefault();
+            if (result > 0)
+            {
+                TempData["SuccessMessage"] = "Xóa thành công";
+            }
             return RedirectToAction("Index");
         }
 

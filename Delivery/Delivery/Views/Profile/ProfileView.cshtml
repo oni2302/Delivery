@@ -3,7 +3,7 @@
     var info = ViewBag.sua as Delivery.Models.Profile_Get_Result;
     ViewBag.Title = "Profile";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    
+
 }
 
 
@@ -14,15 +14,20 @@
 
 @if (!string.IsNullOrEmpty(successMessage))
 {
-    <div id="notice" class="alert alert-success text-light" style="background: linear-gradient(90deg, #54BF5A 0.7%, #2D9147 71.82%);">@successMessage</div>
+    <div id="notice" class="position-fixed" role="alert" style="bottom:5%; right:2%; width:32%;  background-color: rgba(36, 200, 104, 0.8); border-radius: 2.5rem;">
+        <div class="d-flex justify-content-around" style="height: 90px; position: relative;">
+
+            <i class="fas fa-check position-absolute top-50 translate-middle-y p-4 text-center"
+               style="background-color: rgba(36, 200, 104, 1); border-radius:50%; color:white; left:10%;"></i>
+
+            <div class="position-absolute top-50 translate-middle-y" style="right:25%; color:white;">
+                <h5>@successMessage</h5>
+            </div>
+
+        </div>
+    </div>
 }
 
-@*@if (TempData["SuccessMessage"] != null && TempData["SuccessMessage"].ToString() == "success")
-    {
-        <script>
-            alert("Lưu thành công");
-        </script>
-    }*@
 
 <form action="~/Profile/ProfileView" method="post" enctype="multipart/form-data">
     <div class="container" style="background-color: #F2F2F2; padding: 50px; margin: auto">
@@ -120,7 +125,7 @@
             $("#notice").css({ "position": "fixed", "bottom": "5%", "right": "2%" })
 
             $("#notice").fadeIn(2500, function () {
-                $("#notice").fadeOut(5000)
+                $("#notice").fadeOut(3000)
             });
         }
     });

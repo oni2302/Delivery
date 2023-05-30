@@ -30,13 +30,6 @@
     <FunctionImport Name="NhanVien_DanhSach" ReturnType="Collection(GiaoHangModel.NhanVien_DanhSach_Result)" />
     <FunctionImport Name="NhanVien_KhuVuc" ReturnType="Collection(GiaoHangModel.NhanVien_KhuVuc_Result)" />
     <FunctionImport Name="NhanVien_LoaiTK" ReturnType="Collection(GiaoHangModel.NhanVien_LoaiTK_Result)" />
-    <FunctionImport Name="NhanVien_ThemNhanVien" ReturnType="Collection(Int32)">
-      <Parameter Name="TenNhanVien" Mode="In" Type="String" />
-      <Parameter Name="NgaySinh" Mode="In" Type="DateTime" />
-      <Parameter Name="Email" Mode="In" Type="String" />
-      <Parameter Name="Sdt" Mode="In" Type="String" />
-      <Parameter Name="MaKhuVuc" Mode="In" Type="Int32" />
-    </FunctionImport>
     <FunctionImport Name="NhanVien_Xoa" ReturnType="Collection(Int32)">
       <Parameter Name="MaNhanVien" Mode="In" Type="Int32" />
     </FunctionImport>
@@ -159,6 +152,17 @@
     </FunctionImport>
     <FunctionImport Name="ThongKeDonDaGiao_LayNam" ReturnType="Collection(Int32)" />
     <FunctionImport Name="ThongKeDonDaGiao_LayThang" ReturnType="Collection(Int32)" />
+    <FunctionImport Name="NhanVien_Add" ReturnType="Collection(String)">
+      <Parameter Name="TenNhanVien" Mode="In" Type="String" />
+      <Parameter Name="NgaySinh" Mode="In" Type="DateTime" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="Sdt" Mode="In" Type="String" />
+      <Parameter Name="MaKhuVuc" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="TaiKhoan_RSPass" ReturnType="Collection(String)">
+      <Parameter Name="tentk" Mode="In" Type="String" />
+      <Parameter Name="pass" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="Account_DangNhap_Result">
     <Property Type="Int32" Name="MaNhanVien" Nullable="false" />

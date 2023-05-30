@@ -40,6 +40,13 @@
         <Function Name="MenuOf" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MaNhanVien" Type="int" Mode="In" />
         </Function>
+        <Function Name="NhanVien_Add" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TenNhanVien" Type="nvarchar" Mode="In" />
+          <Parameter Name="NgaySinh" Type="date" Mode="In" />
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+          <Parameter Name="Sdt" Type="varchar" Mode="In" />
+          <Parameter Name="MaKhuVuc" Type="int" Mode="In" />
+        </Function>
         <Function Name="NhanVien_ChiTiet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MaNhanVien" Type="int" Mode="In" />
         </Function>
@@ -53,13 +60,6 @@
           <Parameter Name="NgaySinh" Type="date" Mode="In" />
           <Parameter Name="Email" Type="varchar" Mode="In" />
           <Parameter Name="SoDienThoai" Type="char" Mode="In" />
-          <Parameter Name="MaKhuVuc" Type="int" Mode="In" />
-        </Function>
-        <Function Name="NhanVien_ThemNhanVien" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="TenNhanVien" Type="nvarchar" Mode="In" />
-          <Parameter Name="NgaySinh" Type="date" Mode="In" />
-          <Parameter Name="Email" Type="varchar" Mode="In" />
-          <Parameter Name="Sdt" Type="varchar" Mode="In" />
           <Parameter Name="MaKhuVuc" Type="int" Mode="In" />
         </Function>
         <Function Name="NhanVien_TimKiem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -128,8 +128,9 @@
           <Parameter Name="manv" Type="int" Mode="In" />
           <Parameter Name="pass" Type="varchar" Mode="In" />
         </Function>
-        <Function Name="TaiKhoan_ResetPass" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="manv" Type="int" Mode="In" />
+        <Function Name="TaiKhoan_RSPass" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tentk" Type="varchar" Mode="In" />
+          <Parameter Name="pass" Type="varchar" Mode="In" />
         </Function>
         <Function Name="TaiKhoan_TimKiem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="tentk" Type="nvarchar" Mode="In" />
@@ -189,13 +190,6 @@
           <FunctionImport Name="NhanVien_DanhSach" ReturnType="Collection(GiaoHangModel.NhanVien_DanhSach_Result)" />
           <FunctionImport Name="NhanVien_KhuVuc" ReturnType="Collection(GiaoHangModel.NhanVien_KhuVuc_Result)" />
           <FunctionImport Name="NhanVien_LoaiTK" ReturnType="Collection(GiaoHangModel.NhanVien_LoaiTK_Result)" />
-          <FunctionImport Name="NhanVien_ThemNhanVien" ReturnType="Collection(Int32)">
-            <Parameter Name="TenNhanVien" Mode="In" Type="String" />
-            <Parameter Name="NgaySinh" Mode="In" Type="DateTime" />
-            <Parameter Name="Email" Mode="In" Type="String" />
-            <Parameter Name="Sdt" Mode="In" Type="String" />
-            <Parameter Name="MaKhuVuc" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="NhanVien_Xoa" ReturnType="Collection(Int32)">
           <Parameter Name="MaNhanVien" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -318,6 +312,17 @@
           </FunctionImport>
           <FunctionImport Name="ThongKeDonDaGiao_LayNam" ReturnType="Collection(Int32)" />
           <FunctionImport Name="ThongKeDonDaGiao_LayThang" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="NhanVien_Add" ReturnType="Collection(String)">
+            <Parameter Name="TenNhanVien" Mode="In" Type="String" />
+            <Parameter Name="NgaySinh" Mode="In" Type="DateTime" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Sdt" Mode="In" Type="String" />
+            <Parameter Name="MaKhuVuc" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="TaiKhoan_RSPass" ReturnType="Collection(String)">
+            <Parameter Name="tentk" Mode="In" Type="String" />
+            <Parameter Name="pass" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="Account_DangNhap_Result">
           <Property Type="Int32" Name="MaNhanVien" Nullable="false" />
@@ -840,7 +845,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="NhanVien_ThemNhanVien" FunctionName="GiaoHangModel.Store.NhanVien_ThemNhanVien" />
           <FunctionImportMapping FunctionImportName="NhanVien_Xoa" FunctionName="GiaoHangModel.Store.NhanVien_Xoa" />
           <FunctionImportMapping FunctionImportName="sp_Shiper_Don_Hang_Can_Giao" FunctionName="GiaoHangModel.Store.sp_Shiper_Don_Hang_Can_Giao">
             <ResultMapping>
@@ -915,7 +919,6 @@
           <FunctionImportMapping FunctionImportName="TaiKhoan_DoiMK" FunctionName="GiaoHangModel.Store.TaiKhoan_DoiMK" />
           <FunctionImportMapping FunctionImportName="TaiKhoan_LayTen" FunctionName="GiaoHangModel.Store.TaiKhoan_LayTen" />
           <FunctionImportMapping FunctionImportName="TaiKhoan_Profile" FunctionName="GiaoHangModel.Store.TaiKhoan_Profile" />
-          <FunctionImportMapping FunctionImportName="TaiKhoan_ResetPass" FunctionName="GiaoHangModel.Store.TaiKhoan_ResetPass" />
           <FunctionImportMapping FunctionImportName="ThongKe_DaNhan" FunctionName="GiaoHangModel.Store.ThongKe_DaNhan">
             <ResultMapping>
               <ComplexTypeMapping TypeName="GiaoHangModel.ThongKe_DaNhan_Result">
@@ -1046,6 +1049,8 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ThongKeDonDaGiao_LayNam" FunctionName="GiaoHangModel.Store.ThongKeDonDaGiao_LayNam" />
           <FunctionImportMapping FunctionImportName="ThongKeDonDaGiao_LayThang" FunctionName="GiaoHangModel.Store.ThongKeDonDaGiao_LayThang" />
+          <FunctionImportMapping FunctionImportName="NhanVien_Add" FunctionName="GiaoHangModel.Store.NhanVien_Add" />
+          <FunctionImportMapping FunctionImportName="TaiKhoan_RSPass" FunctionName="GiaoHangModel.Store.TaiKhoan_RSPass" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

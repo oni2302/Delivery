@@ -3,6 +3,24 @@
 @{
     ViewBag.Title = "Quản lý nhân viên";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var successMessage = TempData["SuccessMessage"] as string;
+    var errorMessage = TempData["ErrorMessage"] as string;
+}
+
+@if (!string.IsNullOrEmpty(successMessage))
+{
+    <div id="notice" class="position-fixed" role="alert" style="bottom:5%; right:2%; width:32%; background-color: rgba(36, 200, 104, 0.8); border-radius: 2.5rem;">
+        <div class="d-flex justify-content-around" style="height: 90px; position: relative;">
+
+            <i class="fas fa-check position-absolute top-50 translate-middle-y p-4 text-center"
+               style="background-color: rgba(36, 200, 104, 1); border-radius:50%; color:white; left:10%;"></i>
+
+            <div class="position-absolute top-50 translate-middle-y" style="right:25%; color:white;">
+                <h5>@successMessage</h5>
+            </div>
+
+        </div>
+    </div>
 }
 
 @using (Html.BeginForm())
@@ -15,7 +33,7 @@
                 <div class="col mb-3">
                     @Html.DisplayName("Mã nhân viên")
                     <div class="col mt-2">
-                        <input type="number" class="form-control" value="" name="MaNV" placeholder="" />
+                        <input type="number" class="form-control" value="" name="MaNV" placeholder="" min="0" />
                     </div>
                 </div>
                 <div class="col mb-3">
@@ -101,3 +119,15 @@
         </div>
     </div>
 }
+
+<script>
+    $(document).ready(function () {
+
+        if ($("#notice").is(':visible')) {
+            $("#notice").css({ "position": "fixed", "bottom": "5%", "right": "2%" })
+
+            $("#notice").fadeIn(2500, function () {
+                $("#notice").fadeOut(3000)
+            });
+        }
+    });</script>

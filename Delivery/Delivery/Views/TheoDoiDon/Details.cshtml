@@ -1,6 +1,6 @@
 ﻿@model Delivery.Models.DonHang_Find_detail_Result
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Chi tiết đơn hàng";
     Layout = "~/Views/Shared/_Layout.cshtml";
     int trangthai = Convert.ToInt32(Html.DisplayFor(model => model.TrangThai).ToString());
 }
@@ -14,7 +14,7 @@
         .timeline ol {
             font-size: 0;
             width: 100vw;
-            padding: 250px 0;
+            padding: 300px 0;
             transition: all 1s;
         }
 
@@ -45,7 +45,7 @@
                     height: 12px;
                     transform: translateY(-50%);
                     border-radius: 50%;
-                    background: #20e35a;
+                    background: #43ac52;
                 }
 
                 /*Style cho Phần tử Timeline*/
@@ -111,7 +111,7 @@
 </style>
 
 <div class="container" style="background-color: #F2F2F2; padding: 50px;">
-    <h5 class="fw-bold text-uppercase text-center">Trạng Thái của đơn hàng có mã : <span class="text-danger">@Html.DisplayFor(model => model.MaDonHang)</span></h5>
+    <h5 class="fw-bold text-uppercase text-center">Trạng Thái của đơn hàng có mã: <span class="text-danger">@Html.DisplayFor(model => model.MaDonHang)</span></h5>
     <div>
         <div>
             <p><b>Người gửi: </b>@Html.DisplayFor(model => model.NguoiGui)</p>
@@ -120,7 +120,7 @@
         </div>
         <div></div>
     </div>
-    <div class="container">
+    <div class="container p-4">
         @if (trangthai != 0 && trangthai <=7)
         {
             <section class="timeline">
@@ -137,7 +137,7 @@
                             }
                         </div>
                     </li>
-
+                    
                     <!-- more list items here -->
 
                     <li>

@@ -57,7 +57,11 @@ namespace Delivery.Controllers
             if (ModelState.IsValid)
             {
             var login_Session = (Account_Session_Result)Session[Common.CommonConstants.NGUOI_DUNG];
-            db.DonHang_XacNhanDon(id, login_Session.MaNhanVien);
+            var result = db.DonHang_XacNhanDon(id, login_Session.MaNhanVien);
+                if (result > 0)
+                {
+                    TempData["SuccessMessage"] = "Nhận đơn thành công";
+                }
             }
             return RedirectToAction("index");
         }

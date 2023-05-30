@@ -211,7 +211,6 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="NhanVien_ThemNhanVien" FunctionName="GiaoHangModel.Store.NhanVien_ThemNhanVien" />
     <FunctionImportMapping FunctionImportName="NhanVien_Xoa" FunctionName="GiaoHangModel.Store.NhanVien_Xoa" />
     <FunctionImportMapping FunctionImportName="sp_Shiper_Don_Hang_Can_Giao" FunctionName="GiaoHangModel.Store.sp_Shiper_Don_Hang_Can_Giao">
       <ResultMapping>
@@ -286,7 +285,6 @@
     <FunctionImportMapping FunctionImportName="TaiKhoan_DoiMK" FunctionName="GiaoHangModel.Store.TaiKhoan_DoiMK" />
     <FunctionImportMapping FunctionImportName="TaiKhoan_LayTen" FunctionName="GiaoHangModel.Store.TaiKhoan_LayTen" />
     <FunctionImportMapping FunctionImportName="TaiKhoan_Profile" FunctionName="GiaoHangModel.Store.TaiKhoan_Profile" />
-    <FunctionImportMapping FunctionImportName="TaiKhoan_ResetPass" FunctionName="GiaoHangModel.Store.TaiKhoan_ResetPass" />
     <FunctionImportMapping FunctionImportName="ThongKe_DaNhan" FunctionName="GiaoHangModel.Store.ThongKe_DaNhan">
       <ResultMapping>
         <ComplexTypeMapping TypeName="GiaoHangModel.ThongKe_DaNhan_Result">
@@ -417,5 +415,7 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="ThongKeDonDaGiao_LayNam" FunctionName="GiaoHangModel.Store.ThongKeDonDaGiao_LayNam" />
     <FunctionImportMapping FunctionImportName="ThongKeDonDaGiao_LayThang" FunctionName="GiaoHangModel.Store.ThongKeDonDaGiao_LayThang" />
+    <FunctionImportMapping FunctionImportName="NhanVien_Add" FunctionName="GiaoHangModel.Store.NhanVien_Add" />
+    <FunctionImportMapping FunctionImportName="TaiKhoan_RSPass" FunctionName="GiaoHangModel.Store.TaiKhoan_RSPass" />
   </EntityContainerMapping>
 </Mapping>

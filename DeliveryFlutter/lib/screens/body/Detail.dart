@@ -384,18 +384,20 @@ class _DetailState extends State<Detail> with TickerProviderStateMixin {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 ElevatedButton(
                   onPressed: _handleXacNhanLayHang,
-                  child: Text('Đã lấy hàng'),
+                  child: Text('Đã lấy hàng', style: TextStyle(fontSize: 15)),
+                  
                 ),
                 ElevatedButton(
                   onPressed: _handleXacNhanDangGiaoHang,
-                  child: Text('Đang giao hàng'),
+                  child: Text('Đang giao hàng', style: TextStyle(fontSize: 15)),
                 ),
                 ElevatedButton(
                   onPressed: _handleXacNhanDaGiaoHang,
-                  child: Text('Đã giao hàng'),
+                  child: Text('Đã giao hàng', style: TextStyle(fontSize: 15)),
                 ),
               ],
             ),

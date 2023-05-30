@@ -172,38 +172,6 @@ public partial class GiaoHangEntities : DbContext
     }
 
 
-    public virtual ObjectResult<Nullable<int>> NhanVien_ThemNhanVien(string tenNhanVien, Nullable<System.DateTime> ngaySinh, string email, string sdt, Nullable<int> maKhuVuc)
-    {
-
-        var tenNhanVienParameter = tenNhanVien != null ?
-            new ObjectParameter("TenNhanVien", tenNhanVien) :
-            new ObjectParameter("TenNhanVien", typeof(string));
-
-
-        var ngaySinhParameter = ngaySinh.HasValue ?
-            new ObjectParameter("NgaySinh", ngaySinh) :
-            new ObjectParameter("NgaySinh", typeof(System.DateTime));
-
-
-        var emailParameter = email != null ?
-            new ObjectParameter("Email", email) :
-            new ObjectParameter("Email", typeof(string));
-
-
-        var sdtParameter = sdt != null ?
-            new ObjectParameter("Sdt", sdt) :
-            new ObjectParameter("Sdt", typeof(string));
-
-
-        var maKhuVucParameter = maKhuVuc.HasValue ?
-            new ObjectParameter("MaKhuVuc", maKhuVuc) :
-            new ObjectParameter("MaKhuVuc", typeof(int));
-
-
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("NhanVien_ThemNhanVien", tenNhanVienParameter, ngaySinhParameter, emailParameter, sdtParameter, maKhuVucParameter);
-    }
-
-
     public virtual ObjectResult<Nullable<int>> NhanVien_Xoa(Nullable<int> maNhanVien)
     {
 
@@ -738,6 +706,55 @@ public partial class GiaoHangEntities : DbContext
     {
 
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("ThongKeDonDaGiao_LayThang");
+    }
+
+
+    public virtual ObjectResult<string> NhanVien_Add(string tenNhanVien, Nullable<System.DateTime> ngaySinh, string email, string sdt, Nullable<int> maKhuVuc)
+    {
+
+        var tenNhanVienParameter = tenNhanVien != null ?
+            new ObjectParameter("TenNhanVien", tenNhanVien) :
+            new ObjectParameter("TenNhanVien", typeof(string));
+
+
+        var ngaySinhParameter = ngaySinh.HasValue ?
+            new ObjectParameter("NgaySinh", ngaySinh) :
+            new ObjectParameter("NgaySinh", typeof(System.DateTime));
+
+
+        var emailParameter = email != null ?
+            new ObjectParameter("Email", email) :
+            new ObjectParameter("Email", typeof(string));
+
+
+        var sdtParameter = sdt != null ?
+            new ObjectParameter("Sdt", sdt) :
+            new ObjectParameter("Sdt", typeof(string));
+
+
+        var maKhuVucParameter = maKhuVuc.HasValue ?
+            new ObjectParameter("MaKhuVuc", maKhuVuc) :
+            new ObjectParameter("MaKhuVuc", typeof(int));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("NhanVien_Add", tenNhanVienParameter, ngaySinhParameter, emailParameter, sdtParameter, maKhuVucParameter);
+    }
+
+
+    public virtual ObjectResult<string> TaiKhoan_RSPass(string tentk, string pass)
+    {
+
+        var tentkParameter = tentk != null ?
+            new ObjectParameter("tentk", tentk) :
+            new ObjectParameter("tentk", typeof(string));
+
+
+        var passParameter = pass != null ?
+            new ObjectParameter("pass", pass) :
+            new ObjectParameter("pass", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("TaiKhoan_RSPass", tentkParameter, passParameter);
     }
 
 }

@@ -18,11 +18,6 @@ namespace Delivery.Controllers
         private GiaoHangEntities db = new GiaoHangEntities();
 
         // GET: TaiKhoan
-        //public ActionResult Index()
-        //{
-
-        //    return View(db.View_DanhSachTK.ToList());
-        //}
 
         public ActionResult Index(string tenTK, string hoten, string loaiTK)
         {
@@ -92,7 +87,7 @@ namespace Delivery.Controllers
 
 
 
-        public ActionResult Reset(int? id)
+        public ActionResult Reset(string id)
         {
             if (id == null)
             {
@@ -104,10 +99,10 @@ namespace Delivery.Controllers
                 {
                     //Ma hoa mat khau khi reset
                     string pass = "User@GHK2P";
-                    var reset = database.TaiKhoan_Reset(id, PasswordOption.Encrypt(pass)).Single();
+                    var reset = database.TaiKhoan_RSPass(id, PasswordOption.Encrypt(pass)).Single();
 
                     //var reset = database.TaiKhoan_ResetPass(id);
-                    if (reset > 0)
+                    if (reset != null)
                     {
                         TempData["SuccessMessage"] = "Reset thành công";
                     }

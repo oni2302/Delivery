@@ -12,6 +12,8 @@
         <div class="form-horizontal" style="background-color: white; padding: 30px; border-radius: 1rem">
             <h4>Thêm nhân viên</h4>
             <hr />
+            @Html.ValidationMessage("CreateFailed", new { @class = "text-danger" })
+
             <div class="row mb-3">
                 <div class="col">
                     @Html.DisplayName("Họ tên")
@@ -38,7 +40,7 @@
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 @Html.ActionLink("Hủy", "Index", "NhanViens", new { @class = "btn btn-outline-success", @style = "border-radius: 1.5rem;  width: 100px;" })
-                <input type="submit" value="Thêm"  class="btn btn-success" style="border-radius: 1.5rem; width: 100px;" />
+                <input type="submit" value="Thêm" class="btn btn-success" style="border-radius: 1.5rem; width: 100px;" />
             </div>
         </div>
     </div>

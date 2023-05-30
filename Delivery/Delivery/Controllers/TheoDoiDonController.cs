@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Data.Entity;
 using System.Net;
 using Delivery.Models;
+using PagedList;
 
 namespace Delivery.Controllers
 {
@@ -13,17 +14,21 @@ namespace Delivery.Controllers
     {
         GiaoHangEntities db = new GiaoHangEntities();
         // GET: TheoDoiDon
-        public ActionResult Index(string searchString)
+        public ActionResult Index(string searchString,int? page)
         {
+            if (page == null) page = 1;
+            var listDH = db.DonHang_TimKiemTheoTenNG(null).OrderBy(s => s.MaDonHang).ToList();
+            int pageSize = 10;
+            //Toán tử ?? trong C# mô tả nếu page khác null thì lấy giá trị page, còn
+            // nếu page = null thì lấy giá trị 1 cho biến pageNumber.
+            int pageNumber = (page ?? 1);
             if (!String.IsNullOrEmpty(searchString))
             {
                 searchString = searchString.ToLower();
-                var listDHSearch = db.DonHang_TimKiemTheoTenNG(searchString);
-                return View(listDHSearch.ToList());
+                var listDHSearch = db.DonHang_TimKiemTheoTenNG(searchString).OrderBy(s => s.MaDonHang).ToList();
+                return View(listDHSearch.ToPagedList(pageNumber, pageSize));
             }
-
-            var listDH = db.DonHang_TimKiemTheoTenNG(null);
-            return View(listDH.ToList());
+            return View(listDH.ToPagedList(pageNumber, pageSize));
         }
         public ActionResult Details(int? id)
         {

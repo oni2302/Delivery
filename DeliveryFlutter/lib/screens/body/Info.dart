@@ -19,7 +19,9 @@ class Info extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+      
       FutureBuilder<String>(
+        
         future: _layuser(),
         builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -27,15 +29,26 @@ class Info extends StatelessWidget {
           } else if (snapshot.hasError) {
             return Text('Đã xảy ra lỗi: ${snapshot.error}');
           } else {
-            return Text(
-              '${snapshot.data}',
-              style: const TextStyle(
-                fontFamily: 'Arial',
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-                color: Colors.green,
-              ),
-            );
+            return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/logo.png', 
+                    width: 200, 
+                    height: 200,
+                  ),
+                  SizedBox(width: 0), 
+                  Text(
+                    '${snapshot.data}',
+                    style: const TextStyle(
+                      fontFamily: 'Arial',
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.green,
+                    ),
+                  ),
+                ],
+              );
           }
         },
       ),

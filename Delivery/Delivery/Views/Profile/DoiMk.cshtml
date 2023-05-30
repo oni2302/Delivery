@@ -15,43 +15,45 @@
 {
     @Html.AntiForgeryToken()
 
-<div class="row form-horizontal container card-body border-0 shadow p-3 mt-3 mx-auto w-50" style="border-radius: 3%;">
-    <h4 class="text-center">Đổi Mật Khẩu</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.ValidationMessage("OldMatKhau", "", new { @class = "text-danger" })
-  <div class="row" style="border-radius: 30px;">
-        <div class="form-group">
-            @Html.DisplayName("Tên tài khoản")
-            <div class="col mt-2">
-                <input id="" name="" type="text" class="form-control mw-100" value="@info.TenTaiKhoan" readonly />
+    <div class="row form-horizontal container card-body border-0 shadow p-3 mt-3 mx-auto w-50" style="border-radius: 3%;">
+        <h4 class="text-center">Đổi Mật Khẩu</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.ValidationMessage("OldMatKhau", "", new { @class = "text-danger" })
+        <div class="row" style="border-radius: 30px;">
+            <div class="form-group">
+                @Html.DisplayName("Tên tài khoản")
+                <div class="col mt-2">
+                    <input id="" name="" type="text" class="form-control mw-100" value="@info.TenTaiKhoan" readonly />
+                </div>
+            </div>
+            <div class="form-group mt-3">
+                @Html.DisplayName("Mật khẩu cũ")
+                <div class="col-md-12 mt-2">
+                    <input id="OldMatKhau" name="OldMatKhau" type="password" class="form-control  mw-100" required />
+                </div>
+            </div>
+            <div class="form-group mt-3">
+                @Html.DisplayName("Mật khẩu mới")
+                <div class="col-md-12 mt-2">
+                    <input id="MatKhau" name="MatKhau" type="password" class="form-control  mw-100" value="" required  
+                           pattern = "^((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,50})",
+                             title = "8 - 50 kí tự và bao gồm 1 chữ thường, 1 chữ hoa, 1 số và 1 kí tự đặc biệt."/>
+                </div>
+                @Html.ValidationMessage("MatKhau", "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group mt-3">
+                @Html.DisplayName("Nhập lại mật khẩu")
+                <div class="col-md-12 mt-2">
+                    <input id="ReMatKhau" name="ReMatKhau" type="password" class="form-control  mw-100" value="" required />
+                </div>
+                <input type="checkbox" class="me-2 mt-2" onclick="myFunction()">Show Password
             </div>
         </div>
-        <div class="form-group mt-3">
-            @Html.DisplayName("Mật khẩu")
-            <div class="col-md-12 mt-2">
-                <input id="OldMatKhau" name="OldMatKhau" type="password" class="form-control  mw-100" required />
-            </div>
-        </div>
-        <div class="form-group mt-3">
-            @Html.DisplayName("Mật khẩu mới")
-            <div class="col-md-12 mt-2">
-                <input id="MatKhau" name="MatKhau" type="password" class="form-control  mw-100" value="" required />
-            </div>
-            @Html.ValidationMessage("MatKhau", "", new { @class = "text-danger" })
-        </div>
-        <div class="form-group mt-3">
-            @Html.DisplayName("Nhập lại mật khẩu")
-            <div class="col-md-12 mt-2">
-                <input id="ReMatKhau" name="ReMatKhau" type="password" class="form-control  mw-100" value="" required/>
-            </div>
-            <input type="checkbox" class="me-2 mt-2" onclick="myFunction()">Show Password
+        <div class="text-center">
+            <button type="submit" name="id" value="@ViewBag.sua.MaNhanVien" class="btn btn-success" style=" border-radius: 1.5rem; width: 100px; margin-top: 15px;">Save</button>
         </div>
     </div>
-  <div class="text-center">
-      <button type="submit" name="id" value="@ViewBag.sua.MaNhanVien" class="btn btn-success" style=" border-radius: 1.5rem; width: 100px; margin-top: 15px;">Save</button>
-  </div>
-</div>
 }
 
 @section scripts{
@@ -96,3 +98,10 @@
     @Scripts.Render("~/bundles/jqueryval")
 }
 
+<script type="text/javascript">
+    window.onload = () => {
+        const pass = document.getElementById('ReMatKhau');
+        pass.onpaste = e => e.preventDefault();
+    }
+
+</script>

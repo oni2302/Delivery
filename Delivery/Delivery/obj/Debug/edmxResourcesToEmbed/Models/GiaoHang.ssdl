@@ -35,6 +35,13 @@
   <Function Name="MenuOf" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="MaNhanVien" Type="int" Mode="In" />
   </Function>
+  <Function Name="NhanVien_Add" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TenNhanVien" Type="nvarchar" Mode="In" />
+    <Parameter Name="NgaySinh" Type="date" Mode="In" />
+    <Parameter Name="Email" Type="varchar" Mode="In" />
+    <Parameter Name="Sdt" Type="varchar" Mode="In" />
+    <Parameter Name="MaKhuVuc" Type="int" Mode="In" />
+  </Function>
   <Function Name="NhanVien_ChiTiet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="MaNhanVien" Type="int" Mode="In" />
   </Function>
@@ -48,13 +55,6 @@
     <Parameter Name="NgaySinh" Type="date" Mode="In" />
     <Parameter Name="Email" Type="varchar" Mode="In" />
     <Parameter Name="SoDienThoai" Type="char" Mode="In" />
-    <Parameter Name="MaKhuVuc" Type="int" Mode="In" />
-  </Function>
-  <Function Name="NhanVien_ThemNhanVien" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="TenNhanVien" Type="nvarchar" Mode="In" />
-    <Parameter Name="NgaySinh" Type="date" Mode="In" />
-    <Parameter Name="Email" Type="varchar" Mode="In" />
-    <Parameter Name="Sdt" Type="varchar" Mode="In" />
     <Parameter Name="MaKhuVuc" Type="int" Mode="In" />
   </Function>
   <Function Name="NhanVien_TimKiem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -123,8 +123,9 @@
     <Parameter Name="manv" Type="int" Mode="In" />
     <Parameter Name="pass" Type="varchar" Mode="In" />
   </Function>
-  <Function Name="TaiKhoan_ResetPass" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="manv" Type="int" Mode="In" />
+  <Function Name="TaiKhoan_RSPass" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="tentk" Type="varchar" Mode="In" />
+    <Parameter Name="pass" Type="varchar" Mode="In" />
   </Function>
   <Function Name="TaiKhoan_TimKiem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="tentk" Type="nvarchar" Mode="In" />
